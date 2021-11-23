@@ -1,5 +1,5 @@
 <div>
-    @if ($dumpFilters)
-        @dump($filters)
+    @if ($debug)
+        {{ var_dump($debuggable) }}
     @endif
 </div>

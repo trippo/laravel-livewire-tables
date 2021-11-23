@@ -1,46 +1,49 @@
-<div>
-    <div
-        @if (is_numeric($refresh))
-            wire:poll.{{ $refresh }}ms
-        @elseif(is_string($refresh))
-            @if ($refresh === '.keep-alive' || $refresh === 'keep-alive')
-                wire:poll.keep-alive
-            @elseif($refresh === '.visible' || $refresh === 'visible')
-                wire:poll.visible
-            @else
-                wire:poll="{{ $refresh }}"
-            @endif
-        @endif
+<x-livewire-tables::wrapper
+    :debug="$debug"
+    :debuggable="[]"
+    :refresh="$refresh"
+    :customAttributes="$this->getComponentWrapperAttributes()"
+>
+    <x-livewire-tables::table
+        :theme="$this->getTheme()"
+        :customAttributes="[
+            'table' => $this->getTableAttributes(),
+            'thead' => $this->getTheadAttributes(),
+            'tbody' => $this->getTbodyAttributes(),
+        ]"
     >
-        @include('livewire-tables::includes.debug')
-        @include('livewire-tables::tailwind.includes.offline')
+        <x-slot name="thead">
+            @foreach($columns as $column)
+                <x-livewire-tables::table.th
+                    :theme="$this->getTheme()"
+                    :column="$column"
+                    :customAttributes="$this->getThAttributes($column)"
+                />
+            @endforeach
+        </x-slot>
 
-        <div class="flex-col">
-            @include('livewire-tables::tailwind.includes.sorting-pills')
-            @include('livewire-tables::tailwind.includes.filter-pills')
-
-            <div class="space-y-4">
-                <div class="md:flex md:justify-between px-6 py-2 md:p-0">
-                    <div class="w-full mb-4 md:mb-0 md:w-2/4 md:flex space-y-4 md:space-y-0 md:space-x-2">
-                        @include('livewire-tables::tailwind.includes.reorder')
-                        @include('livewire-tables::tailwind.includes.search')
-                        @include('livewire-tables::tailwind.includes.filters')
-                    </div>
-
-                    <div class="md:flex md:items-center">
-                        <div>@include('livewire-tables::tailwind.includes.bulk-actions')</div>
-                        <div>@include('livewire-tables::tailwind.includes.column-select')</div>
-                        <div>@include('livewire-tables::tailwind.includes.per-page')</div>
-                    </div>
-                </div>
-
-                @include('livewire-tables::tailwind.includes.table')
-                @include('livewire-tables::tailwind.includes.pagination')
-            </div>
-        </div>
-    </div>
-
-    @isset($modalsView)
-        @include($modalsView)
-    @endisset
-</div>
+        @forelse ($rows as $index => $row)
+            <x-livewire-tables::table.tr
+                wire:key="row-{{ $index }}-{{ $this->id }}"
+                :theme="$this->getTheme()"
+                :index="$index"
+                :customAttributes="$this->getTrAttributes($row, $index)"
+            >
+                @foreach($columns as $column)
+                    <x-livewire-tables::table.td
+                        :theme="$this->getTheme()"
+                        :customAttributes="$this->getTdAttributes($column, $row, $index)"
+                    >
+                        {{ $column->getContents($row) }}
+                    </x-livewire-tables::table.td>
+                @endforeach
+            </x-livewire-tables::table.tr>
+        @empty
+            <x-livewire-tables::table.empty
+                :theme="$this->getTheme()"
+                :colspan="count($columns)"
+                :message="$this->getEmptyMessage()"
+            />
+        @endforelse
+    </x-livewire-tables::table>
+</x-livewire-tables::wrapper>
