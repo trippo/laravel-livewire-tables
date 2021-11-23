@@ -2,7 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Configuration;
 
-use Livewire\Livewire;
 use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
