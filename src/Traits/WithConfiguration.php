@@ -14,5 +14,7 @@ trait WithConfiguration
         PaginationConfiguration,
         RefreshConfiguration;
 
-    public function configure(): void {}
+    public function configure(): void
+    {
+    }
 }

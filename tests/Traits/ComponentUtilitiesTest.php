@@ -7,7 +7,6 @@ use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class ComponentUtilitiesTest extends TestCase
 {
-
     /** @test */
     public function can_get_current_theme(): void
     {

@@ -2,8 +2,8 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Encryption\Encrypter;
+use Illuminate\Support\Facades\DB;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Rappasoft\LaravelLivewireTables\LaravelLivewireTablesServiceProvider;

@@ -10,7 +10,6 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class ComponentConfigurationTest extends TestCase
 {
-
     /** @test */
     public function initial_wrapper_attributes_get_set(): void
     {
@@ -64,7 +63,7 @@ class ComponentConfigurationTest extends TestCase
     {
         $table = new PetsTable();
 
-        $table->setThAttributes(function(Column $column) {
+        $table->setThAttributes(function (Column $column) {
             if ($column->getField() === 'id') {
                 return ['default' => false, 'this' => 'that'];
             }
@@ -81,7 +80,7 @@ class ComponentConfigurationTest extends TestCase
     {
         $table = new PetsTable();
 
-        $table->setTrAttributes(function(Model $row, $index) {
+        $table->setTrAttributes(function (Model $row, $index) {
             if ($index === 0) {
                 return ['default' => false, 'this' => 'that'];
             }
@@ -98,7 +97,7 @@ class ComponentConfigurationTest extends TestCase
     {
         $table = new PetsTable();
 
-        $table->setTdAttributes(function(Column $column, Model $row, $index) {
+        $table->setTdAttributes(function (Column $column, Model $row, $index) {
             if ($column->getField() === 'id' && $index === 1) {
                 return ['default' => false, 'this' => 'that'];
             }
