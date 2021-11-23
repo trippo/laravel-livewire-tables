@@ -7,7 +7,6 @@ use Illuminate\Support\Str;
 
 class Column
 {
-
     protected string $title;
 
     protected ?string $field = null;

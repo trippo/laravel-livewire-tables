@@ -8,7 +8,6 @@ use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class DebuggingConfigurationTest extends TestCase
 {
-
     /** @test */
     public function debug_can_be_enabled(): void
     {

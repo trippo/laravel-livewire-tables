@@ -9,7 +9,6 @@ class LaravelLivewireTablesServiceProvider extends PackageServiceProvider
 {
     public function bootingPackage(): void
     {
-
     }
 
     /**
