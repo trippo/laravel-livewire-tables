@@ -118,12 +118,4 @@ class ComponentConfigurationTest extends TestCase
 
         $this->assertEquals('My empty message', $table->getEmptyMessage());
     }
-
-    /** @test */
-    public function can_get_empty_message(): void
-    {
-        $table = new PetsTable();
-
-        $this->assertEquals('No items found. Try to broaden your search.', $table->getEmptyMessage());
-    }
 }

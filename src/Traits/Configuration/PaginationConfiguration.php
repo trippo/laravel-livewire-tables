@@ -4,6 +4,12 @@ namespace Rappasoft\LaravelLivewireTables\Traits\Configuration;
 
 trait PaginationConfiguration
 {
+
+    /**
+     * @param  string  $theme
+     *
+     * @return $this
+     */
     public function setPaginationTheme(string $theme): self
     {
         $this->paginationTheme = $theme;
@@ -11,20 +17,47 @@ trait PaginationConfiguration
         return $this;
     }
 
-    public function setPagination(bool $status): self
+    /**
+     * @param  bool  $status
+     *
+     * @return $this
+     */
+    public function setPaginationStatus(bool $status): self
     {
-        $this->paginationEnabled = $status;
+        $this->paginationStatus = $status;
 
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function setPaginationEnabled(): self
     {
-        return $this->setPagination(true);
+        return $this->setPaginationStatus(true);
     }
 
+    /**
+     * @return $this
+     */
     public function setPaginationDisabled(): self
     {
-        return $this->setPagination(false);
+        return $this->setPaginationStatus(false);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getPaginationStatus(): bool
+    {
+        return $this->paginationStatus;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaginationTheme(): string
+    {
+        return $this->paginationTheme;
     }
 }

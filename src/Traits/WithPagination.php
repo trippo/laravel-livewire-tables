@@ -13,12 +13,12 @@ trait WithPagination
      *
      * @var string
      */
-    public string $paginationTheme = 'tailwind';
+    protected string $paginationTheme = 'tailwind';
 
     /**
      * If disabled, the query will execute with get()
      *
      * @var bool
      */
-    public bool $paginationEnabled = true;
+    protected bool $paginationStatus = true;
 }

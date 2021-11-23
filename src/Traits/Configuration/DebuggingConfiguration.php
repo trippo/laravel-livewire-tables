@@ -4,20 +4,40 @@ namespace Rappasoft\LaravelLivewireTables\Traits\Configuration;
 
 trait DebuggingConfiguration
 {
-    public function setDebug(bool $status): self
+
+    /**
+     * @param  bool  $status
+     *
+     * @return $this
+     */
+    public function setDebugStatus(bool $status): self
     {
-        $this->debug = $status;
+        $this->debugStatus = $status;
 
         return $this;
     }
 
+    /**
+     * @return $this
+     */
     public function setDebugEnabled(): self
     {
-        return $this->setDebug(true);
+        return $this->setDebugStatus(true);
     }
 
+    /**
+     * @return $this
+     */
     public function setDebugDisabled(): self
     {
-        return $this->setDebug(false);
+        return $this->setDebugStatus(false);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDebugStatus(): bool
+    {
+        return $this->debugStatus;
     }
 }

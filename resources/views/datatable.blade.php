@@ -1,7 +1,7 @@
 <x-livewire-tables::wrapper
-    :debug="$debug"
+    :debug="$this->getDebugStatus()"
     :debuggable="[]"
-    :refresh="$refresh"
+    :refresh="$this->getRefreshStatus()"
     :customAttributes="$this->getComponentWrapperAttributes()"
 >
     <x-livewire-tables::table

@@ -11,36 +11,48 @@ class RefreshConfigurationTest extends TestCase
     /** @test */
     public function refresh_time_can_be_set(): void
     {
-        Livewire::test(PetsTable::class)
-            ->assertSet('refresh', false)
-            ->call('setRefreshTime', 5000)
-            ->assertSet('refresh', 5000);
+        $table = new PetsTable();
+
+        $this->assertFalse($table->getRefreshStatus());
+
+        $table->setRefreshTime(5000);
+
+        $this->assertSame(5000, $table->getRefreshStatus());
     }
 
     /** @test */
     public function refresh_keep_alive_can_be_set(): void
     {
-        Livewire::test(PetsTable::class)
-            ->assertSet('refresh', false)
-            ->call('setRefreshKeepAlive')
-            ->assertSet('refresh', 'keep-alive');
+        $table = new PetsTable();
+
+        $this->assertFalse($table->getRefreshStatus());
+
+        $table->setRefreshKeepAlive();
+
+        $this->assertSame('keep-alive', $table->getRefreshStatus());
     }
 
     /** @test */
     public function refresh_visible_can_be_set(): void
     {
-        Livewire::test(PetsTable::class)
-            ->assertSet('refresh', false)
-            ->call('setRefreshVisible')
-            ->assertSet('refresh', 'visible');
+        $table = new PetsTable();
+
+        $this->assertFalse($table->getRefreshStatus());
+
+        $table->setRefreshVisible();
+
+        $this->assertSame('visible', $table->getRefreshStatus());
     }
 
     /** @test */
     public function refresh_method_can_be_set(): void
     {
-        Livewire::test(PetsTable::class)
-            ->assertSet('refresh', false)
-            ->call('setRefreshMethod', 'myRefreshMethod')
-            ->assertSet('refresh', 'myRefreshMethod');
+        $table = new PetsTable();
+
+        $this->assertFalse($table->getRefreshStatus());
+
+        $table->setRefreshMethod('myRefreshMethod');
+
+        $this->assertSame('myRefreshMethod', $table->getRefreshStatus());
     }
 }

@@ -12,5 +12,5 @@ trait WithRefresh
      *
      * @var bool|string
      */
-    public $refresh = false;
+    protected $refresh = false;
 }

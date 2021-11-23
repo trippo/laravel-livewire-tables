@@ -9,5 +9,5 @@ trait WithDebugging
      *
      * @var bool
      */
-    public bool $debug = false;
+    protected bool $debugStatus = false;
 }
