@@ -10,6 +10,7 @@ use Rappasoft\LaravelLivewireTables\Traits\WithData;
 use Rappasoft\LaravelLivewireTables\Traits\WithDebugging;
 use Rappasoft\LaravelLivewireTables\Traits\WithPagination;
 use Rappasoft\LaravelLivewireTables\Traits\WithRefresh;
+use Rappasoft\LaravelLivewireTables\Traits\WithSorting;
 
 abstract class DataTableComponent extends Component
 {
@@ -18,7 +19,8 @@ abstract class DataTableComponent extends Component
         WithData,
         WithDebugging,
         WithPagination,
-        WithRefresh;
+        WithRefresh,
+        WithSorting;
 
     /**
      * @var string[]
@@ -59,7 +61,7 @@ abstract class DataTableComponent extends Component
      */
     public function render()
     {
-        return view('livewire-tables::tailwind.datatable')
+        return view('livewire-tables::datatable')
             ->with([
                 'columns' => $this->columns(),
                 'rows' => $this->getRows(),
