@@ -1,12 +1,11 @@
-@props([
-    'refresh',
-    'debug' => false,
-    'debuggable' => [],
-    'customAttributes' => []
-])
+@props(['component'])
+
+@php
+    $refresh = $this->getRefreshStatus();
+@endphp
 
  <div
-    {{ $attributes->merge($customAttributes) }}
+    {{ $attributes->merge($this->getComponentWrapperAttributes()) }}
 
     @if (is_numeric($refresh))
         wire:poll.{{ $refresh }}ms

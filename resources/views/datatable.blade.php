@@ -1,52 +1,21 @@
-<x-livewire-tables::wrapper
-    :debug="$this->getDebugStatus()"
-    :debuggable="[]"
-    :refresh="$this->getRefreshStatus()"
-    :customAttributes="$this->getComponentWrapperAttributes()"
->
-    <x-livewire-tables::table
-        :theme="$this->getTheme()"
-        :customAttributes="[
-            'table' => $this->getTableAttributes(),
-            'thead' => $this->getTheadAttributes(),
-            'tbody' => $this->getTbodyAttributes(),
-        ]"
-    >
+<x-livewire-tables::wrapper :component="$this">
+    <x-livewire-tables::table>
         <x-slot name="thead">
             @foreach($columns as $index => $column)
-                <x-livewire-tables::table.th
-                    wire:key="header-col-{{ $index }}-{{ $this->id }}"
-                    :theme="$this->getTheme()"
-                    :column="$column"
-                    :customAttributes="$this->getThAttributes($column)"
-                />
+                <x-livewire-tables::table.th :column="$column" :index="$index" />
             @endforeach
         </x-slot>
 
         @forelse ($rows as $rowIndex => $row)
-            <x-livewire-tables::table.tr
-                wire:key="row-{{ $rowIndex }}-{{ $this->id }}"
-                :theme="$this->getTheme()"
-                :index="$index"
-                :customAttributes="$this->getTrAttributes($row, $index)"
-            >
+            <x-livewire-tables::table.tr :row="$row" :rowIndex="$rowIndex">
                 @foreach($columns as $colIndex => $column)
-                    <x-livewire-tables::table.td
-                        wire:key="cell-{{ $rowIndex }}-{{ $colIndex }}-{{ $this->id }}"
-                        :theme="$this->getTheme()"
-                        :customAttributes="$this->getTdAttributes($column, $row, $index)"
-                    >
+                    <x-livewire-tables::table.td :column="$column" :colIndex="$colIndex">
                         {{ $column->getContents($row) }}
                     </x-livewire-tables::table.td>
                 @endforeach
             </x-livewire-tables::table.tr>
         @empty
-            <x-livewire-tables::table.empty
-                wire:key="empty-message-{{ $this->id }}"
-                :theme="$this->getTheme()"
-                :colspan="count($columns)"
-                :message="$this->getEmptyMessage()"
-            />
+            <x-livewire-tables::table.empty  />
         @endforelse
     </x-livewire-tables::table>
 </x-livewire-tables::wrapper>

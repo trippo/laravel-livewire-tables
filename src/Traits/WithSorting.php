@@ -4,5 +4,5 @@ namespace Rappasoft\LaravelLivewireTables\Traits;
 
 trait WithSorting
 {
-    protected bool $sortingEnabled = true;
+    protected bool $sortingStatus = true;
 }

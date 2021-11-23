@@ -1,4 +1,14 @@
-@props(['theme', 'customAttributes' => []])
+@aware(['component'])
+
+@php
+    $theme = $component->getTheme();
+
+    $customAttributes = [
+        'table' => $this->getTableAttributes(),
+        'thead' => $this->getTheadAttributes(),
+        'tbody' => $this->getTbodyAttributes(),
+    ];
+@endphp
 
 @if ($theme === 'tailwind')
     <table {{

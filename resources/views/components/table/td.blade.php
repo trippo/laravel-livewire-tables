@@ -1,4 +1,11 @@
-@props(['theme', 'customAttributes' => []])
+@aware(['component', 'row', 'rowIndex'])
+@props(['column', 'colIndex'])
+
+@php
+    $attributes = $attributes->merge(['wire:key' => 'cell-'.$rowIndex.'-'.$colIndex.'-'.$component->id]);
+    $theme = $component->getTheme();
+    $customAttributes = $component->getTdAttributes($column, $row, $colIndex)
+@endphp
 
 @if ($theme === 'tailwind')
     <td {{
