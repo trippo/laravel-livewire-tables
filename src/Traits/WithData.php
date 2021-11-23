@@ -4,7 +4,6 @@ namespace Rappasoft\LaravelLivewireTables\Traits;
 
 trait WithData
 {
-
     /**
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
