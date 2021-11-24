@@ -21,7 +21,9 @@ trait SortingConfiguration
      */
     public function setSortingEnabled(): self
     {
-        return $this->setSortingStatus(true);
+        $this->setSortingStatus(true);
+
+        return $this;
     }
 
     /**
@@ -29,14 +31,65 @@ trait SortingConfiguration
      */
     public function setSortingDisabled(): self
     {
-        return $this->setSortingStatus(false);
+        $this->setSortingStatus(false);
+
+        return $this;
     }
 
     /**
-     * @return bool
+     * @param  bool  $status
+     *
+     * @return $this
      */
-    public function getSortingStatus(): bool
+    public function setSingleSortingStatus(bool $status): self
     {
-        return $this->sortingStatus;
+        $this->singleColumnSortingStatus = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setSingleSortingEnabled(): self
+    {
+        $this->setSingleSortingStatus(true);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setSingleSortingDisabled(): self
+    {
+        $this->setSingleSortingStatus(false);
+
+        return $this;
+    }
+
+    /**
+     * @param  string  $field
+     * @param  string  $direction
+     *
+     * @return $this
+     */
+    public function setDefaultSort(string $field, string $direction = 'asc'): self
+    {
+        $this->defaultSortColumn = $field;
+        $this->defaultSortDirection = $direction;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function removeDefaultSort(): self
+    {
+        $this->defaultSortColumn = null;
+        $this->defaultSortDirection = 'asc';
+
+        return $this;
     }
 }

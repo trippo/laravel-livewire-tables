@@ -4,15 +4,20 @@ namespace Rappasoft\LaravelLivewireTables\Traits;
 
 trait WithData
 {
+
+    // TODO: Test
     /**
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
     public function rows()
     {
-        if ($this->paginationStatus) {
-            $this->query()->paginate();
+        $query = $this->query();
+        $query = $this->applySorting($query);
+
+        if ($this->paginationIsEnabled()) {
+            return $query->paginate();
         }
 
-        return $this->query()->get();
+        return $query->get();
     }
 }

@@ -47,12 +47,4 @@ trait RefreshConfiguration
 
         return $this;
     }
-
-    /**
-     * @return bool|string
-     */
-    public function getRefreshStatus()
-    {
-        return $this->refresh;
-    }
 }

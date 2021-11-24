@@ -5,5 +5,10 @@ namespace Rappasoft\LaravelLivewireTables\Tests;
 class DataTableComponentTest extends TestCase
 {
 
-    // TODO: Test getting column values
+    // TODO
+    /** @test */
+    public function assertPlaceholder()
+    {
+        $this->assertTrue(true);
+    }
 }

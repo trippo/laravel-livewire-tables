@@ -30,4 +30,58 @@ class SortingConfigurationTest extends TestCase
 
         $this->assertTrue($table->getSortingStatus());
     }
+
+    /** @test */
+    public function can_set_single_sorting_status(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertFalse($table->getSingleSortingStatus());
+
+        $table->setSingleSortingEnabled();
+
+        $this->assertTrue($table->getSingleSortingStatus());
+
+        $table->setSingleSortingDisabled();
+
+        $this->assertFalse($table->getSingleSortingStatus());
+
+        $table->setSingleSortingStatus(true);
+
+        $this->assertTrue($table->getSingleSortingStatus());
+
+        $table->setSingleSortingStatus(false);
+
+        $this->assertFalse($table->getSingleSortingStatus());
+    }
+
+    /** @test */
+    public function can_set_default_sort(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertNull($table->getDefaultSortColumn());
+        $this->assertSame('asc', $table->getDefaultSortDirection());
+
+        $table->setDefaultSort('id', 'desc');
+
+        $this->assertSame('id', $table->getDefaultSortColumn());
+        $this->assertSame('desc', $table->getDefaultSortDirection());
+    }
+
+    /** @test */
+    public function can_remove_default_sort(): void
+    {
+        $table = new PetsTable();
+
+        $table->setDefaultSort('id', 'desc');
+
+        $this->assertSame('id', $table->getDefaultSortColumn());
+        $this->assertSame('desc', $table->getDefaultSortDirection());
+
+        $table->removeDefaultSort();
+
+        $this->assertNull($table->getDefaultSortColumn());
+        $this->assertSame('asc', $table->getDefaultSortDirection());
+    }
 }

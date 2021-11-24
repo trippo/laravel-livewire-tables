@@ -5,7 +5,6 @@ namespace Rappasoft\LaravelLivewireTables;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Rappasoft\LaravelLivewireTables\Traits\ComponentUtilities;
-use Rappasoft\LaravelLivewireTables\Traits\WithConfiguration;
 use Rappasoft\LaravelLivewireTables\Traits\WithData;
 use Rappasoft\LaravelLivewireTables\Traits\WithDebugging;
 use Rappasoft\LaravelLivewireTables\Traits\WithPagination;
@@ -15,12 +14,18 @@ use Rappasoft\LaravelLivewireTables\Traits\WithSorting;
 abstract class DataTableComponent extends Component
 {
     use ComponentUtilities,
-        WithConfiguration,
         WithData,
         WithDebugging,
         WithPagination,
         WithRefresh,
         WithSorting;
+
+    /**
+     * @var \null[][]
+     */
+    protected $queryString = [
+        'sorts' => ['except' => null],
+    ];
 
     /**
      * @var string[]
@@ -55,6 +60,11 @@ abstract class DataTableComponent extends Component
      * The base query with search and filters for the table.
      */
     abstract public function query(): Builder;
+
+    /**
+     * Set any configuration options
+     */
+    public function configure(): void {}
 
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View

@@ -33,7 +33,9 @@ trait PaginationConfiguration
      */
     public function setPaginationEnabled(): self
     {
-        return $this->setPaginationStatus(true);
+        $this->setPaginationStatus(true);
+
+        return $this;
     }
 
     /**
@@ -41,22 +43,8 @@ trait PaginationConfiguration
      */
     public function setPaginationDisabled(): self
     {
-        return $this->setPaginationStatus(false);
-    }
+        $this->setPaginationStatus(false);
 
-    /**
-     * @return bool
-     */
-    public function getPaginationStatus(): bool
-    {
-        return $this->paginationStatus;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPaginationTheme(): string
-    {
-        return $this->paginationTheme;
+        return $this;
     }
 }

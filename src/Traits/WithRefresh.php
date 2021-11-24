@@ -2,8 +2,14 @@
 
 namespace Rappasoft\LaravelLivewireTables\Traits;
 
+use Rappasoft\LaravelLivewireTables\Traits\Configuration\RefreshConfiguration;
+use Rappasoft\LaravelLivewireTables\Traits\Helpers\RefreshHelpers;
+
 trait WithRefresh
 {
+    use RefreshConfiguration,
+        RefreshHelpers;
+
     /**
      * Whether to refresh the table at a certain interval or not
      * false is off

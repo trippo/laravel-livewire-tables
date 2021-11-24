@@ -21,7 +21,9 @@ trait DebuggingConfiguration
      */
     public function setDebugEnabled(): self
     {
-        return $this->setDebugStatus(true);
+        $this->setDebugStatus(true);
+
+        return $this;
     }
 
     /**
@@ -29,14 +31,8 @@ trait DebuggingConfiguration
      */
     public function setDebugDisabled(): self
     {
-        return $this->setDebugStatus(false);
-    }
+        $this->setDebugStatus(false);
 
-    /**
-     * @return bool
-     */
-    public function getDebugStatus(): bool
-    {
-        return $this->debugStatus;
+        return $this;
     }
 }

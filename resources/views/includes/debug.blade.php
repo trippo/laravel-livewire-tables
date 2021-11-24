@@ -1,9 +1,11 @@
 <div>
     @php
-        $debuggable = [];
+        $debuggable = [
+            'sorts' => $component->getSorts()
+        ];
     @endphp
 
     @if ($this->getDebugStatus())
-        {{ var_dump($debuggable) }}
+        <pre>{{ var_dump($debuggable) }}</pre>
     @endif
 </div>
