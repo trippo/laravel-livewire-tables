@@ -47,10 +47,6 @@ trait WithSorting
         return null;
     }
 
-
-
-
-
     // TODO: Test
     public function applySorting(Builder $builder): Builder
     {
@@ -58,7 +54,7 @@ trait WithSorting
             return $builder->orderBy($this->getDefaultSortColumn(), $this->getDefaultSortDirection());
         }
 
-        foreach ($this->getSorts() as $field => $direction)  {
+        foreach ($this->getSorts() as $field => $direction) {
             if (! in_array($direction, ['asc', 'desc'])) {
                 $direction = 'desc';
             }
