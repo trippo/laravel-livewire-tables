@@ -7,7 +7,6 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 trait WithColumns
 {
-
     // TODO: Test
     public function getColumns(): Collection
     {
@@ -17,7 +16,7 @@ trait WithColumns
     public function getColumn(string $field): ?Column
     {
         return $this->getColumns()
-            ->filter(fn(Column $column) => $column->isField($field))
+            ->filter(fn (Column $column) => $column->isField($field))
             ->first();
     }
 }
