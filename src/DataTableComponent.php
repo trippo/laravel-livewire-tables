@@ -66,7 +66,9 @@ abstract class DataTableComponent extends Component
     /**
      * Set any configuration options
      */
-    public function configure(): void {}
+    public function configure(): void
+    {
+    }
 
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View

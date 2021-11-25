@@ -4,7 +4,6 @@ namespace Rappasoft\LaravelLivewireTables\Traits\Helpers;
 
 trait SortingHelpers
 {
-
     /**
      * @return bool
      */
