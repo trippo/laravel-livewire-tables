@@ -47,10 +47,6 @@ trait WithSorting
         return null;
     }
 
-
-
-
-
     // TODO: Test
     public function applySorting(Builder $builder): Builder
     {
@@ -63,9 +59,19 @@ trait WithSorting
                 $direction = 'desc';
             }
 
-//            $column = $this->getColumn($field);
-//
-//            dd($column);
+            if (is_null($column = $this->getColumn($field))) {
+                continue;
+            }
+
+            if (! $column->isSortable()) {
+                continue;
+            }
+
+            if ($column->hasSortCallback()) {
+                $builder = app()->call($column->getSortCallback(), ['builder' => $builder, 'direction' => $direction]);
+            } else {
+                $builder->orderBy($field, $direction);
+            }
         }
 
         return $builder;

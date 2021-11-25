@@ -5,6 +5,7 @@ namespace Rappasoft\LaravelLivewireTables\Views;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+// TODO: Test
 class Column
 {
     protected string $title;
@@ -18,12 +19,12 @@ class Column
      */
     public function __construct(string $title, string $field = null)
     {
-        $this->title = $title;
+        $this->title = trim($title);
 
         if (! $field && $title) {
             $this->field = Str::snake($title);
         } else {
-            $this->field = $field;
+            $this->field = trim($field);
         }
     }
 
@@ -47,11 +48,67 @@ class Column
     }
 
     /**
+     * @param  string  $field
+     *
+     * @return $this
+     */
+    public function field(string $field): self
+    {
+        $this->field = trim($field);
+
+        return $this;
+    }
+
+    /**
      * @return string|null
      */
     public function getField(): ?string
     {
         return $this->field;
+    }
+
+    /**
+     * @param  string  $field
+     */
+    public function setField(string $field): void
+    {
+        $this->field = $field;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasField(): bool
+    {
+        return $this->getField() !== null;
+    }
+
+    /**
+     * @return $this
+     */
+    public function label(): self
+    {
+        $this->field = null;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLabel(): bool
+    {
+        return $this->getField() === null;
+    }
+
+    /**
+     * @param  string  $field
+     *
+     * @return bool
+     */
+    public function isField(string $field): bool
+    {
+        return $this->getField() === $field;
     }
 
     /**
@@ -61,6 +118,11 @@ class Column
      */
     public function getContents(Model $row)
     {
+        if ($this->isLabel()) {
+            // TODO: Get content from callback or something
+            return 'N/A';
+        }
+
         return data_get($row, $this->getField());
     }
 
@@ -69,7 +131,7 @@ class Column
      */
     public function isSortable(): bool
     {
-        return $this->sortable === true;
+        return $this->hasField() && $this->sortable === true;
     }
 
     /**

@@ -64,7 +64,7 @@ class ComponentConfigurationTest extends TestCase
         $table = new PetsTable();
 
         $table->setThAttributes(function (Column $column) {
-            if ($column->getField() === 'id') {
+            if ($column->isField('id')) {
                 return ['default' => false, 'this' => 'that'];
             }
 
@@ -98,7 +98,7 @@ class ComponentConfigurationTest extends TestCase
         $table = new PetsTable();
 
         $table->setTdAttributes(function (Column $column, Model $row, $index) {
-            if ($column->getField() === 'id' && $index === 1) {
+            if ($column->isField('id') && $index === 1) {
                 return ['default' => false, 'this' => 'that'];
             }
 

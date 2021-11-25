@@ -5,6 +5,7 @@ namespace Rappasoft\LaravelLivewireTables;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Rappasoft\LaravelLivewireTables\Traits\ComponentUtilities;
+use Rappasoft\LaravelLivewireTables\Traits\WithColumns;
 use Rappasoft\LaravelLivewireTables\Traits\WithData;
 use Rappasoft\LaravelLivewireTables\Traits\WithDebugging;
 use Rappasoft\LaravelLivewireTables\Traits\WithPagination;
@@ -14,6 +15,7 @@ use Rappasoft\LaravelLivewireTables\Traits\WithSorting;
 abstract class DataTableComponent extends Component
 {
     use ComponentUtilities,
+        WithColumns,
         WithData,
         WithDebugging,
         WithPagination,

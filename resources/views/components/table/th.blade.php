@@ -5,7 +5,7 @@
     $attributes = $attributes->merge(['wire:key' => 'header-col-'.$index.'-'.$component->id]);
     $theme = $component->getTheme();
     $customAttributes = $component->getThAttributes($column);
-    $direction = $component->getSort($column->getField());
+    $direction = $column->hasField() ? $component->getSort($column->getField()) : null;
 @endphp
 
 @if ($theme === 'tailwind')
