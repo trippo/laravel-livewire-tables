@@ -22,4 +22,20 @@ class ComponentHelpersTest extends TestCase
 
         $this->assertEquals('No items found. Try to broaden your search.', $table->getEmptyMessage());
     }
+
+    /** @test */
+    public function can_get_offline_status(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertTrue($table->getOfflineIndicatorStatus());
+
+        $this->assertTrue($table->offlineIndicatorIsEnabled());
+
+        $table->setOfflineIndicatorDisabled();
+
+        $this->assertTrue($table->offlineIndicatorIsDisabled());
+
+        $this->assertFalse($table->getOfflineIndicatorStatus());
+    }
 }

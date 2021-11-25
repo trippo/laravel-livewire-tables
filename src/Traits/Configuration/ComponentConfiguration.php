@@ -107,4 +107,36 @@ trait ComponentConfiguration
 
         return $this;
     }
+
+    /**
+     * @param  bool  $status
+     *
+     * @return $this
+     */
+    public function setOfflineIndicatorStatus(bool $status): self
+    {
+        $this->offlineIndicator = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setOfflineIndicatorEnabled(): self
+    {
+        $this->setOfflineIndicatorStatus(true);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setOfflineIndicatorDisabled(): self
+    {
+        $this->setOfflineIndicatorStatus(false);
+
+        return $this;
+    }
 }

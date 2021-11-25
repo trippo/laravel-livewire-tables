@@ -2,6 +2,7 @@
 
 @php
     $refresh = $this->getRefreshStatus();
+    $theme = $component->getTheme();
 @endphp
 
  <div
@@ -20,6 +21,7 @@
     @endif
 >
     @include('livewire-tables::includes.debug')
+    @include('livewire-tables::includes.offline')
 
      <div>
          {{ $slot }}

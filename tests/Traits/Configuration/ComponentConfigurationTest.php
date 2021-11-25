@@ -118,4 +118,28 @@ class ComponentConfigurationTest extends TestCase
 
         $this->assertEquals('My empty message', $table->getEmptyMessage());
     }
+
+    /** @test */
+    public function can_set_offline_indicator_status(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertTrue($table->getOfflineIndicatorStatus());
+
+        $table->setOfflineIndicatorStatus(false);
+
+        $this->assertFalse($table->getOfflineIndicatorStatus());
+
+        $table->setOfflineIndicatorStatus(true);
+
+        $this->assertTrue($table->getOfflineIndicatorStatus());
+
+        $table->setOfflineIndicatorDisabled();
+
+        $this->assertFalse($table->getOfflineIndicatorStatus());
+
+        $table->setOfflineIndicatorEnabled();
+
+        $table->setOfflineIndicatorStatus(true);
+    }
 }

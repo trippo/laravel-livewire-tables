@@ -18,4 +18,5 @@ trait ComponentUtilities
     protected $trAttributesCallback;
     protected $tdAttributesCallback;
     protected string $emptyMessage = 'No items found. Try to broaden your search.';
+    protected bool $offlineIndicator = true;
 }

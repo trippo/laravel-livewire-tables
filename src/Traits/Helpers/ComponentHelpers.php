@@ -89,4 +89,28 @@ trait ComponentHelpers
     {
         return __($this->emptyMessage);
     }
+
+    /**
+     * @return bool
+     */
+    public function getOfflineIndicatorStatus(): bool
+    {
+        return $this->offlineIndicator;
+    }
+
+    /**
+     * @return bool
+     */
+    public function offlineIndicatorIsEnabled(): bool
+    {
+        return $this->getOfflineIndicatorStatus() === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function offlineIndicatorIsDisabled(): bool
+    {
+        return $this->getOfflineIndicatorStatus() === false;
+    }
 }
