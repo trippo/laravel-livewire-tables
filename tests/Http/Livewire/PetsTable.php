@@ -17,7 +17,7 @@ class PetsTable extends DataTableComponent
             Column::make('Name'),
             Column::make('Age'),
             Column::make('Other')
-                ->label()
+                ->label(),
         ];
     }
 
