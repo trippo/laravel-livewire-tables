@@ -23,7 +23,7 @@ trait ColumnHelpers
     public function getColumn(string $field): ?Column
     {
         return $this->getColumns()
-            ->filter(fn (Column $column) => $column->isField($field))
+            ->reject(fn (Column $column) => !$column->isField($field))
             ->first();
     }
 }

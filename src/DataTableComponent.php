@@ -35,12 +35,10 @@ abstract class DataTableComponent extends Component
     protected $listeners = ['refreshDatatable' => '$refresh'];
 
     /**
-     * @param  null  $id
+     * Runs on every request, immediately after the component is instantiated, but before any other lifecycle methods are called
      */
-    public function __construct($id = null)
+    public function boot(): void
     {
-        parent::__construct($id);
-
         $theme = $this->getTheme();
 
         if ($theme === 'bootstrap-4' || $theme === 'bootstrap-5') {
@@ -68,6 +66,7 @@ abstract class DataTableComponent extends Component
      */
     public function configure(): void
     {
+        // Silence is golden
     }
 
     /**
