@@ -36,23 +36,23 @@ class SortingConfigurationTest extends TestCase
     {
         $table = new PetsTable();
 
-        $this->assertFalse($table->getSingleSortingStatus());
-
-        $table->setSingleSortingEnabled();
-
         $this->assertTrue($table->getSingleSortingStatus());
 
         $table->setSingleSortingDisabled();
 
         $this->assertFalse($table->getSingleSortingStatus());
 
-        $table->setSingleSortingStatus(true);
+        $table->setSingleSortingEnabled();
 
         $this->assertTrue($table->getSingleSortingStatus());
 
         $table->setSingleSortingStatus(false);
 
         $this->assertFalse($table->getSingleSortingStatus());
+
+        $table->setSingleSortingStatus(true);
+
+        $this->assertTrue($table->getSingleSortingStatus());
     }
 
     /** @test */

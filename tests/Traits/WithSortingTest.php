@@ -2,6 +2,7 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits;
 
+use Livewire\Livewire;
 use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
@@ -27,6 +28,8 @@ class WithSortingTest extends TestCase
     public function clear_sorts_if_single_sorting_and_setting_not_current_field(): void
     {
         $table = new PetsTable();
+
+        $table->setSingleSortingDisabled();
 
         $table->sortBy('id');
         $table->sortBy('name');
@@ -85,4 +88,51 @@ class WithSortingTest extends TestCase
 
         $this->assertFalse($table->hasSort('id'));
     }
+
+    /** @test */
+    public function default_sorting_gets_applied_if_set_and_there_are_no_sorts(): void
+    {
+//        Livewire::test(PetsTable::class)
+//            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
+//            ->call('setDefaultSort', 'name', 'desc')
+//            ->assertSeeInOrder(['Tux', 'May', 'Chico', 'Cartman', 'Ben']);
+    }
+
+    /** @test */
+    public function sort_direction_can_only_be_asc_or_desc(): void
+    {
+//        Livewire::test(PetsTable::class)
+//            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
+//            ->call('setSort', 'name', 'ugkugkuh')
+//            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico']);
+
+//        Livewire::test(PetsTable::class)
+//            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
+//            ->call('setSort', 'name', 'desc')
+//            ->assertSeeInOrder(['Tux', 'May', 'Chico', 'Cartman', 'Ben']);
+    }
+
+//    /** @test */
+//    public function skip_sorting_column_if_it_does_not_have_a_field(): void
+//    {
+//
+//    }
+//
+//    /** @test */
+//    public function skip_sorting_column_if_it_is_not_sortable(): void
+//    {
+//
+//    }
+//
+//    /** @test */
+//    public function sort_callback_gets_applied_if_specified(): void
+//    {
+//
+//    }
+//
+//    /** @test */
+//    public function sort_field_and_direction_are_applied_if_no_sort_callback(): void
+//    {
+//
+//    }
 }

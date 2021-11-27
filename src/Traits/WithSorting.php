@@ -13,7 +13,7 @@ trait WithSorting
 
     public array $sorts = [];
     protected bool $sortingStatus = true;
-    protected bool $singleColumnSortingStatus = false;
+    protected bool $singleColumnSortingStatus = true;
     protected ?string $defaultSortColumn = null;
     protected string $defaultSortDirection = 'asc';
 
@@ -54,7 +54,12 @@ trait WithSorting
             return $builder->orderBy($this->getDefaultSortColumn(), $this->getDefaultSortDirection());
         }
 
+//        dump($this->getSorts());
+
         foreach ($this->getSorts() as $field => $direction) {
+//            dump($field);
+//            dump($direction);
+
             if (! in_array($direction, ['asc', 'desc'])) {
                 $direction = 'desc';
             }
@@ -70,6 +75,9 @@ trait WithSorting
             if ($column->hasSortCallback()) {
                 $builder = app()->call($column->getSortCallback(), ['builder' => $builder, 'direction' => $direction]);
             } else {
+//                dump($field);
+//                dump($direction);
+
                 $builder->orderBy($field, $direction);
             }
         }

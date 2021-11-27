@@ -24,11 +24,11 @@ class SortingHelpersTest extends TestCase
     {
         $table = new PetsTable();
 
-        $this->assertTrue($table->singleSortingIsDisabled());
-
-        $table->setSingleSortingEnabled();
-
         $this->assertTrue($table->singleSortingIsEnabled());
+
+        $table->setSingleSortingDisabled();
+
+        $this->assertTrue($table->singleSortingIsDisabled());
     }
 
     /** @test */
