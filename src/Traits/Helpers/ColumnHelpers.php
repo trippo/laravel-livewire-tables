@@ -13,7 +13,7 @@ trait ColumnHelpers
     public function setColumns(): void
     {
         $columns = collect($this->columns())
-            ->filter(fn($column) => $column instanceof Column);
+            ->filter(fn ($column) => $column instanceof Column);
 
         $this->columns = $columns;
     }

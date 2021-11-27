@@ -6,5 +6,4 @@ use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class ColumnTest extends TestCase
 {
-
 }
