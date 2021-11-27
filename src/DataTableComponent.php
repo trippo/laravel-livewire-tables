@@ -45,6 +45,9 @@ abstract class DataTableComponent extends Component
             $this->setPaginationTheme('bootstrap');
         }
 
+        // Set the user defined columns to work with
+        $this->setColumns();
+
         // Call the child configuration, if any
         $this->configure();
     }

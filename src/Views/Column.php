@@ -16,8 +16,9 @@ class Column
     protected ?string $field = null;
     protected bool $sortable = false;
     protected $sortCallback;
+    protected bool $collapseOnMobile = false;
+    protected bool $collapseOnTablet = false;
 
-    // TODO: Test
     /**
      * @param  string  $title
      * @param  string|null  $field

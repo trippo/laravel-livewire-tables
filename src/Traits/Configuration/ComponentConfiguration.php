@@ -19,6 +19,20 @@ trait ComponentConfiguration
     }
 
     /**
+     * Get a list of attributes to override on the div that wraps the table
+     *
+     * @param  array  $attributes
+     *
+     * @return $this
+     */
+    public function setTableWrapperAttributes(array $attributes = []): self
+    {
+        $this->tableWrapperAttributes = $attributes;
+
+        return $this;
+    }
+
+    /**
      * Get a list of attributes to override on the table element
      *
      * @param  array  $attributes

@@ -21,6 +21,8 @@ You can install the package via composer:
 composer require rappasoft/laravel-livewire-tables
 ```
 
+You must also have [Alpine.js](https://alpinejs.dev) version 3 or greater installed and available to the component.
+
 ## Documentation and Usage Instructions
 
 See the [documentation](https://rappasoft.com/docs/laravel-livewire-tables) for detailed installation and usage instructions.

@@ -11,6 +11,7 @@ trait ComponentUtilities
         ComponentHelpers;
 
     protected array $componentWrapperAttributes = [];
+    protected array $tableWrapperAttributes = [];
     protected array $tableAttributes = [];
     protected array $theadAttributes = [];
     protected array $tbodyAttributes = [];

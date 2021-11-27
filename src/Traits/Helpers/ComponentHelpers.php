@@ -24,6 +24,14 @@ trait ComponentHelpers
     }
 
     /**
+     * @return string[]
+     */
+    public function getTableWrapperAttributes(): array
+    {
+        return count($this->tableWrapperAttributes) ? $this->tableWrapperAttributes : ['default' => true];
+    }
+
+    /**
      * @return bool[]
      */
     public function getTableAttributes(): array

@@ -23,6 +23,18 @@ class ComponentConfigurationTest extends TestCase
     }
 
     /** @test */
+    public function can_set_table_wrapper_attributes(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertSame($table->getTableWrapperAttributes(), ['default' => true]);
+
+        $table->setTableWrapperAttributes(['this' => 'that']);
+
+        $this->assertSame($table->getTableWrapperAttributes(), ['this' => 'that']);
+    }
+
+    /** @test */
     public function can_set_table_attributes(): void
     {
         $table = new PetsTable();
