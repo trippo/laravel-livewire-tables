@@ -2,7 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Views\Traits\Configuration;
 
-// TODO: Test
 trait ColumnConfiguration
 {
     /**

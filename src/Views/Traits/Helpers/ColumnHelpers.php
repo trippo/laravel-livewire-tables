@@ -5,7 +5,6 @@ namespace Rappasoft\LaravelLivewireTables\Views\Traits\Helpers;
 use Illuminate\Database\Eloquent\Model;
 use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 
-// TODO: Test
 trait ColumnHelpers
 {
     // Getters
@@ -27,6 +26,8 @@ trait ColumnHelpers
     }
 
     /**
+     * TODO: Test
+     *
      * @param  Model  $row
      *
      * @return array|mixed|string
@@ -52,16 +53,6 @@ trait ColumnHelpers
     public function getSortCallback(): ?callable
     {
         return $this->sortCallback;
-    }
-
-    // Setters
-
-    /**
-     * @param  string  $field
-     */
-    public function setField(string $field): void
-    {
-        $this->field = $field;
     }
 
     // Checks

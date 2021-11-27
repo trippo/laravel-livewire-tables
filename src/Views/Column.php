@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 use Rappasoft\LaravelLivewireTables\Views\Traits\Configuration\ColumnConfiguration;
 use Rappasoft\LaravelLivewireTables\Views\Traits\Helpers\ColumnHelpers;
 
-// TODO: Test
 class Column
 {
     use ColumnConfiguration,
