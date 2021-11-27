@@ -8,7 +8,6 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class ColumnTest extends TestCase
 {
-
     /** @test */
     public function can_get_column_title(): void
     {
@@ -97,7 +96,7 @@ class ColumnTest extends TestCase
 
         $this->assertFalse($column->hasSortCallback());
 
-        $column = Column::make('My Title')->sortable(function(Builder $builder, string $direction) {
+        $column = Column::make('My Title')->sortable(function (Builder $builder, string $direction) {
             return $builder->orderBy('name', $direction);
         });
 
@@ -111,7 +110,7 @@ class ColumnTest extends TestCase
 
         $this->assertNull($column->getSortCallback());
 
-        $column = Column::make('My Title')->sortable(function(Builder $builder, string $direction) {
+        $column = Column::make('My Title')->sortable(function (Builder $builder, string $direction) {
             return $builder->orderBy('name', $direction);
         });
 
