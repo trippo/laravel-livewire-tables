@@ -14,7 +14,8 @@ class PetsTable extends DataTableComponent
         return [
             Column::make('ID')
                 ->field('id'),
-            Column::make('Name'),
+            Column::make('Name')
+                ->sortable(),
             Column::make('Age'),
             Column::make('Other')
                 ->label(),

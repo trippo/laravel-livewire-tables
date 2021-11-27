@@ -47,21 +47,20 @@ trait WithSorting
         return null;
     }
 
-    // TODO: Test
+    /**
+     * @param  Builder  $builder
+     *
+     * @return Builder
+     */
     public function applySorting(Builder $builder): Builder
     {
         if ($this->hasDefaultSort() && ! $this->hasSorts()) {
             return $builder->orderBy($this->getDefaultSortColumn(), $this->getDefaultSortDirection());
         }
 
-//        dump($this->getSorts());
-
         foreach ($this->getSorts() as $field => $direction) {
-//            dump($field);
-//            dump($direction);
-
             if (! in_array($direction, ['asc', 'desc'])) {
-                $direction = 'desc';
+                $direction = 'asc';
             }
 
             if (is_null($column = $this->getColumn($field))) {
@@ -72,12 +71,10 @@ trait WithSorting
                 continue;
             }
 
+            // TODO: Test
             if ($column->hasSortCallback()) {
                 $builder = app()->call($column->getSortCallback(), ['builder' => $builder, 'direction' => $direction]);
             } else {
-//                dump($field);
-//                dump($direction);
-
                 $builder->orderBy($field, $direction);
             }
         }
