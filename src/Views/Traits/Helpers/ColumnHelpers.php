@@ -34,8 +34,7 @@ trait ColumnHelpers
      */
     public function getContents(Model $row)
     {
-        if ($this->shouldCollapseOnMobile() && $this->shouldCollapseOnTablet())
-        {
+        if ($this->shouldCollapseOnMobile() && $this->shouldCollapseOnTablet()) {
             throw new DataTableConfigurationException('You should only specify a column should collapse on mobile OR tablet, not both.');
         }
 
