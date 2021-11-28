@@ -3,6 +3,7 @@
 namespace Rappasoft\LaravelLivewireTables\Views\Traits\Helpers;
 
 use Illuminate\Database\Eloquent\Model;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 
 trait ColumnHelpers
@@ -133,5 +134,55 @@ trait ColumnHelpers
     public function shouldCollapseOnTablet(): bool
     {
         return $this->collapseOnTablet;
+    }
+
+
+
+
+    // TODO: Test
+    public function getSortingPillTitle(): string
+    {
+        if ($this->hasCustomSortingPillTitle()) {
+            return $this->getCustomSortingPillTitle();
+        }
+
+        return $this->getTitle();
+    }
+
+    public function getCustomSortingPillTitle(): ?string
+    {
+        return $this->sortingPillTitle;
+    }
+
+    public function hasCustomSortingPillTitle(): bool
+    {
+        return $this->getCustomSortingPillTitle() !== null;
+    }
+
+    public function hasCustomSortingPillDirections(): bool
+    {
+        return $this->sortingPillDirectionAsc !== null && $this->sortingPillDirectionDesc !== null;
+    }
+
+    public function getCustomSortingPillDirections(string $direction): string
+    {
+        if ($direction === 'asc') {
+            return $this->sortingPillDirectionAsc;
+        }
+
+        if ($direction === 'desc') {
+            return $this->sortingPillDirectionDesc;
+        }
+
+        return __('N/A');
+    }
+
+    public function getSortingPillDirection(DataTableComponent $component, string $direction): string
+    {
+        if ($this->hasCustomSortingPillDirections()) {
+            return $this->getCustomSortingPillDirections($direction);
+        }
+
+        return $direction === 'asc' ? $component->getDefaultSortingLabelAsc() : $component->getDefaultSortingLabelDesc();
     }
 }

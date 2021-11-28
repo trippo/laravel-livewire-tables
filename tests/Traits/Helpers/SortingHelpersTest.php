@@ -189,4 +189,20 @@ class SortingHelpersTest extends TestCase
 
         $this->assertTrue($table->hasDefaultSort());
     }
+
+    /** @test */
+    public function can_get_sorting_pills_status(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertTrue($table->sortingPillsAreEnabled());
+
+        $table->setSortingPillsDisabled();
+
+        $this->assertTrue($table->sortingPillsAreDisabled());
+
+        $table->setSortingPillsEnabled();
+
+        $this->assertTrue($table->sortingPillsAreEnabled());
+    }
 }

@@ -20,4 +20,6 @@ trait ComponentUtilities
     protected $tdAttributesCallback;
     protected string $emptyMessage = 'No items found. Try to broaden your search.';
     protected bool $offlineIndicator = true;
+    protected string $defaultSortingLabelAsc = 'A-Z';
+    protected string $defaultSortingLabelDesc = 'Z-A';
 }

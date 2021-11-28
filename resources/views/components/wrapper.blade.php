@@ -20,10 +20,8 @@
         @endif
     @endif
 >
-    @include('livewire-tables::includes.debug')
-    @include('livewire-tables::includes.offline')
+     @include('livewire-tables::includes.debug')
+     @include('livewire-tables::includes.offline')
 
-     <div>
-         {{ $slot }}
-     </div>
+     {{ $slot }}
 </div>

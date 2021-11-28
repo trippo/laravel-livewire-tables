@@ -92,4 +92,36 @@ trait SortingConfiguration
 
         return $this;
     }
+
+    /**
+     * @param  bool  $status
+     *
+     * @return $this
+     */
+    public function setSortingPillsStatus(bool $status): self
+    {
+        $this->sortingPillsStatus = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setSortingPillsEnabled(): self
+    {
+        $this->setSortingPillsStatus(true);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setSortingPillsDisabled(): self
+    {
+        $this->setSortingPillsStatus(false);
+
+        return $this;
+    }
 }

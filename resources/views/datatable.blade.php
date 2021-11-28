@@ -1,4 +1,10 @@
 <x-livewire-tables::wrapper :component="$this">
+    <x-livewire-tables::tools>
+        <x-livewire-tables::tools.sorting-pills />
+        <x-livewire-tables::tools.filter-pills />
+        <x-livewire-tables::tools.toolbar />
+    </x-livewire-tables::tools>
+
     <x-livewire-tables::table>
         <x-slot name="thead">
             <x-livewire-tables::table.th.row-contents />
@@ -24,4 +30,6 @@
             <x-livewire-tables::table.empty  />
         @endforelse
     </x-livewire-tables::table>
+
+    <x-livewire-tables::pagination />
 </x-livewire-tables::wrapper>

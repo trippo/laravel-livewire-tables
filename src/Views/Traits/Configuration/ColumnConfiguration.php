@@ -39,4 +39,30 @@ trait ColumnConfiguration
 
         return $this;
     }
+
+    /**
+     * @param  string  $title
+     *
+     * @return $this
+     */
+    public function setSortingPillTitle(string $title): self
+    {
+        $this->sortingPillTitle = $title;
+
+        return $this;
+    }
+
+    /**
+     * @param  string  $asc
+     * @param  string  $desc
+     *
+     * @return $this
+     */
+    public function setSortingPillDirections(string $asc, string $desc): self
+    {
+        $this->sortingPillDirectionAsc = $asc;
+        $this->sortingPillDirectionDesc = $desc;
+
+        return $this;
+    }
 }

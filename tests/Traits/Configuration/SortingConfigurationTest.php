@@ -84,4 +84,28 @@ class SortingConfigurationTest extends TestCase
         $this->assertNull($table->getDefaultSortColumn());
         $this->assertSame('asc', $table->getDefaultSortDirection());
     }
+
+    /** @test */
+    public function can_set_sorting_pill_status(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertTrue($table->getSortingPillsStatus());
+
+        $table->setSortingPillsDisabled();
+
+        $this->assertFalse($table->getSortingPillsStatus());
+
+        $table->setSortingPillsEnabled();
+
+        $this->assertTrue($table->getSortingPillsStatus());
+
+        $table->setSortingPillsStatus(false);
+
+        $this->assertFalse($table->getSortingPillsStatus());
+
+        $table->setSortingPillsStatus(true);
+
+        $this->assertTrue($table->getSortingPillsStatus());
+    }
 }

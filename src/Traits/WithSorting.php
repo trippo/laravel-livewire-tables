@@ -16,6 +16,7 @@ trait WithSorting
     protected bool $singleColumnSortingStatus = true;
     protected ?string $defaultSortColumn = null;
     protected string $defaultSortDirection = 'asc';
+    protected bool $sortingPillsStatus = true;
 
     /**
      * @param  string  $field

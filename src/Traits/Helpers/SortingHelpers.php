@@ -188,4 +188,28 @@ trait SortingHelpers
     {
         return $this->defaultSortDirection;
     }
+
+    /**
+     * @return bool
+     */
+    public function getSortingPillsStatus(): bool
+    {
+        return $this->sortingPillsStatus;
+    }
+
+    /**
+     * @return bool
+     */
+    public function sortingPillsAreEnabled(): bool
+    {
+        return $this->getSortingPillsStatus() === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function sortingPillsAreDisabled(): bool
+    {
+        return $this->getSortingPillsStatus() === false;
+    }
 }

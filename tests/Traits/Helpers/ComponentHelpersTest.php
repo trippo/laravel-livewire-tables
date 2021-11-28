@@ -38,4 +38,13 @@ class ComponentHelpersTest extends TestCase
 
         $this->assertFalse($table->getOfflineIndicatorStatus());
     }
+
+    /** @test */
+    public function can_get_default_sorting_labels(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertSame('A-Z', $table->getDefaultSortingLabelAsc());
+        $this->assertSame('Z-A', $table->getDefaultSortingLabelDesc());
+    }
 }

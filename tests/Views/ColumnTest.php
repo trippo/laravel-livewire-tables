@@ -142,6 +142,32 @@ class ColumnTest extends TestCase
     }
 
     /** @test */
+    public function can_set_custom_sorting_pill_title(): void
+    {
+        $column = Column::make('My Title');
+
+        $this->assertNull($column->getCustomSortingPillTitle());
+
+        $column->setSortingPillTitle('New Title');
+
+        $this->assertSame('New Title', $column->getCustomSortingPillTitle());
+    }
+
+    /** @test */
+    public function can_set_custom_sorting_pill_directions(): void
+    {
+        $column = Column::make('My Title');
+
+        $this->assertFalse($column->hasCustomSortingPillDirections());
+
+        $column->setSortingPillDirections('1-2', '2-1');
+
+        $this->assertTrue($column->hasCustomSortingPillDirections());
+        $this->assertSame('1-2', $column->getCustomSortingPillDirections('asc'));
+        $this->assertSame('2-1', $column->getCustomSortingPillDirections('desc'));
+    }
+
+    /** @test */
     public function can_get_contents_of_column(): void
     {
         // TODO

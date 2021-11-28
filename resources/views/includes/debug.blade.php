@@ -6,6 +6,6 @@
     @endphp
 
     @if ($this->getDebugStatus())
-        <pre>{{ var_dump($debuggable) }}</pre>
+        <pre class="mb-4">{{ var_dump($debuggable) }}</pre>
     @endif
 </div>

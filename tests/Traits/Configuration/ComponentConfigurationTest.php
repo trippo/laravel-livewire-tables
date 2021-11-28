@@ -154,4 +154,18 @@ class ComponentConfigurationTest extends TestCase
 
         $table->setOfflineIndicatorStatus(true);
     }
+
+    /** @test */
+    public function can_set_default_sorting_labels(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertSame('A-Z', $table->getDefaultSortingLabelAsc());
+        $this->assertSame('Z-A', $table->getDefaultSortingLabelDesc());
+
+        $table->setDefaultSortingLabels('1-2', '2-1');
+
+        $this->assertSame('1-2', $table->getDefaultSortingLabelAsc());
+        $this->assertSame('2-1', $table->getDefaultSortingLabelDesc());
+    }
 }
