@@ -136,9 +136,6 @@ trait ColumnHelpers
         return $this->collapseOnTablet;
     }
 
-
-
-
     // TODO: Test
     public function getSortingPillTitle(): string
     {
