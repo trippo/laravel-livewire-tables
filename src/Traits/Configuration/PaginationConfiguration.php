@@ -47,4 +47,36 @@ trait PaginationConfiguration
 
         return $this;
     }
+
+    /**
+     * @param  bool  $status
+     *
+     * @return $this
+     */
+    public function setPaginationVisibilityStatus(bool $status): self
+    {
+        $this->paginationVisibilityStatus = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setPaginationVisibilityEnabled(): self
+    {
+        $this->setPaginationVisibilityStatus(true);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setPaginationVisibilityDisabled(): self
+    {
+        $this->setPaginationVisibilityStatus(false);
+
+        return $this;
+    }
 }

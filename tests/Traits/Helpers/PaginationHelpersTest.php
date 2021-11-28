@@ -17,5 +17,25 @@ class PaginationHelpersTest extends TestCase
         $table->setPaginationDisabled();
 
         $this->assertTrue($table->paginationIsDisabled());
+
+        $table->setPaginationEnabled();
+
+        $this->assertTrue($table->paginationIsEnabled());
+    }
+
+    /** @test */
+    public function can_get_pagination_visibility_status(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertTrue($table->paginationVisibilityIsEnabled());
+
+        $table->setPaginationVisibilityDisabled();
+
+        $this->assertTrue($table->paginationVisibilityIsDisabled());
+
+        $table->setPaginationVisibilityEnabled();
+
+        $this->assertTrue($table->paginationVisibilityIsEnabled());
     }
 }

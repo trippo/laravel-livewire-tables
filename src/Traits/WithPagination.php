@@ -12,17 +12,7 @@ trait WithPagination
         PaginationConfiguration,
         PaginationHelpers;
 
-    /**
-     * The default pagination theme.
-     *
-     * @var string
-     */
     protected string $paginationTheme = 'tailwind';
-
-    /**
-     * If disabled, the query will execute with get()
-     *
-     * @var bool
-     */
     protected bool $paginationStatus = true;
+    public bool $paginationVisibilityStatus = true;
 }
