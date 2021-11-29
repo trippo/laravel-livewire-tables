@@ -2,7 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Helpers;
 
-use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class SortingHelpersTest extends TestCase
