@@ -22,16 +22,6 @@ abstract class DataTableComponent extends Component
         WithRefresh,
         WithSorting;
 
-    /**
-     * @var \null[][]
-     */
-    protected $queryString = [
-        'sorts' => ['except' => null],
-    ];
-
-    /**
-     * @var string[]
-     */
     protected $listeners = ['refreshDatatable' => '$refresh'];
 
     /**
@@ -39,6 +29,10 @@ abstract class DataTableComponent extends Component
      */
     public function boot(): void
     {
+        $this->{$this->tableName} = [
+            'sorts' => $this->{$this->tableName}['sorts'] ?? []
+        ];
+
         $theme = $this->getTheme();
 
         if ($theme === 'bootstrap-4' || $theme === 'bootstrap-5') {

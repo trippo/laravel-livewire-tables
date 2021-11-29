@@ -59,4 +59,22 @@ trait PaginationHelpers
     {
         return $this->getPaginationVisibilityStatus() === false;
     }
+
+    /**
+     * @return string
+     */
+    public function getComputedPageName(): string
+    {
+        $pageName = 'page';
+
+        // If the component has a specific page name set
+        if ($this->hasPageName()) {
+            $pageName = $this->getPageName();
+        } elseif (! $this->isTableNamed('table')) {
+            // If the component has a custom table name but no custom page name
+            $pageName = $this->getTableName().'Page';
+        }
+
+        return $pageName;
+    }
 }

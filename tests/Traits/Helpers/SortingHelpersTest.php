@@ -66,6 +66,7 @@ class SortingHelpersTest extends TestCase
     public function can_set_single_sort_by_field_and_direction(): void
     {
         $table = new PetsTable();
+        $table->boot();
 
         $this->assertEmpty($table->getSorts());
 

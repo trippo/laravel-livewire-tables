@@ -12,6 +12,7 @@ class WithSortingTest extends TestCase
     public function cannot_call_sortBy_if_sorting_is_disabled(): void
     {
         $table = new PetsTable();
+        $table->boot();
 
         $sort = $table->sortBy('id');
 
@@ -53,6 +54,7 @@ class WithSortingTest extends TestCase
     public function set_sort_asc_if_not_set(): void
     {
         $table = new PetsTable();
+        $table->boot();
 
         $this->assertFalse($table->hasSort('id'));
 

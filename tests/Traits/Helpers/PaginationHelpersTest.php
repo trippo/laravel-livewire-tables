@@ -38,4 +38,20 @@ class PaginationHelpersTest extends TestCase
 
         $this->assertTrue($table->paginationVisibilityIsEnabled());
     }
+
+    /** @test */
+    public function can_get_computed_page_name(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertSame('page', $table->getComputedPageName());
+
+        $table->setTableName('users');
+
+        $this->assertSame('usersPage', $table->getComputedPageName());
+
+        $table->setPageName('newPage');
+
+        $this->assertSame('newPage', $table->getComputedPageName());
+    }
 }

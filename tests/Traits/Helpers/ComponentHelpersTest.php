@@ -47,4 +47,81 @@ class ComponentHelpersTest extends TestCase
         $this->assertSame('A-Z', $table->getDefaultSortingLabelAsc());
         $this->assertSame('Z-A', $table->getDefaultSortingLabelDesc());
     }
+
+    /** @test */
+    public function can_get_query_string_status(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertTrue($table->getQueryStringStatus());
+
+        $this->assertTrue($table->queryStringIsEnabled());
+
+        $table->setQueryStringDisabled();
+
+        $this->assertTrue($table->queryStringIsDisabled());
+
+        $this->assertFalse($table->getQueryStringStatus());
+    }
+
+    /** @test */
+    public function can_get_table_name(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertSame('table', $table->getTableName());
+
+        $table->setTableName('table2');
+
+        $this->assertSame('table2', $table->getTableName());
+    }
+
+    /** @test */
+    public function can_get_table_query_alias(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertSame('t', $table->getTableQueryAlias());
+
+        $table->setTableQueryAlias('q');
+
+        $this->assertSame('q', $table->getTableQueryAlias());
+    }
+
+    /** @test */
+    public function can_get_page_name(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertNull($table->getPageName());
+
+        $table->setPageName('page2');
+
+        $this->assertSame('page2', $table->getPageName());
+    }
+
+    /** @test */
+    public function can_check_if_table_equals_name(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertTrue($table->isTableNamed('table'));
+        $this->assertFalse($table->isTableNamed('table2'));
+
+        $table->setTableName('table2');
+
+        $this->assertTrue($table->isTableNamed('table2'));
+    }
+
+    /** @test */
+    public function can_check_if_table_has_page_name(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertFalse($table->hasPageName());
+
+        $table->setPageName('page2');
+
+        $this->assertTrue($table->hasPageName());
+    }
 }

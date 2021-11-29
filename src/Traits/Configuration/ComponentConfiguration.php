@@ -167,4 +167,36 @@ trait ComponentConfiguration
 
         return $this;
     }
+
+    /**
+     * @param  bool  $status
+     *
+     * @return $this
+     */
+    public function setQueryStringStatus(bool $status): self
+    {
+        $this->queryStringStatus = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setQueryStringEnabled(): self
+    {
+        $this->setQueryStringStatus(true);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setQueryStringDisabled(): self
+    {
+        $this->setQueryStringStatus(false);
+
+        return $this;
+    }
 }

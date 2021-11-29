@@ -168,4 +168,28 @@ class ComponentConfigurationTest extends TestCase
         $this->assertSame('1-2', $table->getDefaultSortingLabelAsc());
         $this->assertSame('2-1', $table->getDefaultSortingLabelDesc());
     }
+
+    /** @test */
+    public function can_set_query_string_status(): void
+    {
+        $table = new PetsTable();
+
+        $this->assertTrue($table->getQueryStringStatus());
+
+        $table->setQueryStringStatus(false);
+
+        $this->assertFalse($table->getQueryStringStatus());
+
+        $table->setQueryStringStatus(true);
+
+        $this->assertTrue($table->getQueryStringStatus());
+
+        $table->setQueryStringDisabled();
+
+        $this->assertFalse($table->getQueryStringStatus());
+
+        $table->setQueryStringEnabled();
+
+        $table->setQueryStringStatus(true);
+    }
 }
