@@ -2,7 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Helpers;
 
-use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class ComponentHelpersTest extends TestCase
@@ -10,118 +9,98 @@ class ComponentHelpersTest extends TestCase
     /** @test */
     public function can_get_current_theme(): void
     {
-        $table = new PetsTable();
-
-        $this->assertEquals('tailwind', $table->getTheme());
+        $this->assertEquals('tailwind', $this->basicTable->getTheme());
     }
 
     /** @test */
     public function can_get_empty_message(): void
     {
-        $table = new PetsTable();
-
-        $this->assertEquals('No items found. Try to broaden your search.', $table->getEmptyMessage());
+        $this->assertEquals('No items found. Try to broaden your search.', $this->basicTable->getEmptyMessage());
     }
 
     /** @test */
     public function can_get_offline_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->getOfflineIndicatorStatus());
 
-        $this->assertTrue($table->getOfflineIndicatorStatus());
+        $this->assertTrue($this->basicTable->offlineIndicatorIsEnabled());
 
-        $this->assertTrue($table->offlineIndicatorIsEnabled());
+        $this->basicTable->setOfflineIndicatorDisabled();
 
-        $table->setOfflineIndicatorDisabled();
+        $this->assertTrue($this->basicTable->offlineIndicatorIsDisabled());
 
-        $this->assertTrue($table->offlineIndicatorIsDisabled());
-
-        $this->assertFalse($table->getOfflineIndicatorStatus());
+        $this->assertFalse($this->basicTable->getOfflineIndicatorStatus());
     }
 
     /** @test */
     public function can_get_default_sorting_labels(): void
     {
-        $table = new PetsTable();
-
-        $this->assertSame('A-Z', $table->getDefaultSortingLabelAsc());
-        $this->assertSame('Z-A', $table->getDefaultSortingLabelDesc());
+        $this->assertSame('A-Z', $this->basicTable->getDefaultSortingLabelAsc());
+        $this->assertSame('Z-A', $this->basicTable->getDefaultSortingLabelDesc());
     }
 
     /** @test */
     public function can_get_query_string_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->getQueryStringStatus());
 
-        $this->assertTrue($table->getQueryStringStatus());
+        $this->assertTrue($this->basicTable->queryStringIsEnabled());
 
-        $this->assertTrue($table->queryStringIsEnabled());
+        $this->basicTable->setQueryStringDisabled();
 
-        $table->setQueryStringDisabled();
+        $this->assertTrue($this->basicTable->queryStringIsDisabled());
 
-        $this->assertTrue($table->queryStringIsDisabled());
-
-        $this->assertFalse($table->getQueryStringStatus());
+        $this->assertFalse($this->basicTable->getQueryStringStatus());
     }
 
     /** @test */
     public function can_get_table_name(): void
     {
-        $table = new PetsTable();
+        $this->assertSame('table', $this->basicTable->getTableName());
 
-        $this->assertSame('table', $table->getTableName());
+        $this->basicTable->setTableName('table2');
 
-        $table->setTableName('table2');
-
-        $this->assertSame('table2', $table->getTableName());
+        $this->assertSame('table2', $this->basicTable->getTableName());
     }
 
     /** @test */
     public function can_get_table_query_alias(): void
     {
-        $table = new PetsTable();
+        $this->assertSame('t', $this->basicTable->getTableQueryAlias());
 
-        $this->assertSame('t', $table->getTableQueryAlias());
+        $this->basicTable->setTableQueryAlias('q');
 
-        $table->setTableQueryAlias('q');
-
-        $this->assertSame('q', $table->getTableQueryAlias());
+        $this->assertSame('q', $this->basicTable->getTableQueryAlias());
     }
 
     /** @test */
     public function can_get_page_name(): void
     {
-        $table = new PetsTable();
+        $this->assertNull($this->basicTable->getPageName());
 
-        $this->assertNull($table->getPageName());
+        $this->basicTable->setPageName('page2');
 
-        $table->setPageName('page2');
-
-        $this->assertSame('page2', $table->getPageName());
+        $this->assertSame('page2', $this->basicTable->getPageName());
     }
 
     /** @test */
     public function can_check_if_table_equals_name(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->isTableNamed('table'));
+        $this->assertFalse($this->basicTable->isTableNamed('table2'));
 
-        $this->assertTrue($table->isTableNamed('table'));
-        $this->assertFalse($table->isTableNamed('table2'));
+        $this->basicTable->setTableName('table2');
 
-        $table->setTableName('table2');
-
-        $this->assertTrue($table->isTableNamed('table2'));
+        $this->assertTrue($this->basicTable->isTableNamed('table2'));
     }
 
     /** @test */
     public function can_check_if_table_has_page_name(): void
     {
-        $table = new PetsTable();
+        $this->assertFalse($this->basicTable->hasPageName());
 
-        $this->assertFalse($table->hasPageName());
+        $this->basicTable->setPageName('page2');
 
-        $table->setPageName('page2');
-
-        $this->assertTrue($table->hasPageName());
+        $this->assertTrue($this->basicTable->hasPageName());
     }
 }

@@ -2,7 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Configuration;
 
-use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class SortingConfigurationTest extends TestCase
@@ -10,102 +9,92 @@ class SortingConfigurationTest extends TestCase
     /** @test */
     public function can_set_sorting_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->getSortingStatus());
 
-        $this->assertTrue($table->getSortingStatus());
+        $this->basicTable->setSortingDisabled();
 
-        $table->setSortingDisabled();
+        $this->assertFalse($this->basicTable->getSortingStatus());
 
-        $this->assertFalse($table->getSortingStatus());
+        $this->basicTable->setSortingEnabled();
 
-        $table->setSortingEnabled();
+        $this->assertTrue($this->basicTable->getSortingStatus());
 
-        $this->assertTrue($table->getSortingStatus());
+        $this->basicTable->setSortingStatus(false);
 
-        $table->setSortingStatus(false);
+        $this->assertFalse($this->basicTable->getSortingStatus());
 
-        $this->assertFalse($table->getSortingStatus());
+        $this->basicTable->setSortingStatus(true);
 
-        $table->setSortingStatus(true);
-
-        $this->assertTrue($table->getSortingStatus());
+        $this->assertTrue($this->basicTable->getSortingStatus());
     }
 
     /** @test */
     public function can_set_single_sorting_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->getSingleSortingStatus());
 
-        $this->assertTrue($table->getSingleSortingStatus());
+        $this->basicTable->setSingleSortingDisabled();
 
-        $table->setSingleSortingDisabled();
+        $this->assertFalse($this->basicTable->getSingleSortingStatus());
 
-        $this->assertFalse($table->getSingleSortingStatus());
+        $this->basicTable->setSingleSortingEnabled();
 
-        $table->setSingleSortingEnabled();
+        $this->assertTrue($this->basicTable->getSingleSortingStatus());
 
-        $this->assertTrue($table->getSingleSortingStatus());
+        $this->basicTable->setSingleSortingStatus(false);
 
-        $table->setSingleSortingStatus(false);
+        $this->assertFalse($this->basicTable->getSingleSortingStatus());
 
-        $this->assertFalse($table->getSingleSortingStatus());
+        $this->basicTable->setSingleSortingStatus(true);
 
-        $table->setSingleSortingStatus(true);
-
-        $this->assertTrue($table->getSingleSortingStatus());
+        $this->assertTrue($this->basicTable->getSingleSortingStatus());
     }
 
     /** @test */
     public function can_set_default_sort(): void
     {
-        $table = new PetsTable();
+        $this->assertNull($this->basicTable->getDefaultSortColumn());
+        $this->assertSame('asc', $this->basicTable->getDefaultSortDirection());
 
-        $this->assertNull($table->getDefaultSortColumn());
-        $this->assertSame('asc', $table->getDefaultSortDirection());
+        $this->basicTable->setDefaultSort('id', 'desc');
 
-        $table->setDefaultSort('id', 'desc');
-
-        $this->assertSame('id', $table->getDefaultSortColumn());
-        $this->assertSame('desc', $table->getDefaultSortDirection());
+        $this->assertSame('id', $this->basicTable->getDefaultSortColumn());
+        $this->assertSame('desc', $this->basicTable->getDefaultSortDirection());
     }
 
     /** @test */
     public function can_remove_default_sort(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setDefaultSort('id', 'desc');
 
-        $table->setDefaultSort('id', 'desc');
+        $this->assertSame('id', $this->basicTable->getDefaultSortColumn());
+        $this->assertSame('desc', $this->basicTable->getDefaultSortDirection());
 
-        $this->assertSame('id', $table->getDefaultSortColumn());
-        $this->assertSame('desc', $table->getDefaultSortDirection());
+        $this->basicTable->removeDefaultSort();
 
-        $table->removeDefaultSort();
-
-        $this->assertNull($table->getDefaultSortColumn());
-        $this->assertSame('asc', $table->getDefaultSortDirection());
+        $this->assertNull($this->basicTable->getDefaultSortColumn());
+        $this->assertSame('asc', $this->basicTable->getDefaultSortDirection());
     }
 
     /** @test */
     public function can_set_sorting_pill_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->getSortingPillsStatus());
 
-        $this->assertTrue($table->getSortingPillsStatus());
+        $this->basicTable->setSortingPillsDisabled();
 
-        $table->setSortingPillsDisabled();
+        $this->assertFalse($this->basicTable->getSortingPillsStatus());
 
-        $this->assertFalse($table->getSortingPillsStatus());
+        $this->basicTable->setSortingPillsEnabled();
 
-        $table->setSortingPillsEnabled();
+        $this->assertTrue($this->basicTable->getSortingPillsStatus());
 
-        $this->assertTrue($table->getSortingPillsStatus());
+        $this->basicTable->setSortingPillsStatus(false);
 
-        $table->setSortingPillsStatus(false);
+        $this->assertFalse($this->basicTable->getSortingPillsStatus());
 
-        $this->assertFalse($table->getSortingPillsStatus());
+        $this->basicTable->setSortingPillsStatus(true);
 
-        $table->setSortingPillsStatus(true);
-
-        $this->assertTrue($table->getSortingPillsStatus());
+        $this->assertTrue($this->basicTable->getSortingPillsStatus());
     }
 }

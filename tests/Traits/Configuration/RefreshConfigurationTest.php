@@ -2,7 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Configuration;
 
-use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class RefreshConfigurationTest extends TestCase
@@ -10,48 +9,40 @@ class RefreshConfigurationTest extends TestCase
     /** @test */
     public function refresh_time_can_be_set(): void
     {
-        $table = new PetsTable();
+        $this->assertFalse($this->basicTable->getRefreshStatus());
 
-        $this->assertFalse($table->getRefreshStatus());
+        $this->basicTable->setRefreshTime(5000);
 
-        $table->setRefreshTime(5000);
-
-        $this->assertSame(5000, $table->getRefreshStatus());
+        $this->assertSame(5000, $this->basicTable->getRefreshStatus());
     }
 
     /** @test */
     public function refresh_keep_alive_can_be_set(): void
     {
-        $table = new PetsTable();
+        $this->assertFalse($this->basicTable->getRefreshStatus());
 
-        $this->assertFalse($table->getRefreshStatus());
+        $this->basicTable->setRefreshKeepAlive();
 
-        $table->setRefreshKeepAlive();
-
-        $this->assertSame('keep-alive', $table->getRefreshStatus());
+        $this->assertSame('keep-alive', $this->basicTable->getRefreshStatus());
     }
 
     /** @test */
     public function refresh_visible_can_be_set(): void
     {
-        $table = new PetsTable();
+        $this->assertFalse($this->basicTable->getRefreshStatus());
 
-        $this->assertFalse($table->getRefreshStatus());
+        $this->basicTable->setRefreshVisible();
 
-        $table->setRefreshVisible();
-
-        $this->assertSame('visible', $table->getRefreshStatus());
+        $this->assertSame('visible', $this->basicTable->getRefreshStatus());
     }
 
     /** @test */
     public function refresh_method_can_be_set(): void
     {
-        $table = new PetsTable();
+        $this->assertFalse($this->basicTable->getRefreshStatus());
 
-        $this->assertFalse($table->getRefreshStatus());
+        $this->basicTable->setRefreshMethod('myRefreshMethod');
 
-        $table->setRefreshMethod('myRefreshMethod');
-
-        $this->assertSame('myRefreshMethod', $table->getRefreshStatus());
+        $this->assertSame('myRefreshMethod', $this->basicTable->getRefreshStatus());
     }
 }

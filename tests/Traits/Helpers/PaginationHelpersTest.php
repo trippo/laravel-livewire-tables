@@ -2,7 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Helpers;
 
-use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class PaginationHelpersTest extends TestCase
@@ -10,48 +9,42 @@ class PaginationHelpersTest extends TestCase
     /** @test */
     public function can_get_pagination_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->paginationIsEnabled());
 
-        $this->assertTrue($table->paginationIsEnabled());
+        $this->basicTable->setPaginationDisabled();
 
-        $table->setPaginationDisabled();
+        $this->assertTrue($this->basicTable->paginationIsDisabled());
 
-        $this->assertTrue($table->paginationIsDisabled());
+        $this->basicTable->setPaginationEnabled();
 
-        $table->setPaginationEnabled();
-
-        $this->assertTrue($table->paginationIsEnabled());
+        $this->assertTrue($this->basicTable->paginationIsEnabled());
     }
 
     /** @test */
     public function can_get_pagination_visibility_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->paginationVisibilityIsEnabled());
 
-        $this->assertTrue($table->paginationVisibilityIsEnabled());
+        $this->basicTable->setPaginationVisibilityDisabled();
 
-        $table->setPaginationVisibilityDisabled();
+        $this->assertTrue($this->basicTable->paginationVisibilityIsDisabled());
 
-        $this->assertTrue($table->paginationVisibilityIsDisabled());
+        $this->basicTable->setPaginationVisibilityEnabled();
 
-        $table->setPaginationVisibilityEnabled();
-
-        $this->assertTrue($table->paginationVisibilityIsEnabled());
+        $this->assertTrue($this->basicTable->paginationVisibilityIsEnabled());
     }
 
     /** @test */
     public function can_get_computed_page_name(): void
     {
-        $table = new PetsTable();
+        $this->assertSame('page', $this->basicTable->getComputedPageName());
 
-        $this->assertSame('page', $table->getComputedPageName());
+        $this->basicTable->setTableName('users');
 
-        $table->setTableName('users');
+        $this->assertSame('usersPage', $this->basicTable->getComputedPageName());
 
-        $this->assertSame('usersPage', $table->getComputedPageName());
+        $this->basicTable->setPageName('newPage');
 
-        $table->setPageName('newPage');
-
-        $this->assertSame('newPage', $table->getComputedPageName());
+        $this->assertSame('newPage', $this->basicTable->getComputedPageName());
     }
 }

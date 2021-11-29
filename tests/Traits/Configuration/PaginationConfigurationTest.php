@@ -2,7 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Configuration;
 
-use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class PaginationConfigurationTest extends TestCase
@@ -10,60 +9,54 @@ class PaginationConfigurationTest extends TestCase
     /** @test */
     public function pagination_theme_can_be_set(): void
     {
-        $table = new PetsTable();
+        $this->assertSame('tailwind', $this->basicTable->getPaginationTheme());
 
-        $this->assertSame('tailwind', $table->getPaginationTheme());
+        $this->basicTable->setPaginationTheme('bootstrap');
 
-        $table->setPaginationTheme('bootstrap');
-
-        $this->assertSame('bootstrap', $table->getPaginationTheme());
+        $this->assertSame('bootstrap', $this->basicTable->getPaginationTheme());
     }
 
     /** @test */
     public function can_set_pagination_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->getPaginationStatus());
 
-        $this->assertTrue($table->getPaginationStatus());
+        $this->basicTable->setPaginationDisabled();
 
-        $table->setPaginationDisabled();
+        $this->assertFalse($this->basicTable->getPaginationStatus());
 
-        $this->assertFalse($table->getPaginationStatus());
+        $this->basicTable->setPaginationEnabled();
 
-        $table->setPaginationEnabled();
+        $this->assertTrue($this->basicTable->getPaginationStatus());
 
-        $this->assertTrue($table->getPaginationStatus());
+        $this->basicTable->setPaginationStatus(false);
 
-        $table->setPaginationStatus(false);
+        $this->assertFalse($this->basicTable->getPaginationStatus());
 
-        $this->assertFalse($table->getPaginationStatus());
+        $this->basicTable->setPaginationStatus(true);
 
-        $table->setPaginationStatus(true);
-
-        $this->assertTrue($table->getPaginationStatus());
+        $this->assertTrue($this->basicTable->getPaginationStatus());
     }
 
     /** @test */
     public function can_set_pagination_visibility_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->getPaginationVisibilityStatus());
 
-        $this->assertTrue($table->getPaginationVisibilityStatus());
+        $this->basicTable->setPaginationVisibilityDisabled();
 
-        $table->setPaginationVisibilityDisabled();
+        $this->assertFalse($this->basicTable->getPaginationVisibilityStatus());
 
-        $this->assertFalse($table->getPaginationVisibilityStatus());
+        $this->basicTable->setPaginationVisibilityEnabled();
 
-        $table->setPaginationVisibilityEnabled();
+        $this->assertTrue($this->basicTable->getPaginationVisibilityStatus());
 
-        $this->assertTrue($table->getPaginationVisibilityStatus());
+        $this->basicTable->setPaginationVisibilityStatus(false);
 
-        $table->setPaginationVisibilityStatus(false);
+        $this->assertFalse($this->basicTable->getPaginationVisibilityStatus());
 
-        $this->assertFalse($table->getPaginationVisibilityStatus());
+        $this->basicTable->setPaginationVisibilityStatus(true);
 
-        $table->setPaginationVisibilityStatus(true);
-
-        $this->assertTrue($table->getPaginationVisibilityStatus());
+        $this->assertTrue($this->basicTable->getPaginationVisibilityStatus());
     }
 }

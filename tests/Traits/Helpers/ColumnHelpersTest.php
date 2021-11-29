@@ -2,7 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Helpers;
 
-use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class ColumnHelpersTest extends TestCase
@@ -10,19 +9,13 @@ class ColumnHelpersTest extends TestCase
     /** @test */
     public function can_get_column_list(): void
     {
-        $table = new PetsTable();
-        $table->boot();
-
-        $this->assertCount(4, $table->getColumns()->toArray());
+        $this->assertCount(4, $this->basicTable->getColumns()->toArray());
     }
 
     /** @test */
     public function can_get_column_by_field(): void
     {
-        $table = new PetsTable();
-        $table->boot();
-
-        $column = $table->getColumn('id');
+        $column = $this->basicTable->getColumn('id');
 
         $this->assertSame('id', $column->getField());
     }
@@ -30,172 +23,136 @@ class ColumnHelpersTest extends TestCase
     /** @test */
     public function can_get_column_count(): void
     {
-        $table = new PetsTable();
-        $table->boot();
-
-        $this->assertSame(4, $table->getColumnCount());
+        $this->assertSame(4, $this->basicTable->getColumnCount());
     }
 
     /** @test */
     public function can_tell_if_there_are_collapsable_columns(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertFalse($this->basicTable->hasCollapsedColumns());
 
-        $this->assertFalse($table->hasCollapsedColumns());
+        $this->assertFalse($this->basicTable->getColumn('id')->shouldCollapseOnMobile());
 
-        $this->assertFalse($table->getColumn('id')->shouldCollapseOnMobile());
+        $this->basicTable->getColumn('id')->collapseOnMobile();
 
-        $table->getColumn('id')->collapseOnMobile();
+        $this->assertTrue($this->basicTable->getColumn('id')->shouldCollapseOnMobile());
 
-        $this->assertTrue($table->getColumn('id')->shouldCollapseOnMobile());
-
-        $this->assertTrue($table->hasCollapsedColumns());
+        $this->assertTrue($this->basicTable->hasCollapsedColumns());
     }
 
     /** @test */
     public function can_tell_if_columns_should_collapse_on_mobile(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertFalse($this->basicTable->shouldCollapseOnMobile());
 
-        $this->assertFalse($table->shouldCollapseOnMobile());
+        $this->basicTable->getColumn('id')->collapseOnMobile();
 
-        $table->getColumn('id')->collapseOnMobile();
-
-        $this->assertTrue($table->shouldCollapseOnMobile());
+        $this->assertTrue($this->basicTable->shouldCollapseOnMobile());
     }
 
     /** @test */
     public function can_get_collapsed_mobile_columns(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertCount(0, $this->basicTable->getCollapsedMobileColumns());
 
-        $this->assertCount(0, $table->getCollapsedMobileColumns());
+        $this->basicTable->getColumn('id')->collapseOnMobile();
+        $this->basicTable->getColumn('name')->collapseOnMobile();
 
-        $table->getColumn('id')->collapseOnMobile();
-        $table->getColumn('name')->collapseOnMobile();
-
-        $this->assertCount(2, $table->getCollapsedMobileColumns());
-        $this->assertSame('ID', $table->getCollapsedMobileColumns()[0]->getTitle());
-        $this->assertSame('Name', $table->getCollapsedMobileColumns()[1]->getTitle());
+        $this->assertCount(2, $this->basicTable->getCollapsedMobileColumns());
+        $this->assertSame('ID', $this->basicTable->getCollapsedMobileColumns()[0]->getTitle());
+        $this->assertSame('Name', $this->basicTable->getCollapsedMobileColumns()[1]->getTitle());
     }
 
     /** @test */
     public function can_get_collapsed_mobile_columns_count(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertSame(0, $this->basicTable->getCollapsedMobileColumnsCount());
 
-        $this->assertSame(0, $table->getCollapsedMobileColumnsCount());
+        $this->basicTable->getColumn('id')->collapseOnMobile();
+        $this->basicTable->getColumn('name')->collapseOnMobile();
 
-        $table->getColumn('id')->collapseOnMobile();
-        $table->getColumn('name')->collapseOnMobile();
-
-        $this->assertSame(2, $table->getCollapsedMobileColumnsCount());
+        $this->assertSame(2, $this->basicTable->getCollapsedMobileColumnsCount());
     }
 
     /** @test */
     public function can_get_visible_mobile_columns(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertCount(4, $this->basicTable->getVisibleMobileColumns());
 
-        $this->assertCount(4, $table->getVisibleMobileColumns());
+        $this->basicTable->getColumn('id')->collapseOnMobile();
+        $this->basicTable->getColumn('name')->collapseOnMobile();
 
-        $table->getColumn('id')->collapseOnMobile();
-        $table->getColumn('name')->collapseOnMobile();
-
-        $this->assertCount(2, $table->getVisibleMobileColumns());
-        $this->assertSame('Age', $table->getVisibleMobileColumns()->values()[0]->getTitle());
-        $this->assertSame('Other', $table->getVisibleMobileColumns()->values()[1]->getTitle());
+        $this->assertCount(2, $this->basicTable->getVisibleMobileColumns());
+        $this->assertSame('Age', $this->basicTable->getVisibleMobileColumns()->values()[0]->getTitle());
+        $this->assertSame('Other', $this->basicTable->getVisibleMobileColumns()->values()[1]->getTitle());
     }
 
     /** @test */
     public function can_get_visible_mobile_columns_count(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertSame(4, $this->basicTable->getVisibleMobileColumnsCount());
 
-        $this->assertSame(4, $table->getVisibleMobileColumnsCount());
+        $this->basicTable->getColumn('id')->collapseOnMobile();
+        $this->basicTable->getColumn('name')->collapseOnMobile();
 
-        $table->getColumn('id')->collapseOnMobile();
-        $table->getColumn('name')->collapseOnMobile();
-
-        $this->assertSame(2, $table->getVisibleMobileColumnsCount());
+        $this->assertSame(2, $this->basicTable->getVisibleMobileColumnsCount());
     }
 
     /** @test */
     public function can_tell_if_columns_should_collapse_on_tablet(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertFalse($this->basicTable->shouldCollapseOnTablet());
 
-        $this->assertFalse($table->shouldCollapseOnTablet());
+        $this->basicTable->getColumn('id')->collapseOnTablet();
 
-        $table->getColumn('id')->collapseOnTablet();
-
-        $this->assertTrue($table->shouldCollapseOnTablet());
+        $this->assertTrue($this->basicTable->shouldCollapseOnTablet());
     }
 
     /** @test */
     public function can_get_collapsed_tablet_columns(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertCount(0, $this->basicTable->getCollapsedTabletColumns());
 
-        $this->assertCount(0, $table->getCollapsedTabletColumns());
+        $this->basicTable->getColumn('id')->collapseOnTablet();
+        $this->basicTable->getColumn('name')->collapseOnTablet();
 
-        $table->getColumn('id')->collapseOnTablet();
-        $table->getColumn('name')->collapseOnTablet();
-
-        $this->assertCount(2, $table->getCollapsedTabletColumns());
-        $this->assertSame('ID', $table->getCollapsedTabletColumns()[0]->getTitle());
-        $this->assertSame('Name', $table->getCollapsedTabletColumns()[1]->getTitle());
+        $this->assertCount(2, $this->basicTable->getCollapsedTabletColumns());
+        $this->assertSame('ID', $this->basicTable->getCollapsedTabletColumns()[0]->getTitle());
+        $this->assertSame('Name', $this->basicTable->getCollapsedTabletColumns()[1]->getTitle());
     }
 
     /** @test */
     public function can_get_collapsed_tablet_columns_count(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertSame(0, $this->basicTable->getCollapsedTabletColumnsCount());
 
-        $this->assertSame(0, $table->getCollapsedTabletColumnsCount());
+        $this->basicTable->getColumn('id')->collapseOnTablet();
+        $this->basicTable->getColumn('name')->collapseOnTablet();
 
-        $table->getColumn('id')->collapseOnTablet();
-        $table->getColumn('name')->collapseOnTablet();
-
-        $this->assertSame(2, $table->getCollapsedTabletColumnsCount());
+        $this->assertSame(2, $this->basicTable->getCollapsedTabletColumnsCount());
     }
 
     /** @test */
     public function can_get_visible_tablet_columns(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertCount(4, $this->basicTable->getVisibleTabletColumns());
 
-        $this->assertCount(4, $table->getVisibleTabletColumns());
+        $this->basicTable->getColumn('id')->collapseOnTablet();
+        $this->basicTable->getColumn('name')->collapseOnTablet();
 
-        $table->getColumn('id')->collapseOnTablet();
-        $table->getColumn('name')->collapseOnTablet();
-
-        $this->assertCount(2, $table->getVisibleTabletColumns());
-        $this->assertSame('Age', $table->getVisibleTabletColumns()->values()[0]->getTitle());
-        $this->assertSame('Other', $table->getVisibleTabletColumns()->values()[1]->getTitle());
+        $this->assertCount(2, $this->basicTable->getVisibleTabletColumns());
+        $this->assertSame('Age', $this->basicTable->getVisibleTabletColumns()->values()[0]->getTitle());
+        $this->assertSame('Other', $this->basicTable->getVisibleTabletColumns()->values()[1]->getTitle());
     }
 
     /** @test */
     public function can_get_visible_tablet_columns_count(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertSame(4, $this->basicTable->getVisibleTabletColumnsCount());
 
-        $this->assertSame(4, $table->getVisibleTabletColumnsCount());
+        $this->basicTable->getColumn('id')->collapseOnTablet();
+        $this->basicTable->getColumn('name')->collapseOnTablet();
 
-        $table->getColumn('id')->collapseOnTablet();
-        $table->getColumn('name')->collapseOnTablet();
-
-        $this->assertSame(2, $table->getVisibleTabletColumnsCount());
+        $this->assertSame(2, $this->basicTable->getVisibleTabletColumnsCount());
     }
 }

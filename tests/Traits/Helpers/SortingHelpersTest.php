@@ -10,200 +10,167 @@ class SortingHelpersTest extends TestCase
     /** @test */
     public function can_get_sorting_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->sortingIsEnabled());
 
-        $this->assertTrue($table->sortingIsEnabled());
+        $this->basicTable->setSortingDisabled();
 
-        $table->setSortingDisabled();
-
-        $this->assertTrue($table->sortingIsDisabled());
+        $this->assertTrue($this->basicTable->sortingIsDisabled());
     }
 
     /** @test */
     public function can_get_single_sorting_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->singleSortingIsEnabled());
 
-        $this->assertTrue($table->singleSortingIsEnabled());
+        $this->basicTable->setSingleSortingDisabled();
 
-        $table->setSingleSortingDisabled();
-
-        $this->assertTrue($table->singleSortingIsDisabled());
+        $this->assertTrue($this->basicTable->singleSortingIsDisabled());
     }
 
     /** @test */
     public function can_set_sorts_array(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSorts(['id' => 'asc', 'name' => 'desc']);
 
-        $table->setSorts(['id' => 'asc', 'name' => 'desc']);
-
-        $this->assertSame($table->getSorts(), ['id' => 'asc', 'name' => 'desc']);
+        $this->assertSame($this->basicTable->getSorts(), ['id' => 'asc', 'name' => 'desc']);
     }
 
     /** @test */
     public function can_get_sorts_array(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSorts(['id' => 'asc', 'name' => 'desc']);
 
-        $table->setSorts(['id' => 'asc', 'name' => 'desc']);
-
-        $this->assertSame($table->getSorts(), ['id' => 'asc', 'name' => 'desc']);
+        $this->assertSame($this->basicTable->getSorts(), ['id' => 'asc', 'name' => 'desc']);
     }
 
     /** @test */
     public function can_get_single_sort_by_field(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSorts(['id' => 'asc']);
 
-        $table->setSorts(['id' => 'asc']);
-
-        $this->assertSame($table->getSort('id'), 'asc');
-        $this->assertNull($table->getSort('name'));
+        $this->assertSame($this->basicTable->getSort('id'), 'asc');
+        $this->assertNull($this->basicTable->getSort('name'));
     }
 
     /** @test */
     public function can_set_single_sort_by_field_and_direction(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertEmpty($this->basicTable->getSorts());
 
-        $this->assertEmpty($table->getSorts());
+        $this->basicTable->setSort('id', 'asc');
+        $this->basicTable->setSort('name', 'desc');
 
-        $table->setSort('id', 'asc');
-        $table->setSort('name', 'desc');
-
-        $this->assertSame($table->getSorts(), ['id' => 'asc', 'name' => 'desc']);
+        $this->assertSame($this->basicTable->getSorts(), ['id' => 'asc', 'name' => 'desc']);
     }
 
     /** @test */
     public function can_check_if_any_sorts(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSorts(['id' => 'asc', 'name' => 'desc']);
 
-        $table->setSorts(['id' => 'asc', 'name' => 'desc']);
+        $this->assertTrue($this->basicTable->hasSorts());
 
-        $this->assertTrue($table->hasSorts());
+        $this->basicTable->clearSorts();
 
-        $table->clearSorts();
-
-        $this->assertFalse($table->hasSorts());
+        $this->assertFalse($this->basicTable->hasSorts());
     }
 
     /** @test */
     public function can_check_single_sort_by_field(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSorts(['id' => 'asc']);
 
-        $table->setSorts(['id' => 'asc']);
-
-        $this->assertTrue($table->hasSort('id'));
-        $this->assertFalse($table->hasSort('name'));
+        $this->assertTrue($this->basicTable->hasSort('id'));
+        $this->assertFalse($this->basicTable->hasSort('name'));
     }
 
     /** @test */
     public function can_clear_sorts_array(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSorts(['id' => 'asc', 'name' => 'desc']);
 
-        $table->setSorts(['id' => 'asc', 'name' => 'desc']);
+        $this->assertTrue($this->basicTable->hasSorts());
 
-        $this->assertTrue($table->hasSorts());
+        $this->basicTable->clearSorts();
 
-        $table->clearSorts();
-
-        $this->assertFalse($table->hasSorts());
+        $this->assertFalse($this->basicTable->hasSorts());
     }
 
     /** @test */
     public function can_clear_single_sort_by_field(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSorts(['id' => 'asc', 'name' => 'desc']);
 
-        $table->setSorts(['id' => 'asc', 'name' => 'desc']);
+        $this->assertTrue($this->basicTable->hasSort('id'));
 
-        $this->assertTrue($table->hasSort('id'));
+        $this->basicTable->clearSort('id');
 
-        $table->clearSort('id');
-
-        $this->assertFalse($table->hasSort('id'));
+        $this->assertFalse($this->basicTable->hasSort('id'));
     }
 
     /** @test */
     public function can_set_sort_field_asc(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSorts(['id' => 'desc']);
 
-        $table->setSorts(['id' => 'desc']);
+        $this->assertSame($this->basicTable->getSort('id'), 'desc');
 
-        $this->assertSame($table->getSort('id'), 'desc');
+        $this->basicTable->setSortAsc('id');
 
-        $table->setSortAsc('id');
-
-        $this->assertSame($table->getSort('id'), 'asc');
+        $this->assertSame($this->basicTable->getSort('id'), 'asc');
     }
 
     /** @test */
     public function can_set_sort_field_desc(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSorts(['id' => 'asc']);
 
-        $table->setSorts(['id' => 'asc']);
+        $this->assertSame($this->basicTable->getSort('id'), 'asc');
 
-        $this->assertSame($table->getSort('id'), 'asc');
+        $this->basicTable->setSortDesc('id');
 
-        $table->setSortDesc('id');
-
-        $this->assertSame($table->getSort('id'), 'desc');
+        $this->assertSame($this->basicTable->getSort('id'), 'desc');
     }
 
     /** @test */
     public function can_check_if_sort_field_currently_asc(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSorts(['id' => 'asc']);
 
-        $table->setSorts(['id' => 'asc']);
-
-        $this->assertTrue($table->isSortAsc('id'));
-        $this->assertFalse($table->isSortDesc('id'));
+        $this->assertTrue($this->basicTable->isSortAsc('id'));
+        $this->assertFalse($this->basicTable->isSortDesc('id'));
     }
 
     /** @test */
     public function can_check_if_sort_field_currently_desc(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSorts(['id' => 'desc']);
 
-        $table->setSorts(['id' => 'desc']);
-
-        $this->assertTrue($table->isSortDesc('id'));
-        $this->assertFalse($table->isSortAsc('id'));
+        $this->assertTrue($this->basicTable->isSortDesc('id'));
+        $this->assertFalse($this->basicTable->isSortAsc('id'));
     }
 
     /** @test */
     public function can_check_default_sort_status(): void
     {
-        $table = new PetsTable();
+        $this->assertFalse($this->basicTable->hasDefaultSort());
 
-        $this->assertFalse($table->hasDefaultSort());
+        $this->basicTable->setDefaultSort('id');
 
-        $table->setDefaultSort('id');
-
-        $this->assertTrue($table->hasDefaultSort());
+        $this->assertTrue($this->basicTable->hasDefaultSort());
     }
 
     /** @test */
     public function can_get_sorting_pills_status(): void
     {
-        $table = new PetsTable();
+        $this->assertTrue($this->basicTable->sortingPillsAreEnabled());
 
-        $this->assertTrue($table->sortingPillsAreEnabled());
+        $this->basicTable->setSortingPillsDisabled();
 
-        $table->setSortingPillsDisabled();
+        $this->assertTrue($this->basicTable->sortingPillsAreDisabled());
 
-        $this->assertTrue($table->sortingPillsAreDisabled());
+        $this->basicTable->setSortingPillsEnabled();
 
-        $table->setSortingPillsEnabled();
-
-        $this->assertTrue($table->sortingPillsAreEnabled());
+        $this->assertTrue($this->basicTable->sortingPillsAreEnabled());
     }
 }

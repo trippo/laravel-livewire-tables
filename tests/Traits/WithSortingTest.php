@@ -11,16 +11,13 @@ class WithSortingTest extends TestCase
     /** @test */
     public function cannot_call_sortBy_if_sorting_is_disabled(): void
     {
-        $table = new PetsTable();
-        $table->boot();
-
-        $sort = $table->sortBy('id');
+        $sort = $this->basicTable->sortBy('id');
 
         $this->assertSame($sort, 'asc');
 
-        $table->setSortingDisabled();
+        $this->basicTable->setSortingDisabled();
 
-        $sort = $table->sortBy('id');
+        $sort = $this->basicTable->sortBy('id');
 
         $this->assertNull($sort);
     }
@@ -28,67 +25,58 @@ class WithSortingTest extends TestCase
     /** @test */
     public function clear_sorts_if_single_sorting_and_setting_not_current_field(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSingleSortingDisabled();
 
-        $table->setSingleSortingDisabled();
+        $this->basicTable->sortBy('id');
+        $this->basicTable->sortBy('name');
 
-        $table->sortBy('id');
-        $table->sortBy('name');
+        $this->assertSame($this->basicTable->getSorts(), ['id' => 'asc', 'name' => 'asc']);
 
-        $this->assertSame($table->getSorts(), ['id' => 'asc', 'name' => 'asc']);
+        $this->basicTable->clearSorts();
 
-        $table->clearSorts();
+        $this->basicTable->setSingleSortingEnabled();
 
-        $table->setSingleSortingEnabled();
+        $this->basicTable->sortBy('id');
 
-        $table->sortBy('id');
+        $this->assertSame($this->basicTable->getSorts(), ['id' => 'asc']);
 
-        $this->assertSame($table->getSorts(), ['id' => 'asc']);
+        $this->basicTable->sortBy('name');
 
-        $table->sortBy('name');
-
-        $this->assertSame($table->getSorts(), ['name' => 'asc']);
+        $this->assertSame($this->basicTable->getSorts(), ['name' => 'asc']);
     }
 
     /** @test */
     public function set_sort_asc_if_not_set(): void
     {
-        $table = new PetsTable();
-        $table->boot();
+        $this->assertFalse($this->basicTable->hasSort('id'));
 
-        $this->assertFalse($table->hasSort('id'));
+        $this->basicTable->sortBy('id');
 
-        $table->sortBy('id');
-
-        $this->assertSame($table->getSorts(), ['id' => 'asc']);
+        $this->assertSame($this->basicTable->getSorts(), ['id' => 'asc']);
     }
 
     /** @test */
     public function set_sort_desc_if_currently_asc(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSort('id', 'asc');
 
-        $table->setSort('id', 'asc');
+        $this->assertSame($this->basicTable->getSorts(), ['id' => 'asc']);
 
-        $this->assertSame($table->getSorts(), ['id' => 'asc']);
+        $this->basicTable->sortBy('id');
 
-        $table->sortBy('id');
-
-        $this->assertSame($table->getSorts(), ['id' => 'desc']);
+        $this->assertSame($this->basicTable->getSorts(), ['id' => 'desc']);
     }
 
     /** @test */
     public function remove_sort_if_currently_desc(): void
     {
-        $table = new PetsTable();
+        $this->basicTable->setSort('id', 'desc');
 
-        $table->setSort('id', 'desc');
+        $this->assertSame($this->basicTable->getSorts(), ['id' => 'desc']);
 
-        $this->assertSame($table->getSorts(), ['id' => 'desc']);
+        $this->basicTable->sortBy('id');
 
-        $table->sortBy('id');
-
-        $this->assertFalse($table->hasSort('id'));
+        $this->assertFalse($this->basicTable->hasSort('id'));
     }
 
     /** @test */

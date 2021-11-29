@@ -2,7 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Configuration;
 
-use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class DebuggingConfigurationTest extends TestCase
@@ -10,24 +9,22 @@ class DebuggingConfigurationTest extends TestCase
     /** @test */
     public function debug_status_can_be_set(): void
     {
-        $table = new PetsTable();
+        $this->assertFalse($this->basicTable->getDebugStatus());
 
-        $this->assertFalse($table->getDebugStatus());
+        $this->basicTable->setDebugEnabled();
 
-        $table->setDebugEnabled();
+        $this->assertTrue($this->basicTable->getDebugStatus());
 
-        $this->assertTrue($table->getDebugStatus());
+        $this->basicTable->setDebugDisabled();
 
-        $table->setDebugDisabled();
+        $this->assertFalse($this->basicTable->getDebugStatus());
 
-        $this->assertFalse($table->getDebugStatus());
+        $this->basicTable->setDebugStatus(true);
 
-        $table->setDebugStatus(true);
+        $this->assertTrue($this->basicTable->getDebugStatus());
 
-        $this->assertTrue($table->getDebugStatus());
+        $this->basicTable->setDebugStatus(false);
 
-        $table->setDebugStatus(false);
-
-        $this->assertFalse($table->getDebugStatus());
+        $this->assertFalse($this->basicTable->getDebugStatus());
     }
 }
