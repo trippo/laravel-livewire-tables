@@ -30,7 +30,7 @@ abstract class DataTableComponent extends Component
     public function boot(): void
     {
         $this->{$this->tableName} = [
-            'sorts' => $this->{$this->tableName}['sorts'] ?? []
+            'sorts' => $this->{$this->tableName}['sorts'] ?? [],
         ];
 
         $theme = $this->getTheme();
