@@ -38,6 +38,25 @@ trait ColumnHelpers
             ->first();
     }
 
+    // TODO: Test
+    public function getColumnRelations(): array
+    {
+        return $this->getColumns()
+            ->filter(fn(Column $column) => $column->hasRelation())
+            ->map(fn (Column $column) => $column->getRelationshipName())
+            ->unique()
+            ->values()
+            ->toArray();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getSelectableColumns(): Collection
+    {
+        return $this->getColumns()->reject(fn(Column $column) => $column->isLabel());
+    }
+
     /**
      * @return int
      */

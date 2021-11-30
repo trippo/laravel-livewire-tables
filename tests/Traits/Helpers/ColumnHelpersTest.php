@@ -3,6 +3,7 @@
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Helpers;
 
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class ColumnHelpersTest extends TestCase
 {
@@ -154,5 +155,15 @@ class ColumnHelpersTest extends TestCase
         $this->basicTable->getColumn('name')->collapseOnTablet();
 
         $this->assertSame(2, $this->basicTable->getVisibleTabletColumnsCount());
+    }
+
+    /** @test */
+    public function can_get_selectable_columns(): void
+    {
+        $selectable = $this->basicTable->getSelectableColumns()
+            ->map(fn(Column $column) => $column->getField())
+            ->toArray();
+
+        $this->assertSame(['id', 'name', 'age'], $selectable);
     }
 }

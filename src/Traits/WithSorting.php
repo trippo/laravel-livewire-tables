@@ -75,6 +75,8 @@ trait WithSorting
             // TODO: Test
             if ($column->hasSortCallback()) {
                 $builder = app()->call($column->getSortCallback(), ['builder' => $builder, 'direction' => $direction]);
+            } elseif ($column->hasRelation()) {
+                $builder->orderBy($builder->getRelation($column->getRelationshipName())->getRelated()->getTable().'.'.$column->getRelationshipField(), $direction);
             } else {
                 $builder->orderBy($field, $direction);
             }

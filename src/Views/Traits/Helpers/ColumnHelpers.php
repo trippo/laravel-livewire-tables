@@ -45,6 +45,11 @@ trait ColumnHelpers
             return 'N/A';
         }
 
+        // TODO: Doesnt work in all situations
+        if ($this->hasRelation()) {
+            return data_get($row, $this->getRelationshipField());
+        }
+
         return data_get($row, $this->getField());
     }
 
@@ -137,6 +142,10 @@ trait ColumnHelpers
     }
 
     // TODO: Test
+
+    /**
+     * @return string
+     */
     public function getSortingPillTitle(): string
     {
         if ($this->hasCustomSortingPillTitle()) {
@@ -146,21 +155,35 @@ trait ColumnHelpers
         return $this->getTitle();
     }
 
+    /**
+     * @return string|null
+     */
     public function getCustomSortingPillTitle(): ?string
     {
         return $this->sortingPillTitle;
     }
 
+    /**
+     * @return bool
+     */
     public function hasCustomSortingPillTitle(): bool
     {
         return $this->getCustomSortingPillTitle() !== null;
     }
 
+    /**
+     * @return bool
+     */
     public function hasCustomSortingPillDirections(): bool
     {
         return $this->sortingPillDirectionAsc !== null && $this->sortingPillDirectionDesc !== null;
     }
 
+    /**
+     * @param  string  $direction
+     *
+     * @return string
+     */
     public function getCustomSortingPillDirections(string $direction): string
     {
         if ($direction === 'asc') {
@@ -174,6 +197,12 @@ trait ColumnHelpers
         return __('N/A');
     }
 
+    /**
+     * @param  DataTableComponent  $component
+     * @param  string  $direction
+     *
+     * @return string
+     */
     public function getSortingPillDirection(DataTableComponent $component, string $direction): string
     {
         if ($this->hasCustomSortingPillDirections()) {

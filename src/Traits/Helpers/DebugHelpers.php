@@ -11,4 +11,16 @@ trait DebugHelpers
     {
         return $this->debugStatus;
     }
+
+
+    // TODO: Test
+    public function debugIsEnabled(): bool
+    {
+        return $this->getDebugStatus() === true;
+    }
+
+    public function debugIsDisabled(): bool
+    {
+        return $this->getDebugStatus() === false;
+    }
 }

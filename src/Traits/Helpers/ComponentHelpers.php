@@ -7,6 +7,22 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 trait ComponentHelpers
 {
+    // TODO: Test
+    public function hasModel(): bool
+    {
+        return $this->model !== null;
+    }
+
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+
+
+
+
+
     /**
      * @return string
      */

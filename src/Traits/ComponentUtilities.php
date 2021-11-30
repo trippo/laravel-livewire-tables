@@ -11,6 +11,7 @@ trait ComponentUtilities
         ComponentHelpers;
 
     public array $table = [];
+    protected $model;
     protected string $tableName = 'table';
     protected ?string $pageName = null;
     protected string $tableQueryAlias = 't';

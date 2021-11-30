@@ -4,6 +4,7 @@ namespace Rappasoft\LaravelLivewireTables;
 
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
+use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 use Rappasoft\LaravelLivewireTables\Traits\ComponentUtilities;
 use Rappasoft\LaravelLivewireTables\Traits\WithColumns;
 use Rappasoft\LaravelLivewireTables\Traits\WithData;
@@ -54,9 +55,16 @@ abstract class DataTableComponent extends Component
     abstract public function columns(): array;
 
     /**
-     * The base query with search and filters for the table.
+     * The base query.
      */
-    abstract public function query(): Builder;
+    public function builder(): Builder
+    {
+        if ($this->hasModel()) {
+            return $this->getModel()::query();
+        }
+
+        throw new DataTableConfigurationException('You must either specify a model or implement the builder method.');
+    }
 
     /**
      * Set any configuration options

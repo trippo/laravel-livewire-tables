@@ -172,4 +172,32 @@ class ColumnTest extends TestCase
     {
         // TODO
     }
+
+    /** @test */
+    public function can_check_if_field_is_relation(): void
+    {
+        $column = Column::make('My Title');
+
+        $this->assertFalse($column->hasRelation());
+
+        $column = Column::make('Address', 'address.address');
+
+        $this->assertTrue($column->hasRelation());
+    }
+
+    /** @test */
+    public function can_get_column_relationship_name(): void
+    {
+        $column = Column::make('Address', 'addresses.address');
+
+        $this->assertSame('addresses', $column->getRelationshipName());
+    }
+
+    /** @test */
+    public function can_get_column_relationship_field(): void
+    {
+        $column = Column::make('Address', 'addresses.address');
+
+        $this->assertSame('address', $column->getRelationshipField());
+    }
 }

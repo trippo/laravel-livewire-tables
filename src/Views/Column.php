@@ -5,11 +5,13 @@ namespace Rappasoft\LaravelLivewireTables\Views;
 use Illuminate\Support\Str;
 use Rappasoft\LaravelLivewireTables\Views\Traits\Configuration\ColumnConfiguration;
 use Rappasoft\LaravelLivewireTables\Views\Traits\Helpers\ColumnHelpers;
+use Rappasoft\LaravelLivewireTables\Views\Traits\Helpers\RelationshipHelpers;
 
 class Column
 {
     use ColumnConfiguration,
-        ColumnHelpers;
+        ColumnHelpers,
+        RelationshipHelpers;
 
     protected string $title;
     protected ?string $field = null;
@@ -29,10 +31,10 @@ class Column
     {
         $this->title = trim($title);
 
-        if (! $field && $title) {
-            $this->field = Str::snake($title);
-        } else {
+        if ($field) {
             $this->field = trim($field);
+        } else {
+            $this->field = Str::snake($title);
         }
     }
 
