@@ -12,7 +12,6 @@ trait DebugHelpers
         return $this->debugStatus;
     }
 
-
     // TODO: Test
     public function debugIsEnabled(): bool
     {

@@ -36,7 +36,7 @@ trait WithData
     protected function joinRelations(Builder $builder, array $relations = []): Builder
     {
         // TODO: Join related tables based on column fields
-        foreach($relations as $relation) {
+        foreach ($relations as $relation) {
             $relationship = $builder->getRelation($relation);
 
             if ($relationship instanceof HasOne) {
@@ -51,8 +51,7 @@ trait WithData
     {
         $fields = [];
 
-        foreach($this->getSelectableColumns() as $column)
-        {
+        foreach ($this->getSelectableColumns() as $column) {
             if ($column->getField() === 'id') {
                 $fields[] = $builder->getModel()->getTable().'.id';
             } elseif ($column->hasRelation()) {

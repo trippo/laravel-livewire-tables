@@ -42,7 +42,7 @@ trait ColumnHelpers
     public function getColumnRelations(): array
     {
         return $this->getColumns()
-            ->filter(fn(Column $column) => $column->hasRelation())
+            ->filter(fn (Column $column) => $column->hasRelation())
             ->map(fn (Column $column) => $column->getRelationshipName())
             ->unique()
             ->values()
@@ -54,7 +54,7 @@ trait ColumnHelpers
      */
     public function getSelectableColumns(): Collection
     {
-        return $this->getColumns()->reject(fn(Column $column) => $column->isLabel());
+        return $this->getColumns()->reject(fn (Column $column) => $column->isLabel());
     }
 
     /**

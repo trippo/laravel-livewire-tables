@@ -161,7 +161,7 @@ class ColumnHelpersTest extends TestCase
     public function can_get_selectable_columns(): void
     {
         $selectable = $this->basicTable->getSelectableColumns()
-            ->map(fn(Column $column) => $column->getField())
+            ->map(fn (Column $column) => $column->getField())
             ->toArray();
 
         $this->assertSame(['id', 'name', 'age'], $selectable);

@@ -18,11 +18,6 @@ trait ComponentHelpers
         return $this->model;
     }
 
-
-
-
-
-
     /**
      * @return string
      */
