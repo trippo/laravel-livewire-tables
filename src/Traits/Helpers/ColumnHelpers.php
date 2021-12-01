@@ -13,7 +13,18 @@ trait ColumnHelpers
     public function setColumns(): void
     {
         $columns = collect($this->columns())
-            ->filter(fn ($column) => $column instanceof Column);
+            ->filter(fn ($column) => $column instanceof Column)
+            ->map(function(Column $column) {
+                if ($column->hasField()) {
+                    if ($column->isBaseColumn()) {
+                        $column->setTable($this->builder()->getModel()->getTable());
+                    } else {
+                        $column->setTable($this->getTableForColumn($column));
+                    }
+                }
+
+                return $column;
+            });
 
         $this->columns = $columns;
     }
@@ -27,24 +38,49 @@ trait ColumnHelpers
     }
 
     /**
-     * @param  string  $field
+     * @param  string  $qualifiedColumn
      *
      * @return Column|null
      */
-    public function getColumn(string $field): ?Column
+    public function getColumn(string $qualifiedColumn): ?Column
     {
         return $this->getColumns()
-            ->filter(fn (Column $column) => $column->isField($field))
+            ->filter(fn (Column $column) => $column->isColumn($qualifiedColumn))
             ->first();
     }
 
-    // TODO: Test
+    /**
+     * @param  string  $qualifiedColumn
+     *
+     * @return Column|null
+     */
+    public function getColumnBySelectName(string $qualifiedColumn): ?Column
+    {
+        return $this->getColumns()
+            ->filter(fn (Column $column) => $column->isColumnBySelectName($qualifiedColumn))
+            ->first();
+    }
+
+    /**
+     * @return array
+     */
     public function getColumnRelations(): array
     {
         return $this->getColumns()
-            ->filter(fn (Column $column) => $column->hasRelation())
-            ->map(fn (Column $column) => $column->getRelationshipName())
-            ->unique()
+            ->filter(fn (Column $column) => $column->hasRelations())
+            ->map(fn (Column $column) => $column->getRelations())
+            ->values()
+            ->toArray();
+    }
+
+    /**
+     * @return array
+     */
+    public function getColumnRelationStrings(): array
+    {
+        return $this->getColumns()
+            ->filter(fn (Column $column) => $column->hasRelations())
+            ->map(fn (Column $column) => $column->getRelationString())
             ->values()
             ->toArray();
     }

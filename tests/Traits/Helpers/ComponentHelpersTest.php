@@ -2,10 +2,23 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Helpers;
 
+use Rappasoft\LaravelLivewireTables\Tests\Models\Pet;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class ComponentHelpersTest extends TestCase
 {
+    /** @test */
+    public function can_see_if_component_has_model(): void
+    {
+        $this->assertTrue($this->basicTable->hasModel());
+    }
+
+    /** @test */
+    public function can_get_component_model(): void
+    {
+        $this->assertSame(Pet::class, $this->basicTable->getModel());
+    }
+
     /** @test */
     public function can_get_current_theme(): void
     {
@@ -64,16 +77,6 @@ class ComponentHelpersTest extends TestCase
     }
 
     /** @test */
-    public function can_get_table_query_alias(): void
-    {
-        $this->assertSame('t', $this->basicTable->getTableQueryAlias());
-
-        $this->basicTable->setTableQueryAlias('q');
-
-        $this->assertSame('q', $this->basicTable->getTableQueryAlias());
-    }
-
-    /** @test */
     public function can_get_page_name(): void
     {
         $this->assertNull($this->basicTable->getPageName());
@@ -102,5 +105,25 @@ class ComponentHelpersTest extends TestCase
         $this->basicTable->setPageName('page2');
 
         $this->assertTrue($this->basicTable->hasPageName());
+    }
+
+    /** @test */
+    public function can_get_eager_load_relations_status(): void
+    {
+        $this->assertFalse($this->basicTable->getEagerLoadAllRelationsStatus());
+
+        $this->assertFalse($this->basicTable->eagerLoadAllRelationsIsEnabled());
+
+        $this->basicTable->setEagerLoadAllRelationshipsEnabled();
+
+        $this->assertFalse($this->basicTable->eagerLoadAllRelationsIsDisabled());
+
+        $this->assertTrue($this->basicTable->eagerLoadAllRelationsIsEnabled());
+
+        $this->basicTable->setEagerLoadAllRelationshipsDisabled();
+
+        $this->assertFalse($this->basicTable->eagerLoadAllRelationsIsEnabled());
+
+        $this->assertTrue($this->basicTable->eagerLoadAllRelationsIsDisabled());
     }
 }

@@ -81,8 +81,8 @@ abstract class DataTableComponent extends Component
     {
         return view('livewire-tables::datatable')
             ->with([
-                'columns' => $this->columns(),
-                'rows' => $this->rows(),
+                'columns' => $this->getColumns(),
+                'rows' => $this->getRows(),
             ]);
     }
 }

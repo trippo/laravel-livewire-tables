@@ -7,12 +7,18 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 trait ComponentHelpers
 {
-    // TODO: Test
+
+    /**
+     * @return bool
+     */
     public function hasModel(): bool
     {
         return $this->model !== null;
     }
 
+    /**
+     * @return mixed
+     */
     public function getModel()
     {
         return $this->model;
@@ -192,24 +198,6 @@ trait ComponentHelpers
     }
 
     /**
-     * @param  string  $alias
-     *
-     * @return string
-     */
-    public function setTableQueryAlias(string $alias): string
-    {
-        return $this->tableQueryAlias = $alias;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTableQueryAlias(): string
-    {
-        return $this->tableQueryAlias;
-    }
-
-    /**
      * @param  string  $name
      *
      * @return bool
@@ -243,5 +231,29 @@ trait ComponentHelpers
     public function hasPageName(): bool
     {
         return $this->pageName !== null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEagerLoadAllRelationsStatus(): bool
+    {
+        return $this->eagerLoadAllRelations;
+    }
+
+    /**
+     * @return bool
+     */
+    public function eagerLoadAllRelationsIsEnabled(): bool
+    {
+        return $this->getEagerLoadAllRelationsStatus() === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function eagerLoadAllRelationsIsDisabled(): bool
+    {
+        return $this->getEagerLoadAllRelationsStatus() === false;
     }
 }

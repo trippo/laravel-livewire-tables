@@ -199,4 +199,36 @@ trait ComponentConfiguration
 
         return $this;
     }
+
+    /**
+     * @param  bool  $status
+     *
+     * @return $this
+     */
+    public function setEagerLoadAllRelationshipsStatus(bool $status): self
+    {
+        $this->eagerLoadAllRelations = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setEagerLoadAllRelationshipsEnabled(): self
+    {
+        $this->setEagerLoadAllRelationshipsStatus(true);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setEagerLoadAllRelationshipsDisabled(): self
+    {
+        $this->setEagerLoadAllRelationshipsStatus(false);
+
+        return $this;
+    }
 }

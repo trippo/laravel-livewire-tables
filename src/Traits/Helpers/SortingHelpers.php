@@ -25,7 +25,7 @@ trait SortingHelpers
      */
     public function getSorts(): array
     {
-        return $this->{$this->tableName}['sorts'];
+        return $this->{$this->getTableName()}['sorts'];
     }
 
     /**
@@ -35,7 +35,7 @@ trait SortingHelpers
      */
     public function setSorts(array $sorts): array
     {
-        return $this->{$this->tableName}['sorts'] = $sorts;
+        return $this->{$this->getTableName()}['sorts'] = $sorts;
     }
 
     /**
@@ -45,7 +45,7 @@ trait SortingHelpers
      */
     public function getSort(string $field): ?string
     {
-        return $this->{$this->tableName}['sorts'][$field] ?? null;
+        return $this->{$this->getTableName()}['sorts'][$field] ?? null;
     }
 
     /**
@@ -56,7 +56,7 @@ trait SortingHelpers
      */
     public function setSort(string $field, string $direction): string
     {
-        return $this->{$this->tableName}['sorts'][$field] = $direction;
+        return $this->{$this->getTableName()}['sorts'][$field] = $direction;
     }
 
     /**
@@ -82,7 +82,7 @@ trait SortingHelpers
      */
     public function clearSorts(): void
     {
-        $this->{$this->tableName}['sorts'] = [];
+        $this->{$this->getTableName()}['sorts'] = [];
     }
 
     /**
@@ -90,7 +90,7 @@ trait SortingHelpers
      */
     public function clearSort(string $field): void
     {
-        unset($this->{$this->tableName}['sorts'][$field]);
+        unset($this->{$this->getTableName()}['sorts'][$field]);
     }
 
     /**

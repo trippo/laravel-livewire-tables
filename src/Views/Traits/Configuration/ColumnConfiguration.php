@@ -4,23 +4,13 @@ namespace Rappasoft\LaravelLivewireTables\Views\Traits\Configuration;
 
 trait ColumnConfiguration
 {
-    /**
-     * @param  string  $field
-     *
-     * @return $this
-     */
-    public function field(string $field): self
-    {
-        $this->field = trim($field);
-
-        return $this;
-    }
 
     /**
      * @return $this
      */
     public function label(): self
     {
+        $this->from = null;
         $this->field = null;
 
         return $this;
@@ -36,6 +26,18 @@ trait ColumnConfiguration
         $this->sortable = true;
 
         $this->sortCallback = $callback;
+
+        return $this;
+    }
+
+    /**
+     * @param  string  $table
+     *
+     * @return $this
+     */
+    public function setTable(string $table): self
+    {
+        $this->table = $table;
 
         return $this;
     }
@@ -62,6 +64,16 @@ trait ColumnConfiguration
     {
         $this->sortingPillDirectionAsc = $asc;
         $this->sortingPillDirectionDesc = $desc;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function eagerLoadRelations(): self
+    {
+        $this->eagerLoadRelations = true;
 
         return $this;
     }

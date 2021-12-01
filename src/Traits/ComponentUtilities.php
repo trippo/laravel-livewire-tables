@@ -14,7 +14,6 @@ trait ComponentUtilities
     protected $model;
     protected string $tableName = 'table';
     protected ?string $pageName = null;
-    protected string $tableQueryAlias = 't';
     protected bool $queryStringStatus = true;
     protected array $componentWrapperAttributes = [];
     protected array $tableWrapperAttributes = [];
@@ -28,17 +27,12 @@ trait ComponentUtilities
     protected bool $offlineIndicator = true;
     protected string $defaultSortingLabelAsc = 'A-Z';
     protected string $defaultSortingLabelDesc = 'Z-A';
+    protected bool $eagerLoadAllRelations = false;
 
     // TODO: Test
     public function queryString(): array
     {
         if ($this->queryStringIsEnabled()) {
-            if ($this->isTableNamed('table')) {
-                return [
-                    $this->getTableName() => ['except' => null, 'as' => $this->getTableQueryAlias()],
-                ];
-            }
-
             return [
                 $this->getTableName() => ['except' => null],
             ];

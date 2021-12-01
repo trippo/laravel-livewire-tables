@@ -165,6 +165,28 @@ class ComponentConfigurationTest extends TestCase
 
         $this->basicTable->setQueryStringEnabled();
 
-        $this->basicTable->setQueryStringStatus(true);
+        $this->assertTrue($this->basicTable->getQueryStringStatus());
+    }
+
+    /** @test */
+    public function can_set_eager_load_relations_status(): void
+    {
+        $this->assertFalse($this->basicTable->getEagerLoadAllRelationsStatus());
+
+        $this->basicTable->setEagerLoadAllRelationshipsStatus(true);
+
+        $this->assertTrue($this->basicTable->getEagerLoadAllRelationsStatus());
+
+        $this->basicTable->setEagerLoadAllRelationshipsStatus(false);
+
+        $this->assertFalse($this->basicTable->getEagerLoadAllRelationsStatus());
+
+        $this->basicTable->setEagerLoadAllRelationshipsEnabled();
+
+        $this->assertTrue($this->basicTable->getEagerLoadAllRelationsStatus());
+
+        $this->basicTable->setEagerLoadAllRelationshipsDisabled();
+
+        $this->assertFalse($this->basicTable->getEagerLoadAllRelationsStatus());
     }
 }

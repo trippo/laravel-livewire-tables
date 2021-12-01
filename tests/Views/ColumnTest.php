@@ -2,42 +2,21 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Views;
 
-use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class ColumnTest extends TestCase
 {
     /** @test */
-    public function can_get_column_title(): void
+    public function can_set_the_column_title(): void
     {
-        $column = Column::make('Name');
+        $column = Column::make('Name', 'name');
 
         $this->assertSame('Name', $column->getTitle());
     }
 
     /** @test */
-    public function can_get_column_field(): void
-    {
-        $column = Column::make('Name', 'name');
-
-        $this->assertSame('name', $column->getField());
-    }
-
-    /** @test */
-    public function can_check_if_column_has_field(): void
-    {
-        $column = Column::make('Name', 'name');
-
-        $this->assertTrue($column->hasField());
-
-        $column->label();
-
-        $this->assertFalse($column->hasField());
-    }
-
-    /** @test */
-    public function can_infer_field_name_from_title(): void
+    public function can_infer_field_name_from_title_if_no_from(): void
     {
         $column = Column::make('My Title');
 
@@ -45,159 +24,48 @@ class ColumnTest extends TestCase
     }
 
     /** @test */
-    public function can_remove_field_with_label(): void
+    public function can_set_base_field_from_from(): void
     {
-        $column = Column::make('My Title')->label();
+        $column = Column::make('Name', 'name');
 
-        $this->assertNull($column->getField());
+        $this->assertSame('name', $column->getField());
     }
 
     /** @test */
-    public function can_check_if_column_is_label(): void
+    public function can_set_relation_field_from_from(): void
     {
-        $column = Column::make('My Title');
+        $column = Column::make('Name', 'address.group.name');
 
-        $this->assertFalse($column->isLabel());
-
-        $column->label();
-
-        $this->assertTrue($column->isLabel());
+        $this->assertSame('name', $column->getField());
     }
 
     /** @test */
-    public function can_check_if_column_is_same_by_field(): void
+    public function can_set_relations_from_from(): void
     {
-        $column = Column::make('My Title');
+        $column = Column::make('Name', 'address.group.name');
 
-        $this->assertTrue($column->isField('my_title'));
-        $this->assertFalse($column->isField('name'));
-    }
-
-    /** @test */
-    public function can_check_if_column_is_sortable(): void
-    {
-        $column = Column::make('My Title');
-
-        $this->assertFalse($column->isSortable());
-
-        $column->sortable();
-
-        $this->assertTrue($column->isSortable());
-
-        $column->label();
-
-        $this->assertFalse($column->isSortable());
-    }
-
-    /** @test */
-    public function can_check_if_column_has_a_sort_callback(): void
-    {
-        $column = Column::make('My Title')->sortable();
-
-        $this->assertFalse($column->hasSortCallback());
-
-        $column = Column::make('My Title')->sortable(function (Builder $builder, string $direction) {
-            return $builder->orderBy('name', $direction);
-        });
-
-        $this->assertTrue($column->hasSortCallback());
-    }
-
-    /** @test */
-    public function can_get_column_sort_callback(): void
-    {
-        $column = Column::make('My Title')->sortable();
-
-        $this->assertNull($column->getSortCallback());
-
-        $column = Column::make('My Title')->sortable(function (Builder $builder, string $direction) {
-            return $builder->orderBy('name', $direction);
-        });
-
-        $this->assertIsCallable($column->getSortCallback());
-    }
-
-    /** @test */
-    public function can_check_if_column_should_collapse_on_mobile(): void
-    {
-        $column = Column::make('My Title');
-
-        $this->assertFalse($column->shouldCollapseOnMobile());
-
-        $column->collapseOnMobile();
-
-        $this->assertTrue($column->shouldCollapseOnMobile());
-    }
-
-    /** @test */
-    public function can_check_if_column_should_collapse_on_tablet(): void
-    {
-        $column = Column::make('My Title');
-
-        $this->assertFalse($column->shouldCollapseOnTablet());
-
-        $column->collapseOnTablet();
-
-        $this->assertTrue($column->shouldCollapseOnTablet());
-    }
-
-    /** @test */
-    public function can_set_custom_sorting_pill_title(): void
-    {
-        $column = Column::make('My Title');
-
-        $this->assertNull($column->getCustomSortingPillTitle());
-
-        $column->setSortingPillTitle('New Title');
-
-        $this->assertSame('New Title', $column->getCustomSortingPillTitle());
-    }
-
-    /** @test */
-    public function can_set_custom_sorting_pill_directions(): void
-    {
-        $column = Column::make('My Title');
-
-        $this->assertFalse($column->hasCustomSortingPillDirections());
-
-        $column->setSortingPillDirections('1-2', '2-1');
-
-        $this->assertTrue($column->hasCustomSortingPillDirections());
-        $this->assertSame('1-2', $column->getCustomSortingPillDirections('asc'));
-        $this->assertSame('2-1', $column->getCustomSortingPillDirections('desc'));
+        $this->assertSame(['address', 'group'], $column->getRelations()->toArray());
+        $this->assertSame('address.group', $column->getRelationString());
     }
 
     /** @test */
     public function can_get_contents_of_column(): void
     {
-        // TODO
+        // TODO: Figure out how to call getContents on a row object to verify that way
+        $rows = $this->basicTable->getRows();
+        $this->assertSame('Cartman', $rows->first()->name);
+        $this->assertSame('Norwegian Forest', $rows->first()['breed.name']);
     }
 
     /** @test */
-    public function can_check_if_field_is_relation(): void
+    public function column_table_gets_set_for_base_and_relationship_columns(): void
     {
-        $column = Column::make('My Title');
+        $column = $this->basicTable->getColumnBySelectName('name');
 
-        $this->assertFalse($column->hasRelation());
+        $this->assertSame('pets', $column->getTable());
 
-        $column = Column::make('Address', 'address.address');
+        $column = $this->basicTable->getColumnBySelectName('breed.name');
 
-        $this->assertTrue($column->hasRelation());
-    }
-
-    /** @test */
-    public function can_get_column_relationship_name(): void
-    {
-        $column = Column::make('Address', 'addresses.address');
-
-        $this->assertSame('addresses', $column->getRelationshipName());
-    }
-
-    /** @test */
-    public function can_get_column_relationship_field(): void
-    {
-        $column = Column::make('Address', 'addresses.address');
-
-        $this->assertSame('address', $column->getRelationshipField());
+        $this->assertSame('breeds', $column->getTable());
     }
 }

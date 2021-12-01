@@ -2,38 +2,33 @@
 
 namespace Rappasoft\LaravelLivewireTables\Views\Traits\Helpers;
 
-use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 
 trait RelationshipHelpers
 {
 
     // TODO: Test
-//    public function isBaseColumn(): bool
-//    {
-//        return ! Str::contains($this->getField(), '.');
-//    }
-
-    /**
-     * @return bool
-     */
-    public function hasRelation(): bool
+    public function isBaseColumn(): bool
     {
-        return Str::contains($this->getField(), '.');
+        return ! $this->hasRelations() && $this->hasField();
     }
 
-    /**
-     * @return string
-     */
-    public function getRelationshipName(): string
+    public function hasRelations(): bool
     {
-        return Str::beforeLast($this->getField(), '.');
+        return $this->getRelations()->count();
     }
 
-    /**
-     * @return string
-     */
-    public function getRelationshipField(): string
+    public function getRelations(): Collection
     {
-        return Str::afterLast($this->getField(), '.');
+        return collect($this->relations);
+    }
+
+    public function getRelationString(): ?string
+    {
+        if ($this->hasRelations()) {
+            return $this->getRelations()->implode('.');
+        }
+
+        return null;
     }
 }

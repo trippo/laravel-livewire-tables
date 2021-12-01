@@ -8,7 +8,22 @@ use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 
 trait ColumnHelpers
 {
-    // Getters
+
+    /**
+     * @return bool
+     */
+    public function hasFrom(): bool
+    {
+        return $this->from !== null;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFrom(): ?string
+    {
+        return $this->from;
+    }
 
     /**
      * @return string
@@ -24,6 +39,80 @@ trait ColumnHelpers
     public function getField(): ?string
     {
         return $this->field;
+    }
+
+    /**
+     * @param  string  $field
+     *
+     * @return bool
+     */
+    public function isField(string $field): bool
+    {
+        return $this->getField() === $field;
+    }
+
+    /**
+     * @param  string  $column
+     *
+     * @return bool
+     */
+    public function isColumn(string $column): bool
+    {
+        return $this->getColumn() === $column;
+    }
+
+    /**
+     * @param  string  $name
+     *
+     * @return bool
+     */
+    public function isColumnBySelectName(string $name): bool
+    {
+        return $this->getColumnSelectName() === $name;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasField(): bool
+    {
+        return $this->getField() !== null;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLabel(): bool
+    {
+        return ! $this->hasFrom() && ! $this->hasField();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTable(): ?string
+    {
+        return $this->table;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getColumn(): ?string
+    {
+        return $this->getTable() . '.' . $this->getField();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getColumnSelectName(): ?string
+    {
+        if ($this->isBaseColumn()) {
+            return $this->getField();
+        }
+
+        return $this->getRelationString().'.'.$this->getField();
     }
 
     /**
@@ -45,12 +134,11 @@ trait ColumnHelpers
             return 'N/A';
         }
 
-        // TODO: Doesnt work in all situations
-        if ($this->hasRelation()) {
-            return data_get($row, $this->getRelationshipField());
+        if ($this->isBaseColumn()) {
+            return $row->{$this->getField()};
         }
 
-        return data_get($row, $this->getField());
+        return $row->{$this->getRelationString().'.'.$this->getField()};
     }
 
     /**
@@ -59,34 +147,6 @@ trait ColumnHelpers
     public function getSortCallback(): ?callable
     {
         return $this->sortCallback;
-    }
-
-    // Checks
-
-    /**
-     * @return bool
-     */
-    public function hasField(): bool
-    {
-        return $this->getField() !== null;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isLabel(): bool
-    {
-        return $this->getField() === null;
-    }
-
-    /**
-     * @param  string  $field
-     *
-     * @return bool
-     */
-    public function isField(string $field): bool
-    {
-        return $this->getField() === $field;
     }
 
     /**
@@ -140,8 +200,6 @@ trait ColumnHelpers
     {
         return $this->collapseOnTablet;
     }
-
-    // TODO: Test
 
     /**
      * @return string
@@ -210,5 +268,13 @@ trait ColumnHelpers
         }
 
         return $direction === 'asc' ? $component->getDefaultSortingLabelAsc() : $component->getDefaultSortingLabelDesc();
+    }
+
+    /**
+     * @return bool
+     */
+    public function eagerLoadRelationsIsEnabled(): bool
+    {
+        return $this->eagerLoadRelations === true;
     }
 }

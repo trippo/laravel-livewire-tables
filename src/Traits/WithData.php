@@ -3,22 +3,21 @@
 namespace Rappasoft\LaravelLivewireTables\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 trait WithData
 {
     // TODO: Test
-
-    public function rows()
+    public function getRows()
     {
         return $this->executeQuery($this->baseQuery());
     }
 
     protected function baseQuery(): Builder
     {
-        $builder = $this->builder();
-
-        $builder = $this->joinRelations($builder, $this->getColumnRelations());
+        $builder = $this->joinRelations($this->builder());
 
         $builder = $this->selectFields($builder);
 
@@ -33,15 +32,65 @@ trait WithData
             $builder->get();
     }
 
-    protected function joinRelations(Builder $builder, array $relations = []): Builder
+    protected function joinRelations(Builder $builder): Builder
     {
-        // TODO: Join related tables based on column fields
-        foreach ($relations as $relation) {
-            $relationship = $builder->getRelation($relation);
-
-            if ($relationship instanceof HasOne) {
-                $builder->leftJoin($relationship->getRelated()->getTable(), $relationship->getQualifiedForeignKeyName(), '=', $relationship->getQualifiedParentKeyName());
+        foreach ($this->getSelectableColumns() as $column) {
+            if ($column->hasRelations()) {
+                $builder = $this->joinRelation($builder, $column);
             }
+        }
+
+        return $builder;
+    }
+
+    protected function joinRelation(Builder $builder, Column $column): Builder
+    {
+        if ($column->eagerLoadRelationsIsEnabled() || $this->eagerLoadAllRelationsIsEnabled()) {
+            $builder->with($column->getRelationString());
+        }
+
+        $table = false;
+        $foreign = false;
+        $other = false;
+        $lastQuery = $builder;
+
+        foreach ($column->getRelations() as $relationPart) {
+            $model = $lastQuery->getRelation($relationPart);
+
+            switch (true) {
+                case $model instanceof HasOne:
+                    $table = $model->getRelated()->getTable();
+                    $foreign = $model->getQualifiedForeignKeyName();
+                    $other = $model->getQualifiedParentKeyName();
+                break;
+
+                case $model instanceof BelongsTo:
+                    $table = $model->getRelated()->getTable();
+                    $foreign = $model->getQualifiedForeignKeyName();
+                    $other = $model->getQualifiedOwnerKeyName();
+                break;
+            }
+
+            if ($table) {
+                $builder = $this->performJoin($builder, $table, $foreign, $other);
+            }
+
+            $lastQuery = $model->getQuery();
+        }
+
+        return $builder;
+    }
+
+    protected function performJoin(Builder $builder, $table, $foreign, $other, $type = 'left'): Builder
+    {
+        $joins = [];
+
+        foreach ($builder->getQuery()->joins ?? [] as $join) {
+            $joins[] = $join->table;
+        }
+
+        if (! in_array($table, $joins, true)) {
+            $builder->join($table, $foreign, '=', $other, $type);
         }
 
         return $builder;
@@ -49,19 +98,29 @@ trait WithData
 
     protected function selectFields(Builder $builder): Builder
     {
-        $fields = [];
-
         foreach ($this->getSelectableColumns() as $column) {
-            if ($column->getField() === 'id') {
-                $fields[] = $builder->getModel()->getTable().'.id';
-            } elseif ($column->hasRelation()) {
-                $fields[] = $builder->getRelation($column->getRelationshipName())->getRelated()->getTable().'.'.$column->getRelationshipField();
-            } else {
-                $fields[] = $column->getField();
-            }
+            $builder->addSelect($column->getColumn() . ' as ' .$column->getColumnSelectName());
         }
 
-        return $builder->select($fields);
+        return $builder;
+    }
+
+    protected function getTableForColumn(Column $column): ?string
+    {
+        $table = null;
+        $lastQuery = $this->builder();
+
+        foreach ($column->getRelations() as $relationPart) {
+            $model = $lastQuery->getRelation($relationPart);
+
+            if ($model instanceof HasOne || $model instanceof BelongsTo) {
+                $table = $model->getRelated()->getTable();
+            }
+
+            $lastQuery = $model->getQuery();
+        }
+
+        return $table;
     }
 
     protected function getQuerySql(): string

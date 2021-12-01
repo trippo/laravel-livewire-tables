@@ -13,8 +13,21 @@ class Column
         ColumnHelpers,
         RelationshipHelpers;
 
+    // What displays in the column header
     protected string $title;
+
+    // The column or relationship location: i.e. name, or address.group.name
+    protected ?string $from = null;
+
+    // The underlying column name: i.e. name
     protected ?string $field = null;
+
+    // The table of the column or relationship
+    protected ?string $table = null;
+
+    // An array of relationships: i.e. address.group.name => ['address', 'group']
+    protected array $relations = [];
+
     protected bool $sortable = false;
     protected $sortCallback;
     protected bool $collapseOnMobile = false;
@@ -22,17 +35,25 @@ class Column
     protected ?string $sortingPillTitle = null;
     protected ?string $sortingPillDirectionAsc = null;
     protected ?string $sortingPillDirectionDesc = null;
+    protected bool $eagerLoadRelations = false;
 
     /**
      * @param  string  $title
-     * @param  string|null  $field
+     * @param  string|null  $from
      */
-    public function __construct(string $title, string $field = null)
+    public function __construct(string $title, string $from = null)
     {
         $this->title = trim($title);
 
-        if ($field) {
-            $this->field = trim($field);
+        if ($from) {
+            $this->from = trim($from);
+
+            if (Str::contains($this->from, '.')) {
+                $this->field = Str::afterLast($this->from, '.');
+                $this->relations = explode('.', Str::beforeLast($this->from, '.'));
+            } else {
+                $this->field = $this->from;
+            }
         } else {
             $this->field = Str::snake($title);
         }
@@ -40,12 +61,12 @@ class Column
 
     /**
      * @param  string  $title
-     * @param  string|null  $field
+     * @param  string|null  $from
      *
      * @return Column
      */
-    public static function make(string $title, string $field = null): Column
+    public static function make(string $title, string $from = null): Column
     {
-        return new static($title, $field);
+        return new static($title, $from);
     }
 }

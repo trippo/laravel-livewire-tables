@@ -19,11 +19,11 @@ trait WithSorting
     protected bool $sortingPillsStatus = true;
 
     /**
-     * @param  string  $field
+     * @param  string  $columnSelectName
      *
      * @return string|null
      */
-    public function sortBy(string $field): ?string
+    public function sortBy(string $columnSelectName): ?string
     {
         if ($this->sortingIsDisabled()) {
             return null;
@@ -31,19 +31,19 @@ trait WithSorting
 
         // If single sorting is enabled and there are sorts but not the field that is being sorted,
         // then clear all the sorts
-        if ($this->singleSortingIsEnabled() && $this->hasSorts() && ! $this->hasSort($field)) {
+        if ($this->singleSortingIsEnabled() && $this->hasSorts() && ! $this->hasSort($columnSelectName)) {
             $this->clearSorts();
         }
 
-        if (! $this->hasSort($field)) {
-            return $this->setSortAsc($field);
+        if (! $this->hasSort($columnSelectName)) {
+            return $this->setSortAsc($columnSelectName);
         }
 
-        if ($this->isSortAsc($field)) {
-            return $this->setSortDesc($field);
+        if ($this->isSortAsc($columnSelectName)) {
+            return $this->setSortDesc($columnSelectName);
         }
 
-        $this->clearSort($field);
+        $this->clearSort($columnSelectName);
 
         return null;
     }
@@ -59,12 +59,12 @@ trait WithSorting
             return $builder->orderBy($this->getDefaultSortColumn(), $this->getDefaultSortDirection());
         }
 
-        foreach ($this->getSorts() as $field => $direction) {
+        foreach ($this->getSorts() as $column => $direction) {
             if (! in_array($direction, ['asc', 'desc'])) {
                 $direction = 'asc';
             }
 
-            if (is_null($column = $this->getColumn($field))) {
+            if (is_null($column = $this->getColumnBySelectName($column))) {
                 continue;
             }
 
@@ -75,10 +75,10 @@ trait WithSorting
             // TODO: Test
             if ($column->hasSortCallback()) {
                 $builder = app()->call($column->getSortCallback(), ['builder' => $builder, 'direction' => $direction]);
-            } elseif ($column->hasRelation()) {
-                $builder->orderBy($builder->getRelation($column->getRelationshipName())->getRelated()->getTable().'.'.$column->getRelationshipField(), $direction);
+            } elseif ($column->isBaseColumn()) {
+                $builder->orderBy($column->getColumnSelectName(), $direction);
             } else {
-                $builder->orderBy($field, $direction);
+                $builder->orderByRaw('`'.$column->getColumnSelectName().'`' . ' ' . $direction);
             }
         }
 
