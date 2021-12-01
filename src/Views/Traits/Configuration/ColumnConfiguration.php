@@ -4,7 +4,6 @@ namespace Rappasoft\LaravelLivewireTables\Views\Traits\Configuration;
 
 trait ColumnConfiguration
 {
-
     /**
      * @return $this
      */

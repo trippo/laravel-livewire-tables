@@ -7,7 +7,6 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 trait ComponentHelpers
 {
-
     /**
      * @return bool
      */

@@ -8,7 +8,6 @@ use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 
 trait ColumnHelpers
 {
-
     /**
      * @return bool
      */
