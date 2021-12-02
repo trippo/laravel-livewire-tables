@@ -111,4 +111,28 @@ trait PaginationConfiguration
 
         return $this;
     }
+
+    /**
+     * @param  int  $perPage
+     *
+     * @return $this
+     */
+    public function setPerPage(int $perPage): self
+    {
+        $this->perPage = $perPage;
+
+        return $this;
+    }
+
+    /**
+     * @param  array  $accepted
+     *
+     * @return $this
+     */
+    public function setPerPageAccepted(array $accepted): self
+    {
+        $this->perPageAccepted = $accepted;
+
+        return $this;
+    }
 }

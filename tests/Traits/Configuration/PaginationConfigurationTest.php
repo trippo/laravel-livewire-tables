@@ -81,4 +81,24 @@ class PaginationConfigurationTest extends TestCase
 
         $this->assertTrue($this->basicTable->getPerPageVisibilityStatus());
     }
+
+    /** @test */
+    public function can_set_per_page_selection(): void
+    {
+        $this->assertSame(10, $this->basicTable->getPerPage());
+
+        $this->basicTable->setPerPage(25);
+
+        $this->assertSame(25, $this->basicTable->getPerPage());
+    }
+
+    /** @test */
+    public function can_set_per_page_accepted_values(): void
+    {
+        $this->assertSame([10, 25, 50], $this->basicTable->getPerPageAccepted());
+
+        $this->basicTable->setPerPageAccepted([10, 25, 50, -1]);
+
+        $this->assertSame([10, 25, 50, -1], $this->basicTable->getPerPageAccepted());
+    }
 }

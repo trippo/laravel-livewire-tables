@@ -55,16 +55,6 @@ class PaginationHelpersTest extends TestCase
     }
 
     /** @test */
-    public function can_set_per_page_selection(): void
-    {
-        $this->assertSame(10, $this->basicTable->getPerPage());
-
-        $this->basicTable->setPerPage(25);
-
-        $this->assertSame(25, $this->basicTable->getPerPage());
-    }
-
-    /** @test */
     public function can_get_per_page_accepted(): void
     {
         $this->assertSame([10, 25, 50], $this->basicTable->getPerPageAccepted());

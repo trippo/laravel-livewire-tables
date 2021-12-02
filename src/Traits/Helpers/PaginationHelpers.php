@@ -87,16 +87,6 @@ trait PaginationHelpers
     }
 
     /**
-     * @param  int  $amount
-     *
-     * @return int
-     */
-    public function setPerPage(int $amount): int
-    {
-        return $this->perPage = $amount;
-    }
-
-    /**
      * @return array
      */
     public function getPerPageAccepted(): array
