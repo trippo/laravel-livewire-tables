@@ -13,7 +13,8 @@ class PetsTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id'),
+            Column::make('ID', 'id')
+                ->sortable(),
             Column::make('Name')
                 ->sortable(),
             Column::make('Age'),
