@@ -129,7 +129,7 @@ trait ComponentConfiguration
      */
     public function setOfflineIndicatorStatus(bool $status): self
     {
-        $this->offlineIndicator = $status;
+        $this->offlineIndicatorStatus = $status;
 
         return $this;
     }
@@ -205,9 +205,9 @@ trait ComponentConfiguration
      *
      * @return $this
      */
-    public function setEagerLoadAllRelationshipsStatus(bool $status): self
+    public function setEagerLoadAllRelationsStatus(bool $status): self
     {
-        $this->eagerLoadAllRelations = $status;
+        $this->eagerLoadAllRelationsStatus = $status;
 
         return $this;
     }
@@ -215,9 +215,9 @@ trait ComponentConfiguration
     /**
      * @return $this
      */
-    public function setEagerLoadAllRelationshipsEnabled(): self
+    public function setEagerLoadAllRelationsEnabled(): self
     {
-        $this->setEagerLoadAllRelationshipsStatus(true);
+        $this->setEagerLoadAllRelationsStatus(true);
 
         return $this;
     }
@@ -225,9 +225,9 @@ trait ComponentConfiguration
     /**
      * @return $this
      */
-    public function setEagerLoadAllRelationshipsDisabled(): self
+    public function setEagerLoadAllRelationsDisabled(): self
     {
-        $this->setEagerLoadAllRelationshipsStatus(false);
+        $this->setEagerLoadAllRelationsStatus(false);
 
         return $this;
     }

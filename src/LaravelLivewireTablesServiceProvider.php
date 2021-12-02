@@ -7,10 +7,6 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class LaravelLivewireTablesServiceProvider extends PackageServiceProvider
 {
-    public function bootingPackage(): void
-    {
-    }
-
     /**
      * @param Package $package
      */

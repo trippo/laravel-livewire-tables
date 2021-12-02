@@ -15,6 +15,8 @@ trait ComponentUtilities
     protected string $tableName = 'table';
     protected ?string $pageName = null;
     protected bool $queryStringStatus = true;
+    protected bool $offlineIndicatorStatus = true;
+    protected bool $eagerLoadAllRelationsStatus = false;
     protected array $componentWrapperAttributes = [];
     protected array $tableWrapperAttributes = [];
     protected array $tableAttributes = [];
@@ -24,10 +26,8 @@ trait ComponentUtilities
     protected $trAttributesCallback;
     protected $tdAttributesCallback;
     protected string $emptyMessage = 'No items found. Try to broaden your search.';
-    protected bool $offlineIndicator = true;
     protected string $defaultSortingLabelAsc = 'A-Z';
     protected string $defaultSortingLabelDesc = 'Z-A';
-    protected bool $eagerLoadAllRelations = false;
 
     public function queryString(): array
     {

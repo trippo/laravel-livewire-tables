@@ -173,19 +173,19 @@ class ComponentConfigurationTest extends TestCase
     {
         $this->assertFalse($this->basicTable->getEagerLoadAllRelationsStatus());
 
-        $this->basicTable->setEagerLoadAllRelationshipsStatus(true);
+        $this->basicTable->setEagerLoadAllRelationsStatus(true);
 
         $this->assertTrue($this->basicTable->getEagerLoadAllRelationsStatus());
 
-        $this->basicTable->setEagerLoadAllRelationshipsStatus(false);
+        $this->basicTable->setEagerLoadAllRelationsStatus(false);
 
         $this->assertFalse($this->basicTable->getEagerLoadAllRelationsStatus());
 
-        $this->basicTable->setEagerLoadAllRelationshipsEnabled();
+        $this->basicTable->setEagerLoadAllRelationsEnabled();
 
         $this->assertTrue($this->basicTable->getEagerLoadAllRelationsStatus());
 
-        $this->basicTable->setEagerLoadAllRelationshipsDisabled();
+        $this->basicTable->setEagerLoadAllRelationsDisabled();
 
         $this->assertFalse($this->basicTable->getEagerLoadAllRelationsStatus());
     }

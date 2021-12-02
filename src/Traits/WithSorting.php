@@ -14,9 +14,9 @@ trait WithSorting
     public array $sorts = [];
     protected bool $sortingStatus = true;
     protected bool $singleColumnSortingStatus = true;
+    protected bool $sortingPillsStatus = true;
     protected ?string $defaultSortColumn = null;
     protected string $defaultSortDirection = 'asc';
-    protected bool $sortingPillsStatus = true;
 
     /**
      * @param  string  $columnSelectName

@@ -119,7 +119,7 @@ trait ComponentHelpers
      */
     public function getOfflineIndicatorStatus(): bool
     {
-        return $this->offlineIndicator;
+        return $this->offlineIndicatorStatus;
     }
 
     /**
@@ -237,7 +237,7 @@ trait ComponentHelpers
      */
     public function getEagerLoadAllRelationsStatus(): bool
     {
-        return $this->eagerLoadAllRelations;
+        return $this->eagerLoadAllRelationsStatus;
     }
 
     /**

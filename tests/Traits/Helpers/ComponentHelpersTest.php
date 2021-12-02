@@ -114,13 +114,13 @@ class ComponentHelpersTest extends TestCase
 
         $this->assertFalse($this->basicTable->eagerLoadAllRelationsIsEnabled());
 
-        $this->basicTable->setEagerLoadAllRelationshipsEnabled();
+        $this->basicTable->setEagerLoadAllRelationsEnabled();
 
         $this->assertFalse($this->basicTable->eagerLoadAllRelationsIsDisabled());
 
         $this->assertTrue($this->basicTable->eagerLoadAllRelationsIsEnabled());
 
-        $this->basicTable->setEagerLoadAllRelationshipsDisabled();
+        $this->basicTable->setEagerLoadAllRelationsDisabled();
 
         $this->assertFalse($this->basicTable->eagerLoadAllRelationsIsEnabled());
 
