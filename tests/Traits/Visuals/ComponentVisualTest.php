@@ -8,7 +8,6 @@ use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class ComponentVisualTest extends TestCase
 {
-
     /** @test */
     public function empty_message_does_not_show_with_results(): void
     {
