@@ -29,7 +29,6 @@ trait ComponentUtilities
     protected string $defaultSortingLabelDesc = 'Z-A';
     protected bool $eagerLoadAllRelations = false;
 
-    // TODO: Test
     public function queryString(): array
     {
         if ($this->queryStringIsEnabled()) {
