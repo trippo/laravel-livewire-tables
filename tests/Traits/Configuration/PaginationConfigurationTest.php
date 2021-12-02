@@ -59,4 +59,26 @@ class PaginationConfigurationTest extends TestCase
 
         $this->assertTrue($this->basicTable->getPaginationVisibilityStatus());
     }
+
+    /** @test */
+    public function can_set_per_page_visibility_status(): void
+    {
+        $this->assertTrue($this->basicTable->getPerPageVisibilityStatus());
+
+        $this->basicTable->setPerPageVisibilityDisabled();
+
+        $this->assertFalse($this->basicTable->getPerPageVisibilityStatus());
+
+        $this->basicTable->setPerPageVisibilityEnabled();
+
+        $this->assertTrue($this->basicTable->getPerPageVisibilityStatus());
+
+        $this->basicTable->setPerPageVisibilityStatus(false);
+
+        $this->assertFalse($this->basicTable->getPerPageVisibilityStatus());
+
+        $this->basicTable->setPerPageVisibilityStatus(true);
+
+        $this->assertTrue($this->basicTable->getPerPageVisibilityStatus());
+    }
 }

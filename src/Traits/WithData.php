@@ -27,8 +27,7 @@ trait WithData
     protected function executeQuery(Builder $builder)
     {
         return $this->paginationIsEnabled() ?
-            // TODO: Get per page
-            $builder->paginate(10, ['*'], $this->getComputedPageName()) :
+            $builder->paginate($this->getPerPage() === -1 ? $builder->count() : $this->getPerPage(), ['*'], $this->getComputedPageName()) :
             $builder->get();
     }
 

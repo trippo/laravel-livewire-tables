@@ -77,4 +77,54 @@ trait PaginationHelpers
 
         return $pageName;
     }
+
+    /**
+     * @return int
+     */
+    public function getPerPage(): int
+    {
+        return $this->perPage;
+    }
+
+    /**
+     * @param  int  $amount
+     *
+     * @return int
+     */
+    public function setPerPage(int $amount): int
+    {
+        return $this->perPage = $amount;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPerPageAccepted(): array
+    {
+        return $this->perPageAccepted;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getPerPageVisibilityStatus(): bool
+    {
+        return $this->perPageVisibilityStatus;
+    }
+
+    /**
+     * @return bool
+     */
+    public function perPageVisibilityIsEnabled(): bool
+    {
+        return $this->getPerPageVisibilityStatus() === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function perPageVisibilityIsDisabled(): bool
+    {
+        return $this->getPerPageVisibilityStatus() === false;
+    }
 }
