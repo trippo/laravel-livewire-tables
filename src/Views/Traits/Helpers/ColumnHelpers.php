@@ -177,8 +177,6 @@ trait ColumnHelpers
         return $this->sortCallback !== null;
     }
 
-
-
     // TODO
     public function getSearchCallback(): ?callable
     {
@@ -194,9 +192,6 @@ trait ColumnHelpers
     {
         return $this->searchCallback !== null;
     }
-
-
-
 
     /**
      * @return $this
