@@ -8,7 +8,7 @@
 @if ($theme === 'tailwind')
     <div>
         @if ($component->paginationVisibilityIsEnabled())
-            <div class="mt-4 sm:flex justify-between items-center space-y-4 sm:space-y-0">
+            <div class="mt-4 px-4 md:p-0 sm:flex justify-between items-center space-y-4 sm:space-y-0">
                 <div>
                     @if ($component->paginationIsEnabled() && $rows->lastPage() > 1)
                         <p class="paged-pagination-results text-sm text-gray-700 leading-5 dark:text-white">

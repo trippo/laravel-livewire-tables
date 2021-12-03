@@ -7,7 +7,7 @@
 @if ($theme === 'tailwind')
     <div>
         @if ($component->sortingPillsAreEnabled() && $component->hasSorts())
-            <div class="md:mb-4 px-6 py-2 md:p-0">
+            <div class="mb-4 px-4 md:p-0">
                 <small class="text-gray-700 dark:text-white">@lang('Applied Sorting'):</small>
 
                 @foreach($component->getSorts() as $columnSelectName => $direction)

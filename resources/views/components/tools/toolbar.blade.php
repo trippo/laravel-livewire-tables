@@ -5,10 +5,10 @@
 @endphp
 
 @if ($theme === 'tailwind')
-    <div class="mb-4 flex justify-between items-center">
-        <div class="flex items-center">
+    <div class="md:flex md:justify-between mb-4 px-4 md:p-0">
+        <div class="w-full mb-4 md:mb-0 md:w-2/4 md:flex space-y-4 md:space-y-0 md:space-x-2">
             @if ($component->searchIsEnabled() && $component->searchVisibilityIsEnabled())
-                <div class="flex rounded-md shadow-sm">
+                <div class="md:flex rounded-md shadow-sm">
                     <input
                         wire:model{{ $component->getSearchOptions() }}="{{ $component->getTableName() }}.search"
                         placeholder="{{ __('Search') }}"
@@ -27,7 +27,7 @@
             @endif
         </div>
 
-        <div class="flex items-center">
+        <div class="md:flex md:items-center">
             @if ($component->paginationIsEnabled() && $component->perPageVisibilityIsEnabled())
                 <div>
                     <select
