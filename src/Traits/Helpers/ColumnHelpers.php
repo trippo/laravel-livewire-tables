@@ -15,6 +15,8 @@ trait ColumnHelpers
         $columns = collect($this->columns())
             ->filter(fn ($column) => $column instanceof Column)
             ->map(function (Column $column) {
+                $column->setComponent($this);
+
                 if ($column->hasField()) {
                     if ($column->isBaseColumn()) {
                         $column->setTable($this->builder()->getModel()->getTable());

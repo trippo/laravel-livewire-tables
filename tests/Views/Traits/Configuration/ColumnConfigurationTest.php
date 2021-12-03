@@ -18,4 +18,16 @@ class ColumnConfigurationTest extends TestCase
 
         $this->assertTrue($column->eagerLoadRelationsIsEnabled());
     }
+
+    /** @test */
+    public function can_set_component_on_column(): void
+    {
+        $column = Column::make('Name');
+
+        $this->assertNull($column->getComponent());
+
+        $column->setComponent($this->basicTable);
+        
+        $this->assertSame($this->basicTable, $column->getComponent());
+    }
 }

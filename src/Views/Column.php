@@ -3,6 +3,7 @@
 namespace Rappasoft\LaravelLivewireTables\Views;
 
 use Illuminate\Support\Str;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Traits\Configuration\ColumnConfiguration;
 use Rappasoft\LaravelLivewireTables\Views\Traits\Helpers\ColumnHelpers;
 use Rappasoft\LaravelLivewireTables\Views\Traits\Helpers\RelationshipHelpers;
@@ -13,16 +14,18 @@ class Column
         ColumnHelpers,
         RelationshipHelpers;
 
-    // What displays in the column header
+    protected ?DataTableComponent $component = null;
+
+    // What displays in the columns header
     protected string $title;
 
-    // The column or relationship location: i.e. name, or address.group.name
+    // The columns or relationship location: i.e. name, or address.group.name
     protected ?string $from = null;
 
-    // The underlying column name: i.e. name
+    // The underlying columns name: i.e. name
     protected ?string $field = null;
 
-    // The table of the column or relationship
+    // The table of the columns or relationship
     protected ?string $table = null;
 
     // An array of relationships: i.e. address.group.name => ['address', 'group']

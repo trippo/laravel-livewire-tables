@@ -30,7 +30,7 @@
                 <div>
                     @foreach($columns as $colIndex => $column)
                         <p class="block mb-2 @if($column->shouldCollapseOnMobile()) sm:hidden @endif @if($column->shouldCollapseOnTablet()) md:hidden @endif">
-                            <strong>{{ $column->getTitle() }}</strong>: {{ $column->getContents($row) }}
+                            <strong>{{ $column->getTitle() }}</strong>: {{ $column->renderContents($row) }}
                         </p>
                     @endforeach
                 </div>

@@ -2,8 +2,22 @@
 
 namespace Rappasoft\LaravelLivewireTables\Views\Traits\Configuration;
 
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+
 trait ColumnConfiguration
 {
+    /**
+     * @param  DataTableComponent  $component
+     *
+     * @return $this
+     */
+    public function setComponent(DataTableComponent $component): self
+    {
+        $this->component = $component;
+
+        return $this;
+    }
+
     /**
      * @return $this
      */

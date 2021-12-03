@@ -9,6 +9,14 @@ use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 trait ColumnHelpers
 {
     /**
+     * @return DataTableComponent|null
+     */
+    public function getComponent(): ?DataTableComponent
+    {
+        return $this->component;
+    }
+
+    /**
      * @return bool
      */
     public function hasFrom(): bool
@@ -114,25 +122,30 @@ trait ColumnHelpers
         return $this->getRelationString().'.'.$this->getField();
     }
 
-    /**
-     * TODO: Test
-     *
-     * @param  Model  $row
-     *
-     * @return array|mixed|string
-     * @throws DataTableConfigurationException
-     */
-    public function getContents(Model $row)
+    // TODO: Test
+    public function renderContents(Model $row)
     {
         if ($this->shouldCollapseOnMobile() && $this->shouldCollapseOnTablet()) {
-            throw new DataTableConfigurationException('You should only specify a column should collapse on mobile OR tablet, not both.');
+            throw new DataTableConfigurationException('You should only specify a columns should collapse on mobile OR tablet, not both.');
         }
 
+        return $this->getContents($row);
+    }
+
+    // TODO: Test
+    public function getContents(Model $row)
+    {
         if ($this->isLabel()) {
             // TODO: Get content from callback or something
             return 'N/A';
         }
 
+        return $this->getValue($row);
+    }
+
+    // TODO: Test
+    public function getValue(Model $row)
+    {
         if ($this->isBaseColumn()) {
             return $row->{$this->getField()};
         }

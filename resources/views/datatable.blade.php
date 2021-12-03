@@ -20,7 +20,7 @@
 
                 @foreach($columns as $colIndex => $column)
                     <x-livewire-tables::table.td :column="$column" :colIndex="$colIndex">
-                        {{ $column->getContents($row) }}
+                        {{ $column->renderContents($row) }}
                     </x-livewire-tables::table.td>
                 @endforeach
             </x-livewire-tables::table.tr>
