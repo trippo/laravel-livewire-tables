@@ -6,7 +6,6 @@ use Closure;
 
 trait BooleanColumnConfiguration
 {
-
     /**
      * @param  Closure  $callback
      *

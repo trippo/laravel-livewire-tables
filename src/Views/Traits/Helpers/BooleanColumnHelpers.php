@@ -6,7 +6,6 @@ use Closure;
 
 trait BooleanColumnHelpers
 {
-
     /**
      * @return bool
      */
