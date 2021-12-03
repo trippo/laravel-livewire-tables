@@ -25,7 +25,7 @@ trait SortingHelpers
      */
     public function getSorts(): array
     {
-        return $this->{$this->getTableName()}['sorts'];
+        return $this->{$this->getTableName()}['sorts'] ?? [];
     }
 
     /**

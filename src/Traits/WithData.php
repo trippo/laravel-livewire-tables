@@ -21,6 +21,8 @@ trait WithData
 
         $builder = $this->selectFields($builder);
 
+        $builder = $this->applySearch($builder);
+
         return $this->applySorting($builder);
     }
 

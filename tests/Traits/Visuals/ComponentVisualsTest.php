@@ -6,7 +6,7 @@ use Livewire\Livewire;
 use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
-class ComponentVisualTest extends TestCase
+class ComponentVisualsTest extends TestCase
 {
     /** @test */
     public function empty_message_does_not_show_with_results(): void

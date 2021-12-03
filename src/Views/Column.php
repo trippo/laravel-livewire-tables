@@ -33,6 +33,8 @@ class Column
 
     protected bool $sortable = false;
     protected $sortCallback;
+    protected bool $searchable = false;
+    protected $searchCallback;
     protected bool $collapseOnMobile = false;
     protected bool $collapseOnTablet = false;
     protected ?string $sortingPillTitle = null;

@@ -42,7 +42,7 @@ trait WithPagination
             session()->put($this->getPerPagePaginationSessionKey(), $this->getPerPageAccepted()[0] ?? 10);
         }
 
-        $this->resetPage();
+        $this->resetComputedPage();
     }
 
     private function getPerPagePaginationSessionKey(): string

@@ -4,6 +4,7 @@
             $debuggable = [
                 'query' => $component->getQuerySql(),
                 'sorts' => $component->getSorts(),
+                'search' => $component->getSearch(),
             ];
         @endphp
 

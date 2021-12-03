@@ -6,7 +6,7 @@ use Livewire\Livewire;
 use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
-class PaginationVisualTest extends TestCase
+class PaginationVisualsTest extends TestCase
 {
     /** @test */
     public function pagination_shows_by_default(): void

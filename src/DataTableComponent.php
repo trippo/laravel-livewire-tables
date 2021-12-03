@@ -11,6 +11,7 @@ use Rappasoft\LaravelLivewireTables\Traits\WithData;
 use Rappasoft\LaravelLivewireTables\Traits\WithDebugging;
 use Rappasoft\LaravelLivewireTables\Traits\WithPagination;
 use Rappasoft\LaravelLivewireTables\Traits\WithRefresh;
+use Rappasoft\LaravelLivewireTables\Traits\WithSearch;
 use Rappasoft\LaravelLivewireTables\Traits\WithSorting;
 
 abstract class DataTableComponent extends Component
@@ -21,6 +22,7 @@ abstract class DataTableComponent extends Component
         WithDebugging,
         WithPagination,
         WithRefresh,
+        WithSearch,
         WithSorting;
 
     protected $listeners = ['refreshDatatable' => '$refresh'];

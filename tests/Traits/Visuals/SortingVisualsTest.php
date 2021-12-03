@@ -6,7 +6,7 @@ use Livewire\Livewire;
 use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
-class SortingVisualTest extends TestCase
+class SortingVisualsTest extends TestCase
 {
     /** @test */
     public function th_headers_are_buttons_with_sorting_enabled(): void

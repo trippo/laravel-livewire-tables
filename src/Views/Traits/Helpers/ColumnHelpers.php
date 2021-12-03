@@ -177,6 +177,27 @@ trait ColumnHelpers
         return $this->sortCallback !== null;
     }
 
+
+
+    // TODO
+    public function getSearchCallback(): ?callable
+    {
+        return $this->searchCallback;
+    }
+
+    public function isSearchable(): bool
+    {
+        return $this->hasField() && $this->searchable === true;
+    }
+
+    public function hasSearchCallback(): bool
+    {
+        return $this->searchCallback !== null;
+    }
+
+
+
+
     /**
      * @return $this
      */

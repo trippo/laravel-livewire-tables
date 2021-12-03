@@ -95,6 +95,12 @@ trait ColumnHelpers
         return $this->getColumns()->reject(fn (Column $column) => $column->isLabel());
     }
 
+    // TODO
+    public function getSearchableColumns(): Collection
+    {
+        return $this->getColumns()->filter(fn (Column $column) => $column->isSearchable());
+    }
+
     /**
      * @return int
      */
