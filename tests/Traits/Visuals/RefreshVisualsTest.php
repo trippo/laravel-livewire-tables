@@ -8,7 +8,6 @@ use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class RefreshVisualsTest extends TestCase
 {
-
     /** @test */
     public function refresh_shows_no_poll_by_default(): void
     {

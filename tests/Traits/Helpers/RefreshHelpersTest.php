@@ -6,7 +6,6 @@ use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class RefreshHelpersTest extends TestCase
 {
-
     /** @test */
     public function can_check_if_refresh_is_set(): void
     {
