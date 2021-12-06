@@ -107,13 +107,11 @@ class SortingVisualsTest extends TestCase
     /** @test */
     public function sorting_pill_shows_correct_name(): void
     {
-
     }
 
     /** @test */
     public function sorting_pill_shows_correct_direction_value(): void
     {
-
     }
 
     /** @test */

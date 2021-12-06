@@ -2,8 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits;
 
-use Livewire\Livewire;
-use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class WithSortingTest extends TestCase
