@@ -92,13 +92,19 @@ trait ColumnHelpers
      */
     public function getSelectableColumns(): Collection
     {
-        return $this->getColumns()->reject(fn (Column $column) => $column->isLabel());
+        return $this->getColumns()
+            ->reject(fn (Column $column) => $column->isLabel())
+            ->values();
     }
 
-    // TODO
+    /**
+     * @return Collection
+     */
     public function getSearchableColumns(): Collection
     {
-        return $this->getColumns()->filter(fn (Column $column) => $column->isSearchable());
+        return $this->getColumns()
+            ->filter(fn (Column $column) => $column->isSearchable())
+            ->values();
     }
 
     /**
@@ -130,7 +136,9 @@ trait ColumnHelpers
      */
     public function getCollapsedMobileColumns(): Collection
     {
-        return $this->getColumns()->filter(fn (Column $column) => $column->shouldCollapseOnMobile());
+        return $this->getColumns()
+            ->filter(fn (Column $column) => $column->shouldCollapseOnMobile())
+            ->values();
     }
 
     /**
@@ -146,7 +154,9 @@ trait ColumnHelpers
      */
     public function getVisibleMobileColumns(): Collection
     {
-        return $this->getColumns()->reject(fn (Column $column) => $column->shouldCollapseOnMobile());
+        return $this->getColumns()
+            ->reject(fn (Column $column) => $column->shouldCollapseOnMobile())
+            ->values();
     }
 
     /**
@@ -170,7 +180,9 @@ trait ColumnHelpers
      */
     public function getCollapsedTabletColumns(): Collection
     {
-        return $this->getColumns()->filter(fn (Column $column) => $column->shouldCollapseOnTablet());
+        return $this->getColumns()
+            ->filter(fn (Column $column) => $column->shouldCollapseOnTablet())
+            ->values();
     }
 
     /**
@@ -186,7 +198,9 @@ trait ColumnHelpers
      */
     public function getVisibleTabletColumns(): Collection
     {
-        return $this->getColumns()->reject(fn (Column $column) => $column->shouldCollapseOnTablet());
+        return $this->getColumns()
+            ->reject(fn (Column $column) => $column->shouldCollapseOnTablet())
+            ->values();
     }
 
     /**

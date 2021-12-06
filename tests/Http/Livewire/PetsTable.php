@@ -18,7 +18,8 @@ class PetsTable extends DataTableComponent
             Column::make('Sort')
                 ->sortable(),
             Column::make('Name')
-                ->sortable(),
+                ->sortable()
+                ->searchable(),
             Column::make('Age'),
             Column::make('Breed', 'breed.name')
                 ->sortable(),

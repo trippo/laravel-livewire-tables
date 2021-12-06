@@ -96,25 +96,24 @@ class SortingVisualsTest extends TestCase
     /** @test */
     public function multiple_sorting_pill_shows_with_single_column_off(): void
     {
-        // TODO: Fail, single sorting not being disabled or component test isn't refreshing view internally
-//        Livewire::test(PetsTable::class)
-//            ->call('setSingleSortingDisabled')
-//            ->call('sortBy', 'id')
-//            ->call('sortBy', 'name')
-//            ->assertSee('Name: A-Z')
-//            ->assertSee('ID: A-Z');
+        Livewire::test(PetsTable::class)
+            ->call('setSingleSortingDisabled')
+            ->call('sortBy', 'id')
+            ->call('sortBy', 'name')
+            ->assertSee('Name: A-Z')
+            ->assertSee('ID: A-Z');
     }
 
     /** @test */
     public function sorting_pill_shows_correct_name(): void
     {
-        // TODO: How to set columns on livewire component test call?
+
     }
 
     /** @test */
     public function sorting_pill_shows_correct_direction_value(): void
     {
-        // TODO: How to set columns on livewire component test call?
+
     }
 
     /** @test */
@@ -133,5 +132,59 @@ class SortingVisualsTest extends TestCase
         Livewire::test(PetsTable::class)
             ->call('sortBy', 'name2')
             ->assertDontSee('Name2: A-Z');
+    }
+
+    /** @test */
+    public function default_sorting_gets_applied_if_set_and_there_are_no_sorts(): void
+    {
+        Livewire::test(PetsTable::class)
+            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
+            ->call('setDefaultSort', 'name', 'desc')
+            ->assertSeeInOrder(['Tux', 'May', 'Chico', 'Cartman', 'Ben']);
+    }
+
+    /** @test */
+    public function sort_direction_can_only_be_asc_or_desc(): void
+    {
+        // If not asc, desc, default to asc
+        Livewire::test(PetsTable::class)
+            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
+            ->call('setSort', 'name', 'ugkugkuh')
+            ->assertSeeInOrder(['Ben', 'Cartman', 'Chico', 'May', 'Tux']);
+
+        Livewire::test(PetsTable::class)
+            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
+            ->call('setSort', 'name', 'desc')
+            ->assertSeeInOrder(['Tux', 'May', 'Chico', 'Cartman', 'Ben']);
+    }
+
+    /** @test */
+    public function skip_sorting_column_if_it_does_not_have_a_field(): void
+    {
+        // Other col is a label therefore has no field
+        Livewire::test(PetsTable::class)
+            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
+            ->call('setSort', 'other', 'desc')
+            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico']);
+    }
+
+    /** @test */
+    public function skip_sorting_column_if_it_is_not_sortable(): void
+    {
+        // Other col is a label therefore is not sortable
+        Livewire::test(PetsTable::class)
+            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
+            ->call('setSort', 'other', 'desc')
+            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico']);
+    }
+
+    /** @test */
+    public function sort_field_and_direction_are_applied_if_no_sort_callback(): void
+    {
+        // TODO: Test that there is no callback
+        Livewire::test(PetsTable::class)
+            ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
+            ->call('setSort', 'name', 'desc')
+            ->assertSeeInOrder(['Tux', 'May', 'Chico', 'Cartman', 'Ben']);
     }
 }

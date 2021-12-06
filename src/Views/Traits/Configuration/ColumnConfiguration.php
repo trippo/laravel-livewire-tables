@@ -43,7 +43,11 @@ trait ColumnConfiguration
         return $this;
     }
 
-    // TODO
+    /**
+     * @param  null  $callback
+     *
+     * @return $this
+     */
     public function searchable($callback = null): self
     {
         $this->searchable = true;

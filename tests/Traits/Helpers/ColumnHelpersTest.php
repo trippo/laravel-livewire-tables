@@ -68,7 +68,7 @@ class ColumnHelpersTest extends TestCase
         $this->basicTable->getColumnBySelectName('name')->collapseOnMobile();
 
         $this->assertCount(2, $this->basicTable->getCollapsedMobileColumns());
-        
+
         $this->assertSame('ID', $this->basicTable->getCollapsedMobileColumns()[0]->getTitle());
         $this->assertSame('Name', $this->basicTable->getCollapsedMobileColumns()[1]->getTitle());
     }
@@ -178,6 +178,16 @@ class ColumnHelpersTest extends TestCase
             ->toArray();
 
         $this->assertSame(['id', 'sort', 'name', 'age', 'breed.name'], $selectable);
+    }
+
+    /** @test */
+    public function can_get_searchable_columns(): void
+    {
+        $selectable = $this->basicTable->getSearchableColumns()
+            ->map(fn (Column $column) => $column->getColumnSelectName())
+            ->toArray();
+
+        $this->assertSame(['name'], $selectable);
     }
 
     /** @test */

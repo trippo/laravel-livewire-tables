@@ -18,10 +18,9 @@ class ComponentVisualsTest extends TestCase
     /** @test */
     public function empty_message_shows_with_no_results(): void
     {
-        // TODO: After search is done
-//        Livewire::test(PetsTable::class)
-//            ->call('search', 'sdfsdfsdf')
-//            ->assertSeeSee('No items found. Try to broaden your search.');
+        Livewire::test(PetsTable::class)
+            ->set('table.search', 'sdfsdfsdf')
+            ->assertSee('No items found. Try to broaden your search.');
     }
 
     /** @test */
