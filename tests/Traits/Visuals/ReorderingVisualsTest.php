@@ -167,7 +167,7 @@ class ReorderingVisualsTest extends TestCase
             ->set('table', ['search' => 'abc123'])
             ->call('enableReordering')
             ->assertSet('searchStatus', false)
-            ->assertSet('table' ,[])
+            ->assertSet('table', [])
             ->assertDontSee('Search')
             ->call('disableReordering')
             ->assertSet('searchStatus', true)
