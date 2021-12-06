@@ -14,7 +14,9 @@ class PetsTable extends DataTableComponent
     {
         return [
             Column::make('ID', 'id')
-                ->sortable(),
+                ->sortable()
+                ->setSortingPillTitle('Key')
+                ->setSortingPillDirections('0-9', '9-0'),
             Column::make('Sort')
                 ->sortable(),
             Column::make('Name')

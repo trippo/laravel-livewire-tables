@@ -87,10 +87,10 @@ class SortingVisualsTest extends TestCase
     {
         Livewire::test(PetsTable::class)
             ->call('sortBy', 'id')
-            ->assertSee('ID: A-Z')
+            ->assertSee('Key: 0-9')
             ->call('sortBy', 'name')
             ->assertSee('Name: A-Z')
-            ->assertDontSee('ID: A-Z');
+            ->assertDontSee('Key: 0-9');
     }
 
     /** @test */
@@ -101,17 +101,20 @@ class SortingVisualsTest extends TestCase
             ->call('sortBy', 'id')
             ->call('sortBy', 'name')
             ->assertSee('Name: A-Z')
-            ->assertSee('ID: A-Z');
+            ->assertSee('Key: 0-9');
     }
 
     /** @test */
-    public function sorting_pill_shows_correct_name(): void
+    public function sorting_pill_shows_correct_name_and_direction(): void
     {
-    }
-
-    /** @test */
-    public function sorting_pill_shows_correct_direction_value(): void
-    {
+        Livewire::test(PetsTable::class)
+            ->assertDontSee('Key')
+            ->call('sortBy', 'id')
+            ->assertSee('Key')
+            ->assertSee('0-9')
+            ->call('sortBy', 'id')
+            ->assertSee('Key')
+            ->assertSee('9-0');
     }
 
     /** @test */
