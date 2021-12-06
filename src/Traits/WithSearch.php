@@ -12,11 +12,11 @@ trait WithSearch
         SearchHelpers;
 
     public ?string $search = null;
-    protected bool $searchStatus = true;
-    protected bool $searchVisibilityStatus = true;
-    protected ?int $searchFilterDebounce = null;
-    protected ?bool $searchFilterDefer = null;
-    protected ?bool $searchFilterLazy = null;
+    public bool $searchStatus = true;
+    public bool $searchVisibilityStatus = true;
+    public ?int $searchFilterDebounce = null;
+    public ?bool $searchFilterDefer = null;
+    public ?bool $searchFilterLazy = null;
 
     // TODO
     public function applySearch(Builder $builder): Builder

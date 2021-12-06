@@ -7,18 +7,24 @@
 
     <x-livewire-tables::table>
         <x-slot name="thead">
+            <x-livewire-tables::table.th.reorder />
             <x-livewire-tables::table.th.row-contents />
 
             @foreach($columns as $index => $column)
+                @continue($this->currentlyReorderingIsDisabled() && $column->isReorderColumn() && $this->hideReorderColumnUnlessReorderingIsEnabled())
+
                 <x-livewire-tables::table.th :column="$column" :index="$index" />
             @endforeach
         </x-slot>
 
         @forelse ($rows as $rowIndex => $row)
             <x-livewire-tables::table.tr :row="$row" :rowIndex="$rowIndex">
+                <x-livewire-tables::table.td.reorder />
                 <x-livewire-tables::table.td.row-contents :rowIndex="$rowIndex" />
 
                 @foreach($columns as $colIndex => $column)
+                    @continue($this->currentlyReorderingIsDisabled() && $column->isReorderColumn() && $this->hideReorderColumnUnlessReorderingIsEnabled())
+
                     <x-livewire-tables::table.td :column="$column" :colIndex="$colIndex">
                         {{ $column->renderContents($row) }}
                     </x-livewire-tables::table.td>
@@ -27,7 +33,7 @@
 
             <x-livewire-tables::table.row-contents :row="$row" :rowIndex="$rowIndex" />
         @empty
-            <x-livewire-tables::table.empty  />
+            <x-livewire-tables::table.empty />
         @endforelse
     </x-livewire-tables::table>
 

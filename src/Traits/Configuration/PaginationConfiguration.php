@@ -2,6 +2,8 @@
 
 namespace Rappasoft\LaravelLivewireTables\Traits\Configuration;
 
+use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
+
 trait PaginationConfiguration
 {
     /**
@@ -113,18 +115,6 @@ trait PaginationConfiguration
     }
 
     /**
-     * @param  int  $perPage
-     *
-     * @return $this
-     */
-    public function setPerPage(int $perPage): self
-    {
-        $this->perPage = $perPage;
-
-        return $this;
-    }
-
-    /**
      * @param  array  $accepted
      *
      * @return $this
@@ -132,6 +122,23 @@ trait PaginationConfiguration
     public function setPerPageAccepted(array $accepted): self
     {
         $this->perPageAccepted = $accepted;
+
+        return $this;
+    }
+
+    /**
+     * @param  int  $perPage
+     *
+     * @return $this
+     * @throws DataTableConfigurationException
+     */
+    public function setPerPage(int $perPage): self
+    {
+        if (! in_array($perPage, $this->getPerPageAccepted(), true)) {
+            throw new DataTableConfigurationException('You can only set per page values that are in your accepted values list.');
+        }
+
+        $this->perPage = $perPage;
 
         return $this;
     }

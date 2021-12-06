@@ -305,4 +305,12 @@ trait ColumnHelpers
     {
         return $this->eagerLoadRelations === true;
     }
+
+    /**
+     * @return bool
+     */
+    public function isReorderColumn(): bool
+    {
+        return $this->getField() === $this->component->getDefaultReorderColumn();
+    }
 }

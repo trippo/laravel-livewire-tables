@@ -13,11 +13,11 @@ trait WithPagination
         PaginationHelpers;
 
     public int $perPage = 10;
-    protected string $paginationTheme = 'tailwind';
-    protected bool $paginationStatus = true;
-    protected bool $paginationVisibilityStatus = true;
-    protected bool $perPageVisibilityStatus = true;
-    protected array $perPageAccepted = [10, 25, 50];
+    public array $perPageAccepted = [10, 25, 50];
+    public string $paginationTheme = 'tailwind';
+    public bool $paginationStatus = true;
+    public bool $paginationVisibilityStatus = true;
+    public bool $perPageVisibilityStatus = true;
 
     // TODO: Test
     public function mountWithPagination(): void

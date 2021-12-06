@@ -12,11 +12,11 @@ trait WithSorting
         SortingHelpers;
 
     public array $sorts = [];
-    protected bool $sortingStatus = true;
-    protected bool $singleColumnSortingStatus = true;
-    protected bool $sortingPillsStatus = true;
-    protected ?string $defaultSortColumn = null;
-    protected string $defaultSortDirection = 'asc';
+    public bool $sortingStatus = true;
+    public bool $singleColumnSortingStatus = true;
+    public bool $sortingPillsStatus = true;
+    public ?string $defaultSortColumn = null;
+    public string $defaultSortDirection = 'asc';
 
     /**
      * @param  string  $columnSelectName

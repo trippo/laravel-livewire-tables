@@ -3,6 +3,7 @@
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Visuals;
 
 use Livewire\Livewire;
+use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
@@ -12,6 +13,7 @@ class PaginationVisualsTest extends TestCase
     public function pagination_shows_by_default(): void
     {
         Livewire::test(PetsTable::class)
+            ->call('setPerPageAccepted', [1])
             ->call('setPerPage', 1)
             ->assertSeeHtml('<nav role="navigation" aria-label="Pagination Navigation" class="flex items-center justify-between">');
     }
@@ -33,6 +35,7 @@ class PaginationVisualsTest extends TestCase
     public function pagination_is_removed_when_hidden(): void
     {
         Livewire::test(PetsTable::class)
+            ->call('setPerPageAccepted', [1])
             ->call('setPerPage', 1)
             ->call('setPaginationVisibilityDisabled')
             ->assertDontSeeHtml('<nav role="navigation" aria-label="Pagination Navigation" class="flex items-center justify-between">');
@@ -42,6 +45,7 @@ class PaginationVisualsTest extends TestCase
     public function pagination_is_removed_when_disabled(): void
     {
         Livewire::test(PetsTable::class)
+            ->call('setPerPageAccepted', [1])
             ->call('setPerPage', 1)
             ->call('setPaginationDisabled')
             ->assertDontSeeHtml('<nav role="navigation" aria-label="Pagination Navigation" class="flex items-center justify-between">');
@@ -79,6 +83,7 @@ class PaginationVisualsTest extends TestCase
     public function paged_results_label_shows_with_pagination_enabled_and_more_than_one_page(): void
     {
         Livewire::test(PetsTable::class)
+            ->call('setPerPageAccepted', [1])
             ->call('setPerPage', 1)
             ->assertSeeHtml('<p class="paged-pagination-results text-sm text-gray-700 leading-5 dark:text-white">');
     }
@@ -139,9 +144,9 @@ class PaginationVisualsTest extends TestCase
     /** @test */
     public function per_page_dropdown_only_renders_with_accepted_values(): void
     {
+        $this->expectException(DataTableConfigurationException::class);
+
         Livewire::test(PetsTable::class)
-            ->call('setPerPage', 15)
-            ->call('setPerPageAccepted', [10, 25, 50, -1])
-            ->assertDontSeeHtml('<option value="15">15</option>');
+            ->call('setPerPage', 15);
     }
 }

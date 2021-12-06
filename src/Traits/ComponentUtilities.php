@@ -63,6 +63,14 @@ trait ComponentUtilities
     }
 
     /**
+     * 1. After the sorting method is hit we need to tell the table to go back into reordering mode
+     */
+    public function hydrate(): void
+    {
+        $this->restartReorderingIfNecessary();
+    }
+
+    /**
      * Reset the page using the custom page name
      */
     public function resetComputedPage(): void

@@ -27,6 +27,7 @@ class Pet extends Model
      */
     protected $fillable = [
         'id',
+        'sort',
         'name',
         'age',
         'last_visit',

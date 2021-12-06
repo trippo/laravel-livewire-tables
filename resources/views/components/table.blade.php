@@ -31,11 +31,17 @@
                     {{ $thead }}
                 </tr>
             </thead>
-            <tbody {{
-                $attributes->merge($customAttributes['tbody'])
+            <tbody
+                @if ($component->reorderIsEnabled())
+                    wire:sortable="{{ $component->getReorderMethod() }}"
+                @endif
+
+                {{
+                    $attributes->merge($customAttributes['tbody'])
                     ->class(['bg-white divide-y divide-gray-200 dark:divide-none' => $customAttributes['tbody']['default'] ?? true])
                     ->except('default')
-            }}>
+                }}
+            >
                 {{ $slot }}
             </tbody>
         </table>

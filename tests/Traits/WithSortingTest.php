@@ -83,6 +83,7 @@ class WithSortingTest extends TestCase
     public function default_sorting_gets_applied_if_set_and_there_are_no_sorts(): void
     {
         Livewire::test(PetsTable::class)
+            // TODO: Move to visuals
             ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
             ->call('setDefaultSort', 'name', 'desc')
             ->assertSeeInOrder(['Tux', 'May', 'Chico', 'Cartman', 'Ben']);
@@ -92,6 +93,7 @@ class WithSortingTest extends TestCase
     public function sort_direction_can_only_be_asc_or_desc(): void
     {
         // If not asc, desc, default to asc
+        // TODO: Move to visuals
         Livewire::test(PetsTable::class)
             ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
             ->call('setSort', 'name', 'ugkugkuh')
@@ -107,6 +109,7 @@ class WithSortingTest extends TestCase
     public function skip_sorting_column_if_it_does_not_have_a_field(): void
     {
         // Other col is a label therefore has no field
+        // TODO: Move to visuals
         Livewire::test(PetsTable::class)
             ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
             ->call('setSort', 'other', 'desc')
@@ -117,6 +120,7 @@ class WithSortingTest extends TestCase
     public function skip_sorting_column_if_it_is_not_sortable(): void
     {
         // Other col is a label therefore is not sortable
+        // TODO: Move to visuals
         Livewire::test(PetsTable::class)
             ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])
             ->call('setSort', 'other', 'desc')
@@ -133,6 +137,7 @@ class WithSortingTest extends TestCase
     public function sort_field_and_direction_are_applied_if_no_sort_callback(): void
     {
         // TODO: Test that there is no callback
+        // TODO: Move to visuals
 
         Livewire::test(PetsTable::class)
             ->assertSeeInOrder(['Cartman', 'Tux', 'May', 'Ben', 'Chico'])

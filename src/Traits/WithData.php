@@ -23,6 +23,10 @@ trait WithData
 
         $builder = $this->applySearch($builder);
 
+        if ($this->currentlyReorderingIsEnabled()) {
+            return $builder->orderBy($this->getDefaultReorderColumn(), $this->getDefaultReorderDirection());
+        }
+
         return $this->applySorting($builder);
     }
 
