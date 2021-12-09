@@ -2,12 +2,9 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests;
 
-use Closure;
 use Livewire\Livewire;
 use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 use Rappasoft\LaravelLivewireTables\Tests\Http\Livewire\PetsTable;
-use Rappasoft\LaravelLivewireTables\Tests\TestCase;
-use Rappasoft\LaravelLivewireTables\Views\BooleanColumn;
 
 class DataTableComponentTest extends TestCase
 {
