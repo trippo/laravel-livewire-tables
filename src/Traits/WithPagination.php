@@ -22,6 +22,10 @@ trait WithPagination
     // TODO: Test
     public function mountWithPagination(): void
     {
+        if ($this->paginationIsDisabled()) {
+            return;
+        }
+
         if (in_array(session($this->getPerPagePaginationSessionKey(), $this->getPerPage()), $this->getPerPageAccepted(), true)) {
             $this->setPerPage(session($this->getPerPagePaginationSessionKey(), $this->getPerPage()));
         } else {

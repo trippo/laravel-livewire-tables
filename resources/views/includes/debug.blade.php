@@ -5,6 +5,7 @@
                 'query' => $component->getQuerySql(),
                 'sorts' => $component->getSorts(),
                 'search' => $component->getSearch(),
+                'selected' => $component->getSelected(),
             ];
         @endphp
 

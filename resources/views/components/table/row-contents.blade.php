@@ -16,6 +16,8 @@
         }
 
         $columns = $columns->collapse();
+
+        // TODO: Column count
         $colspan = $columns->count() + 1;
     @endphp
 

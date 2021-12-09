@@ -283,4 +283,26 @@ class ColumnHelpersTest extends TestCase
 
         $this->assertTrue($column->eagerLoadRelationsIsEnabled());
     }
+
+    /** @test */
+    public function can_get_colspan_count(): void
+    {
+        $this->basicTable->setBulkActionsDisabled();
+
+        $this->assertEquals(6, $this->basicTable->getColspanCount());
+
+        // TODO: Not working
+//        $this->basicTable->setReorderEnabled();
+//        $this->basicTable->setHideBulkActionsWhenEmptyEnabled();
+//
+//        $this->assertEquals(5, $this->basicTable->getColspanCount());
+//
+//        $this->basicTable->setCurrentlyReorderingEnabled();
+//
+//        $this->assertEquals(6, $this->basicTable->getColspanCount());
+//
+//        $this->basicTable->setBulkActionsEnabled();
+//
+//        $this->assertEquals(7, $this->basicTable->getColspanCount());
+    }
 }

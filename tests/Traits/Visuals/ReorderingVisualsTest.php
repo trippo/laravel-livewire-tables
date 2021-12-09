@@ -190,5 +190,72 @@ class ReorderingVisualsTest extends TestCase
 //            ->assertSet('page', 3);
     }
 
+    /** @test */
+    public function bulk_actions_dropdown_gets_hidden_on_reorder(): void
+    {
+        Livewire::test(PetsTable::class)
+            ->call('setReorderEnabled')
+            ->assertSet('bulkActionsStatus', true)
+            ->call('setBulkActions', ['activate' => 'Activate'])
+            ->assertSee('Bulk Actions')
+            ->call('enableReordering')
+            ->assertSet('bulkActionsStatus', false)
+            ->assertDontSee('Bulk Actions');
+    }
+
+    /** @test */
+    public function bulk_actions_header_gets_hidden_on_reorder(): void
+    {
+        Livewire::test(PetsTable::class)
+            ->call('setReorderEnabled')
+            ->assertSet('bulkActionsStatus', true)
+            ->call('setBulkActions', ['activate' => 'Activate'])
+            ->assertSeeHtml('wire:model="selectAll"')
+            ->call('enableReordering')
+            ->assertSet('bulkActionsStatus', false)
+            ->assertDontSeeHtml('wire:model="selectAll"');
+    }
+
+    /** @test */
+    public function bulk_actions_cell_gets_hidden_on_reorder(): void
+    {
+        Livewire::test(PetsTable::class)
+            ->call('setReorderEnabled')
+            ->assertSet('bulkActionsStatus', true)
+            ->call('setBulkActions', ['activate' => 'Activate'])
+            ->assertSeeHtml('wire:model="selected"')
+            ->call('enableReordering')
+            ->assertSet('bulkActionsStatus', false)
+            ->assertDontSeeHtml('wire:model="selected"');
+    }
+
+    /** @test */
+    public function bulk_actions_row_select_all_gets_hidden_on_reorder(): void
+    {
+        Livewire::test(PetsTable::class)
+            ->call('setReorderEnabled')
+            ->assertSet('bulkActionsStatus', true)
+            ->call('setBulkActions', ['activate' => 'Activate'])
+            ->call('setAllSelected')
+            ->assertSee('You are currently selecting all')
+            ->call('enableReordering')
+            ->assertSet('bulkActionsStatus', false)
+            ->assertDontSee('You are currently selecting all');
+    }
+
+    /** @test */
+    public function bulk_actions_row_select_some_gets_hidden_on_reorder(): void
+    {
+        Livewire::test(PetsTable::class)
+            ->call('setReorderEnabled')
+            ->assertSet('bulkActionsStatus', true)
+            ->call('setBulkActions', ['activate' => 'Activate'])
+            ->call('setSelected', [1, 2, 3])
+            ->assertSee('do you want to select all')
+            ->call('enableReordering')
+            ->assertSet('bulkActionsStatus', false)
+            ->assertDontSee('do you want to select all');
+    }
+
     // TODO: Append as new features added
 }

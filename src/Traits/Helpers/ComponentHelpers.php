@@ -7,6 +7,23 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 trait ComponentHelpers
 {
+
+    /**
+     * @return bool
+     */
+    public function hasPrimaryKey(): bool
+    {
+        return $this->primaryKey !== null;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrimaryKey()
+    {
+        return $this->primaryKey;
+    }
+
     /**
      * @return bool
      */

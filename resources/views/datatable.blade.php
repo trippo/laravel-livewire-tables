@@ -8,6 +8,7 @@
     <x-livewire-tables::table>
         <x-slot name="thead">
             <x-livewire-tables::table.th.reorder />
+            <x-livewire-tables::table.th.bulk-actions />
             <x-livewire-tables::table.th.row-contents />
 
             @foreach($columns as $index => $column)
@@ -17,9 +18,12 @@
             @endforeach
         </x-slot>
 
+        <x-livewire-tables::table.tr.bulk-actions :rows="$rows" />
+
         @forelse ($rows as $rowIndex => $row)
             <x-livewire-tables::table.tr :row="$row" :rowIndex="$rowIndex">
                 <x-livewire-tables::table.td.reorder />
+                <x-livewire-tables::table.td.bulk-actions :row="$row" />
                 <x-livewire-tables::table.td.row-contents :rowIndex="$rowIndex" />
 
                 @foreach($columns as $colIndex => $column)

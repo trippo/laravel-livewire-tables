@@ -4,6 +4,19 @@ namespace Rappasoft\LaravelLivewireTables\Traits\Configuration;
 
 trait ComponentConfiguration
 {
+
+    /**
+     * @param $key
+     *
+     * @return $this
+     */
+    public function setPrimaryKey($key): self
+    {
+        $this->primaryKey = $key;
+
+        return $this;
+    }
+
     /**
      * Get a list of attributes to override on the main wrapper of the component
      *

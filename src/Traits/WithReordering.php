@@ -19,6 +19,10 @@ trait WithReordering
 
     public function mountWithReordering(): void
     {
+        if ($this->reorderIsDisabled()) {
+            return;
+        }
+
         // If reordering is disabled but the page has a reorder session, remove it
         if (! $this->reorderIsEnabled() && $this->hasReorderingSession()) {
             $this->forgetReorderingSession();
@@ -62,6 +66,8 @@ trait WithReordering
         $this->setPerPageAccepted([-1]);
         $this->setPerPage(-1);
         $this->setSearchDisabled();
+        $this->setBulkActionsDisabled();
+        $this->clearSelected();
         $this->resetComputedPage();
     }
 
@@ -81,6 +87,9 @@ trait WithReordering
             'perPage' => $this->getPerPage(),
             'page' => $this->paginators[$this->getComputedPageName()] ?? 1,
             'searchStatus' => $this->getSearchStatus(),
+            'bulkActionsStatus' => $this->getBulkActionsStatus(),
+            'selected' => $this->getSelected(),
+            'selectAllStatus' => $this->getSelectAllStatus(),
         ]]);
     }
 
@@ -97,6 +106,9 @@ trait WithReordering
             $this->setPerPage($save['perPage']);
             $this->setPage($save['page'], $this->getComputedPageName());
             $this->setSearchStatus($save['searchStatus']);
+            $this->setBulkActionsStatus($save['bulkActionsStatus']);
+            $this->setSelected($save['selected']);
+            $this->setSelectAllStatus($save['selectAllStatus']);
             session()->forget($this->getReorderingBackupSessionKey());
         }
     }

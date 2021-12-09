@@ -12,6 +12,7 @@ trait ComponentUtilities
 
     public array $table = [];
     protected $model;
+    protected $primaryKey;
     protected string $tableName = 'table';
     protected ?string $pageName = null;
     protected bool $queryStringStatus = true;

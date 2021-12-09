@@ -10,6 +10,11 @@ class PetsTable extends DataTableComponent
 {
     public $model = Pet::class;
 
+    public function configure(): void
+    {
+        $this->setPrimaryKey('id');
+    }
+
     public function columns(): array
     {
         return [

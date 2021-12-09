@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 use Rappasoft\LaravelLivewireTables\Traits\ComponentUtilities;
+use Rappasoft\LaravelLivewireTables\Traits\WithBulkActions;
 use Rappasoft\LaravelLivewireTables\Traits\WithColumns;
 use Rappasoft\LaravelLivewireTables\Traits\WithData;
 use Rappasoft\LaravelLivewireTables\Traits\WithDebugging;
@@ -18,6 +19,7 @@ use Rappasoft\LaravelLivewireTables\Traits\WithSorting;
 abstract class DataTableComponent extends Component
 {
     use ComponentUtilities,
+        WithBulkActions,
         WithColumns,
         WithData,
         WithDebugging,
@@ -49,6 +51,12 @@ abstract class DataTableComponent extends Component
 
         // Call the child configuration, if any
         $this->configure();
+
+        // TODO
+        // Make sure a primary key is set
+        if (! $this->hasPrimaryKey()) {
+            throw new DataTableConfigurationException('You must set a primary key using setPrimaryKey in the configure method.');
+        }
     }
 
     /**
