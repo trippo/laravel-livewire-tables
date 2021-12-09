@@ -6,7 +6,6 @@ use Illuminate\Support\Collection;
 
 trait RelationshipHelpers
 {
-
     /**
      * @return bool
      */
