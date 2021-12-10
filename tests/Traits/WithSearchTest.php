@@ -15,4 +15,20 @@ class WithSearchTest extends TestCase
     public function search_callback_gets_applied_where_necessary(): void
     {
     }
+
+    /** @test */
+    public function when_search_is_applied_bulk_actions_are_cleared(): void
+    {
+        // TODO: Not working
+
+//        $this->basicTable->setBulkActions(['activate' => 'Activate']);
+//
+//        $this->basicTable->setSelected([1, 2, 3]);
+//
+//        $this->assertSame([1, 2, 3], $this->basicTable->getSelected());
+//
+//        $this->basicTable->setSearch('abcd');
+//
+//        $this->assertSame([], $this->basicTable->getSelected());
+    }
 }
