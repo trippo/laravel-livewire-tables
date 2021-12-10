@@ -185,6 +185,6 @@ trait BulkActionsHelpers
     public function setAllSelected(): void
     {
         $this->setSelectAllEnabled();
-        $this->setSelected($this->baseQuery()->pluck($this->getPrimaryKey())->map(fn($item) => (string)$item)->toArray());
+        $this->setSelected($this->baseQuery()->pluck($this->getPrimaryKey())->map(fn ($item) => (string)$item)->toArray());
     }
 }
