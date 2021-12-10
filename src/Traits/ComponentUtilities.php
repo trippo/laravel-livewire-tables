@@ -57,6 +57,10 @@ trait ComponentUtilities
         if ($name === $this->getTableName().'.search') {
             $this->resetComputedPage();
 
+            // Clear bulk actions on search
+            $this->clearSelected();
+            $this->setSelectAllDisabled();
+
             if ($value === '') {
                 $this->clearSearch();
             }
