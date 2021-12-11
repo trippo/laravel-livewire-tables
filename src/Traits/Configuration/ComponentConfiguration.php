@@ -4,12 +4,13 @@ namespace Rappasoft\LaravelLivewireTables\Traits\Configuration;
 
 trait ComponentConfiguration
 {
+
     /**
-     * @param $key
+     * @param  string  $key
      *
      * @return $this
      */
-    public function setPrimaryKey($key): self
+    public function setPrimaryKey(string $key): self
     {
         $this->primaryKey = $key;
 
