@@ -38,7 +38,7 @@ class ColumnConfigurationTest extends TestCase
 
         $this->assertFalse($column->hasFormatter());
 
-        $column->format(fn($value) => $value);
+        $column->format(fn ($value) => $value);
 
         $this->assertTrue($column->hasFormatter());
     }
