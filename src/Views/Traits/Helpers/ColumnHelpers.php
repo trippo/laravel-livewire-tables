@@ -3,10 +3,9 @@
 namespace Rappasoft\LaravelLivewireTables\Views\Traits\Helpers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\HtmlString;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
-use Rappasoft\LaravelLivewireTables\Views\Column;
-use Illuminate\Support\HtmlString;
 
 trait ColumnHelpers
 {

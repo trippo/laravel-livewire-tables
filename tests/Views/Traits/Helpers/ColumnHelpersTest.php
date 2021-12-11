@@ -315,7 +315,7 @@ class ColumnHelpersTest extends TestCase
         $this->assertFalse($column->hasFormatter());
         $this->assertNull($column->getFormatCallback());
 
-        $column->format(fn($value) => $value);
+        $column->format(fn ($value) => $value);
 
         $this->assertInstanceOf(Closure::class, $column->getFormatCallback());
     }
