@@ -2,6 +2,7 @@
 
 namespace Rappasoft\LaravelLivewireTables\Tests\Views\Traits\Helpers;
 
+use Closure;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -304,5 +305,18 @@ class ColumnHelpersTest extends TestCase
 //        $this->basicTable->setBulkActionsEnabled();
 //
 //        $this->assertEquals(7, $this->basicTable->getColspanCount());
+    }
+
+    /** @test */
+    public function can_get_column_formatter(): void
+    {
+        $column = Column::make('Name');
+
+        $this->assertFalse($column->hasFormatter());
+        $this->assertNull($column->getFormatCallback());
+
+        $column->format(fn($value) => $value);
+
+        $this->assertInstanceOf(Closure::class, $column->getFormatCallback());
     }
 }

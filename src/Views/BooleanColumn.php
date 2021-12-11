@@ -19,7 +19,7 @@ class BooleanColumn extends Column
     public function getContents(Model $row)
     {
         if ($this->isLabel()) {
-            throw new DataTableConfigurationException('You can not specify a boolean columns as a label.');
+            throw new DataTableConfigurationException('You can not specify a boolean column as a label.');
         }
 
         $value = $this->getValue($row);

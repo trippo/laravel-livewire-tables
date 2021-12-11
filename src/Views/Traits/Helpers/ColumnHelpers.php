@@ -5,6 +5,8 @@ namespace Rappasoft\LaravelLivewireTables\Views\Traits\Helpers;
 use Illuminate\Database\Eloquent\Model;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Illuminate\Support\HtmlString;
 
 trait ColumnHelpers
 {
@@ -140,7 +142,19 @@ trait ColumnHelpers
             return 'N/A';
         }
 
-        return $this->getValue($row);
+        $value = $this->getValue($row);
+
+        if ($this->hasFormatter()) {
+            $value = call_user_func($this->getFormatCallback(), $value, $row, $this);
+
+            if ($this->isHtml()) {
+                return new HtmlString($value);
+            }
+
+            return $value;
+        }
+
+        return $value;
     }
 
     // TODO: Test
@@ -312,5 +326,29 @@ trait ColumnHelpers
     public function isReorderColumn(): bool
     {
         return $this->getField() === $this->component->getDefaultReorderColumn();
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFormatter(): bool
+    {
+        return $this->formatCallback !== null;
+    }
+
+    /**
+     * @return callable|null
+     */
+    public function getFormatCallback(): ?callable
+    {
+        return $this->formatCallback;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHtml(): bool
+    {
+        return $this->html === true;
     }
 }

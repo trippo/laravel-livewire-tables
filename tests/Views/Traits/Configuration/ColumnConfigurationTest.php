@@ -27,7 +27,31 @@ class ColumnConfigurationTest extends TestCase
         $this->assertNull($column->getComponent());
 
         $column->setComponent($this->basicTable);
-        
+
         $this->assertSame($this->basicTable, $column->getComponent());
+    }
+
+    /** @test */
+    public function can_set_column_format(): void
+    {
+        $column = Column::make('Name');
+
+        $this->assertFalse($column->hasFormatter());
+
+        $column->format(fn($value) => $value);
+
+        $this->assertTrue($column->hasFormatter());
+    }
+
+    /** @test */
+    public function can_set_column_wants_html(): void
+    {
+        $column = Column::make('Name');
+
+        $this->assertFalse($column->isHtml());
+
+        $column->html();
+
+        $this->assertTrue($column->isHtml());
     }
 }

@@ -3,6 +3,7 @@
 namespace Rappasoft\LaravelLivewireTables\Views\Traits\Configuration;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 trait ColumnConfiguration
 {
@@ -30,11 +31,11 @@ trait ColumnConfiguration
     }
 
     /**
-     * @param  null  $callback
+     * @param  callable|null  $callback
      *
      * @return $this
      */
-    public function sortable($callback = null): self
+    public function sortable(callable $callback = null): self
     {
         $this->sortable = true;
 
@@ -44,15 +45,37 @@ trait ColumnConfiguration
     }
 
     /**
-     * @param  null  $callback
+     * @param  callable  $callable
+     *
+     * @return Column
+     */
+    public function format(callable $callable): Column
+    {
+        $this->formatCallback = $callable;
+
+        return $this;
+    }
+
+    /**
+     * @param  callable|null  $callback
      *
      * @return $this
      */
-    public function searchable($callback = null): self
+    public function searchable(callable $callback = null): self
     {
         $this->searchable = true;
 
         $this->searchCallback = $callback;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function html(): self
+    {
+        $this->html = true;
 
         return $this;
     }

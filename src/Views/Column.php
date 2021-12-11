@@ -41,6 +41,8 @@ class Column
     protected ?string $sortingPillDirectionAsc = null;
     protected ?string $sortingPillDirectionDesc = null;
     protected bool $eagerLoadRelations = false;
+    protected $formatCallback;
+    protected bool $html = false;
 
     /**
      * @param  string  $title
