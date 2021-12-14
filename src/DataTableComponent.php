@@ -60,6 +60,11 @@ abstract class DataTableComponent extends Component
     }
 
     /**
+     * Set any configuration options
+     */
+    abstract public function configure(): void;
+
+    /**
      * The array defining the columns of the table.
      *
      * @return array
@@ -76,14 +81,6 @@ abstract class DataTableComponent extends Component
         }
 
         throw new DataTableConfigurationException('You must either specify a model or implement the builder method.');
-    }
-
-    /**
-     * Set any configuration options
-     */
-    public function configure(): void
-    {
-        // Silence is golden
     }
 
     /**
