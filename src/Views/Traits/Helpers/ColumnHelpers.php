@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
+use Rappasoft\LaravelLivewireTables\Views\Column;
 
 trait ColumnHelpers
 {
@@ -137,8 +138,13 @@ trait ColumnHelpers
     public function getContents(Model $row)
     {
         if ($this->isLabel()) {
-            // TODO: Get content from callback or something
-            return 'N/A';
+            $value = call_user_func($this->getLabelCallback(), $row, $this);
+
+            if ($this->isHtml()) {
+                return new HtmlString($value);
+            }
+
+            return $value;
         }
 
         $value = $this->getValue($row);
@@ -343,11 +349,30 @@ trait ColumnHelpers
         return $this->formatCallback;
     }
 
+    // TODO
+    public function getLabelCallback(): ?callable
+    {
+        return $this->labelCallback;
+    }
+
     /**
      * @return bool
      */
     public function isHtml(): bool
     {
         return $this->html === true;
+    }
+
+    // TODO
+    public function view($view): self
+    {
+        $this->format(function($value, $row, Column $column) use($view) {
+            return view($view)
+                ->withValue($value)
+                ->withRow($row)
+                ->withColumn($column);
+        });
+
+        return $this;
     }
 }

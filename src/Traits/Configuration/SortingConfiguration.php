@@ -124,4 +124,18 @@ trait SortingConfiguration
 
         return $this;
     }
+
+    /**
+     * @param  string  $asc
+     * @param  string  $desc
+     *
+     * @return $this
+     */
+    public function setDefaultSortingLabels(string $asc, string $desc): self
+    {
+        $this->defaultSortingLabelAsc = $asc;
+        $this->defaultSortingLabelDesc = $desc;
+
+        return $this;
+    }
 }

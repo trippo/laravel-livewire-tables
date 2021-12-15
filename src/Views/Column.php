@@ -43,6 +43,7 @@ class Column
     protected bool $eagerLoadRelations = false;
     protected $formatCallback;
     protected bool $html = false;
+    protected $labelCallback;
 
     /**
      * @param  string  $title

@@ -27,8 +27,6 @@ trait ComponentUtilities
     protected $trAttributesCallback;
     protected $tdAttributesCallback;
     protected string $emptyMessage = 'No items found. Try to broaden your search.';
-    protected string $defaultSortingLabelAsc = 'A-Z';
-    protected string $defaultSortingLabelDesc = 'Z-A';
 
     /**
      * Set the custom query string array for this specific table

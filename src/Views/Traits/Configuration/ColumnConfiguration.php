@@ -22,10 +22,11 @@ trait ColumnConfiguration
     /**
      * @return $this
      */
-    public function label(): self
+    public function label(callable $callback): self
     {
         $this->from = null;
         $this->field = null;
+        $this->labelCallback = $callback;
 
         return $this;
     }

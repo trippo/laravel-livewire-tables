@@ -155,22 +155,6 @@ trait ComponentHelpers
     }
 
     /**
-     * @return string
-     */
-    public function getDefaultSortingLabelAsc(): string
-    {
-        return $this->defaultSortingLabelAsc;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDefaultSortingLabelDesc(): string
-    {
-        return $this->defaultSortingLabelDesc;
-    }
-
-    /**
      * @return bool
      */
     public function getQueryStringStatus(): bool

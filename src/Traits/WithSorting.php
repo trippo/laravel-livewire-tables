@@ -17,6 +17,8 @@ trait WithSorting
     public bool $sortingPillsStatus = true;
     public ?string $defaultSortColumn = null;
     public string $defaultSortDirection = 'asc';
+    public string $defaultSortingLabelAsc = 'A-Z';
+    public string $defaultSortingLabelDesc = 'Z-A';
 
     /**
      * @param  string  $columnSelectName
