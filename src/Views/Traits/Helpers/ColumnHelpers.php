@@ -366,7 +366,7 @@ trait ColumnHelpers
     // TODO
     public function view($view): self
     {
-        $this->format(function($value, $row, Column $column) use($view) {
+        $this->format(function ($value, $row, Column $column) use ($view) {
             return view($view)
                 ->withValue($value)
                 ->withRow($row)
