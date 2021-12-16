@@ -56,7 +56,7 @@ class ColumnHelpersTest extends TestCase
 
         $this->assertTrue($column->hasField());
 
-        $column->label();
+        $column->label(fn() => 'Name');
 
         $this->assertFalse($column->hasField());
     }
@@ -64,7 +64,7 @@ class ColumnHelpersTest extends TestCase
     /** @test */
     public function can_remove_field_with_label(): void
     {
-        $column = Column::make('My Title', 'my_title')->label();
+        $column = Column::make('My Title', 'my_title')->label(fn() => 'My Label');
 
         $this->assertNull($column->getFrom());
         $this->assertNull($column->getField());
@@ -77,7 +77,7 @@ class ColumnHelpersTest extends TestCase
 
         $this->assertFalse($column->isLabel());
 
-        $column->label();
+        $column->label(fn() => 'My Label');
 
         $this->assertTrue($column->isLabel());
     }
@@ -164,7 +164,7 @@ class ColumnHelpersTest extends TestCase
 
         $this->assertTrue($column->isSortable());
 
-        $column->label();
+        $column->label(fn() => 'My Label');
 
         $this->assertFalse($column->isSortable());
     }

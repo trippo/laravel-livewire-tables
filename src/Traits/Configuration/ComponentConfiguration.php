@@ -9,7 +9,7 @@ trait ComponentConfiguration
      *
      * @return $this
      */
-    public function setPrimaryKey(string $key): self
+    public function setPrimaryKey(?string $key): self
     {
         $this->primaryKey = $key;
 
