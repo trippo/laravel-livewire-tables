@@ -4,7 +4,7 @@
 @php
     $attributes = $attributes->merge(['wire:key' => 'cell-'.$rowIndex.'-'.$colIndex.'-'.$component->id]);
     $theme = $component->getTheme();
-    $customAttributes = $component->getTdAttributes($column, $row, $colIndex)
+    $customAttributes = $component->getTdAttributes($column, $row, $colIndex, $rowIndex)
 @endphp
 
 @if ($theme === 'tailwind')
