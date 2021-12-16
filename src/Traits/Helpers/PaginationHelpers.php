@@ -4,7 +4,6 @@ namespace Rappasoft\LaravelLivewireTables\Traits\Helpers;
 
 trait PaginationHelpers
 {
-
     /**
      * @return string|null
      */

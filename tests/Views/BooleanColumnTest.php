@@ -14,6 +14,6 @@ class BooleanColumnTest extends TestCase
     {
         $this->expectException(DataTableConfigurationException::class);
 
-        BooleanColumn::make('Name')->label(fn() => 'My Label')->getContents(Pet::find(1));
+        BooleanColumn::make('Name')->label(fn () => 'My Label')->getContents(Pet::find(1));
     }
 }
