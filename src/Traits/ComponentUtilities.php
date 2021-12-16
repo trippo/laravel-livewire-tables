@@ -14,7 +14,6 @@ trait ComponentUtilities
     protected $model;
     protected $primaryKey;
     protected string $tableName = 'table';
-    protected ?string $pageName = null;
     protected bool $queryStringStatus = true;
     protected bool $offlineIndicatorStatus = true;
     protected bool $eagerLoadAllRelationsStatus = false;
@@ -71,13 +70,5 @@ trait ComponentUtilities
     public function hydrate(): void
     {
         $this->restartReorderingIfNecessary();
-    }
-
-    /**
-     * Reset the page using the custom page name
-     */
-    public function resetComputedPage(): void
-    {
-        $this->resetPage($this->getComputedPageName());
     }
 }

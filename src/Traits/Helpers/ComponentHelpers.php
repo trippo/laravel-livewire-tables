@@ -207,32 +207,6 @@ trait ComponentHelpers
     }
 
     /**
-     * @param  string  $name
-     *
-     * @return string
-     */
-    public function setPageName(string $name): string
-    {
-        return $this->pageName = $name;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getPageName(): ?string
-    {
-        return $this->pageName;
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasPageName(): bool
-    {
-        return $this->pageName !== null;
-    }
-
-    /**
      * @return bool
      */
     public function getEagerLoadAllRelationsStatus(): bool

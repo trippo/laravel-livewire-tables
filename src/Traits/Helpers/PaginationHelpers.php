@@ -4,6 +4,23 @@ namespace Rappasoft\LaravelLivewireTables\Traits\Helpers;
 
 trait PaginationHelpers
 {
+
+    /**
+     * @return string|null
+     */
+    public function getPageName(): ?string
+    {
+        return $this->pageName;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasPageName(): bool
+    {
+        return $this->pageName !== null;
+    }
+
     /**
      * @return bool
      */

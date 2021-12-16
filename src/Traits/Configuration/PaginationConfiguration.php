@@ -6,6 +6,18 @@ use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 
 trait PaginationConfiguration
 {
+     /**
+     * @param  string  $name
+     *
+     * @return string
+     */
+    public function setPageName(string $name): self
+    {
+        $this->pageName = $name;
+
+        return $this;
+    }
+
     /**
      * @param  string  $theme
      *

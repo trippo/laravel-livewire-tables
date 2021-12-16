@@ -31,7 +31,9 @@ class PetsTable extends DataTableComponent
             Column::make('Breed', 'breed.name')
                 ->sortable(),
             Column::make('Other')
-                ->label(),
+                ->label(function($row, Column $column) {
+                    return 'Other';
+                }),
         ];
     }
 }

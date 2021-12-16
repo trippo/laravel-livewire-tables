@@ -12,6 +12,7 @@ trait WithPagination
         PaginationConfiguration,
         PaginationHelpers;
 
+    public ?string $pageName = null;
     public int $perPage = 10;
     public array $perPageAccepted = [10, 25, 50];
     public string $paginationTheme = 'tailwind';
@@ -47,6 +48,14 @@ trait WithPagination
         }
 
         $this->resetComputedPage();
+    }
+
+    /**
+     * Reset the page using the custom page name
+     */
+    public function resetComputedPage(): void
+    {
+        $this->resetPage($this->getComputedPageName());
     }
 
     private function getPerPagePaginationSessionKey(): string
