@@ -68,6 +68,7 @@ trait WithReordering
         $this->setSearchDisabled();
         $this->setBulkActionsDisabled();
         $this->clearSelected();
+        $this->setFiltersDisabled();
         $this->resetComputedPage();
     }
 
@@ -90,6 +91,7 @@ trait WithReordering
             'bulkActionsStatus' => $this->getBulkActionsStatus(),
             'selected' => $this->getSelected(),
             'selectAllStatus' => $this->getSelectAllStatus(),
+            'filtersStatus' => $this->getFiltersStatus(),
         ]]);
     }
 
@@ -109,6 +111,7 @@ trait WithReordering
             $this->setBulkActionsStatus($save['bulkActionsStatus']);
             $this->setSelected($save['selected']);
             $this->setSelectAllStatus($save['selectAllStatus']);
+            $this->setFiltersStatus($save['filtersStatus']);
             session()->forget($this->getReorderingBackupSessionKey());
         }
     }

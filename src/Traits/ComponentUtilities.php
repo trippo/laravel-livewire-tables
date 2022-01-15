@@ -2,8 +2,12 @@
 
 namespace Rappasoft\LaravelLivewireTables\Traits;
 
-use Rappasoft\LaravelLivewireTables\Traits\Configuration\ComponentConfiguration;
+use Illuminate\Support\Str;
 use Rappasoft\LaravelLivewireTables\Traits\Helpers\ComponentHelpers;
+use Rappasoft\LaravelLivewireTables\Traits\Configuration\ComponentConfiguration;
+use Rappasoft\LaravelLivewireTables\Views\DateFilter;
+use Rappasoft\LaravelLivewireTables\Views\MultiSelectFilter;
+use Rappasoft\LaravelLivewireTables\Views\SelectFilter;
 
 trait ComponentUtilities
 {
@@ -60,6 +64,25 @@ trait ComponentUtilities
 
             if ($value === '') {
                 $this->clearSearch();
+            }
+        }
+
+        if (Str::contains($name, $this->getTableName().'.filters')) {
+            $this->resetComputedPage();
+
+            // Clear bulk actions on filter
+            $this->clearSelected();
+            $this->setSelectAllDisabled();
+
+            // Clear filters on empty value
+            $filterName = Str::after($name, $this->getTableName().'.filters.');
+            $filter = $this->getFilterByKey($filterName);
+
+            if (
+                ($filter instanceof SelectFilter && $value === '' || $filter instanceof DateFilter && $value === '') ||
+                ($filter instanceof MultiSelectFilter && !is_array($value))
+            ) {
+                $this->resetFilter($filterName);
             }
         }
     }

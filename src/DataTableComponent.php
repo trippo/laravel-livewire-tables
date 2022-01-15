@@ -10,6 +10,7 @@ use Rappasoft\LaravelLivewireTables\Traits\WithBulkActions;
 use Rappasoft\LaravelLivewireTables\Traits\WithColumns;
 use Rappasoft\LaravelLivewireTables\Traits\WithData;
 use Rappasoft\LaravelLivewireTables\Traits\WithDebugging;
+use Rappasoft\LaravelLivewireTables\Traits\WithFilters;
 use Rappasoft\LaravelLivewireTables\Traits\WithPagination;
 use Rappasoft\LaravelLivewireTables\Traits\WithRefresh;
 use Rappasoft\LaravelLivewireTables\Traits\WithReordering;
@@ -23,6 +24,7 @@ abstract class DataTableComponent extends Component
         WithColumns,
         WithData,
         WithDebugging,
+        WithFilters,
         WithPagination,
         WithRefresh,
         WithReordering,
@@ -38,6 +40,7 @@ abstract class DataTableComponent extends Component
     {
         $this->{$this->tableName} = [
             'sorts' => $this->{$this->tableName}['sorts'] ?? [],
+            'filters' => $this->{$this->tableName}['filters'] ?? [],
         ];
 
         $theme = $this->getTheme();
@@ -52,11 +55,14 @@ abstract class DataTableComponent extends Component
         // Call the child configuration, if any
         $this->configure();
 
-        // TODO
+        // TODO: Test
         // Make sure a primary key is set
         if (! $this->hasPrimaryKey()) {
             throw new DataTableConfigurationException('You must set a primary key using setPrimaryKey in the configure method.');
         }
+
+        // Set the filter defaults based on the filter type
+        $this->setFilterDefaults();
     }
 
     /**

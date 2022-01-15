@@ -3,6 +3,7 @@
         @php
             $debuggable = [
                 'query' => $component->getQuerySql(),
+                'filters' => $component->getAppliedFilters(),
                 'sorts' => $component->getSorts(),
                 'search' => $component->getSearch(),
                 'select-all' => $component->getSelectAllStatus(),
