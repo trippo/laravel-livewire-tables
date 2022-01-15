@@ -3,8 +3,8 @@
 namespace Rappasoft\LaravelLivewireTables\Traits;
 
 use Illuminate\Support\Str;
-use Rappasoft\LaravelLivewireTables\Traits\Helpers\ComponentHelpers;
 use Rappasoft\LaravelLivewireTables\Traits\Configuration\ComponentConfiguration;
+use Rappasoft\LaravelLivewireTables\Traits\Helpers\ComponentHelpers;
 use Rappasoft\LaravelLivewireTables\Views\DateFilter;
 use Rappasoft\LaravelLivewireTables\Views\MultiSelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\SelectFilter;
@@ -80,7 +80,7 @@ trait ComponentUtilities
 
             if (
                 ($filter instanceof SelectFilter && $value === '' || $filter instanceof DateFilter && $value === '') ||
-                ($filter instanceof MultiSelectFilter && !is_array($value))
+                ($filter instanceof MultiSelectFilter && ! is_array($value))
             ) {
                 $this->resetFilter($filterName);
             }

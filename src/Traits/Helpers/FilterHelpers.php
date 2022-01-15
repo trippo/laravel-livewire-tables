@@ -179,7 +179,7 @@ trait FilterHelpers
      */
     public function setFilterDefaults(): void
     {
-        foreach($this->getFilters() as $filter) {
+        foreach ($this->getFilters() as $filter) {
             $this->resetFilter($filter);
         }
     }
@@ -211,7 +211,7 @@ trait FilterHelpers
      */
     public function getAppliedFiltersWithValues(): array
     {
-        return array_filter($this->getAppliedFilters(), function($item) {
+        return array_filter($this->getAppliedFilters(), function ($item) {
             return is_array($item) ? count($item) : $item !== null;
         });
     }

@@ -276,9 +276,9 @@ class ReorderingVisualsTest extends TestCase
             ->assertSeeHtml('Filters');
     }
 
-     /** @test */
-     public function filter_pills_hide_on_reorder(): void
-     {
+    /** @test */
+    public function filter_pills_hide_on_reorder(): void
+    {
         Livewire::test(PetsTable::class)
             ->call('setReorderEnabled')
             ->set('table.filters.breed', [1])
@@ -286,7 +286,7 @@ class ReorderingVisualsTest extends TestCase
             ->assertSee('Applied Filters')
             ->call('enableReordering')
             ->assertDontSee('Applied Filters');
-     }
+    }
 
     // TODO: Append as new features added
 }

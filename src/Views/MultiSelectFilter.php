@@ -24,8 +24,8 @@ class MultiSelectFilter extends Filter
     {
         return collect($this->getOptions())
             ->keys()
-            ->map(fn($value) => (string)$value)
-            ->filter(fn($value) => strlen($value))
+            ->map(fn ($value) => (string)$value)
+            ->filter(fn ($value) => strlen($value))
             ->values()
             ->toArray();
     }
@@ -47,7 +47,7 @@ class MultiSelectFilter extends Filter
             }
         }
 
-        return implode(', ' , $values);
+        return implode(', ', $values);
     }
 
     public function render(DataTableComponent $component)

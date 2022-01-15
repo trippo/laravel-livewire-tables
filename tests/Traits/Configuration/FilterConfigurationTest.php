@@ -7,7 +7,6 @@ use Rappasoft\LaravelLivewireTables\Tests\TestCase;
 
 class FilterConfigurationTest extends TestCase
 {
-
     /** @test */
     public function filters_status_can_be_set(): void
     {
@@ -74,9 +73,9 @@ class FilterConfigurationTest extends TestCase
         $this->assertTrue($this->basicTable->getFilterPillsStatus());
     }
 
-     /** @test */
-     public function filters_layout_can_be_set(): void
-     {
+    /** @test */
+    public function filters_layout_can_be_set(): void
+    {
         $this->expectException(DataTableConfigurationException::class);
 
         $this->assertSame('popover', $this->basicTable->getFilterLayout());
@@ -100,5 +99,5 @@ class FilterConfigurationTest extends TestCase
         $this->basicTable->setFilterLayoutPopover();
 
         $this->basicTable->setFilterLayout('popover');
-     }
+    }
 }

@@ -6,7 +6,6 @@ use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 
 trait FilterConfiguration
 {
-
     /**
      * @param  bool  $status
      *
@@ -41,7 +40,7 @@ trait FilterConfiguration
 
     /**
      * @param  bool $status
-     * 
+     *
      * @return $this
      */
     public function setFiltersVisibilityStatus(bool $status): self
@@ -73,7 +72,7 @@ trait FilterConfiguration
 
     /**
      * @param  bool $status
-     * 
+     *
      * @return $this
      */
     public function setFilterPillsStatus(bool $status): self
@@ -105,7 +104,7 @@ trait FilterConfiguration
 
     /**
      * @param  bool $status
-     * 
+     *
      * @return $this
      */
     public function setFilterLayout(string $type): self

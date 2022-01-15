@@ -2,13 +2,13 @@
 
 namespace Rappasoft\LaravelLivewireTables\Traits;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Traits\Configuration\FilterConfiguration;
 use Rappasoft\LaravelLivewireTables\Traits\Helpers\FilterHelpers;
 use Rappasoft\LaravelLivewireTables\Views\DateFilter;
 use Rappasoft\LaravelLivewireTables\Views\MultiSelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\SelectFilter;
-use DateTime;
 
 trait WithFilters
 {
@@ -40,7 +40,7 @@ trait WithFilters
                                         unset($value[$index]);
                                     }
                                 }
-                            } elseif(! in_array($value, $filter->getKeys())) {
+                            } elseif (! in_array($value, $filter->getKeys())) {
                                 continue;
                             }
                         }

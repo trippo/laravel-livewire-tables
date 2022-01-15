@@ -78,7 +78,7 @@ class FilterHelpersTest extends TestCase
         $this->assertFalse($filter->hasFilterCallback());
 
         $filter = SelectFilter::make('Active')
-            ->filter(function(Builder $builder, array $values) {
+            ->filter(function (Builder $builder, array $values) {
                 return $builder->whereIn('breed_id', $values);
             });
 

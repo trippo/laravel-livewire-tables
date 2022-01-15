@@ -49,10 +49,10 @@ class PetsTable extends DataTableComponent
                         ->orderBy('name')
                         ->get()
                         ->keyBy('id')
-                        ->map(fn($breed) => $breed->name)
+                        ->map(fn ($breed) => $breed->name)
                         ->toArray()
                 )
-                ->filter(function(Builder $builder, array $values) {
+                ->filter(function (Builder $builder, array $values) {
                     return $builder->whereIn('breed_id', $values);
                 }),
         ];
