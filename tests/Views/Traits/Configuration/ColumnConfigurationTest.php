@@ -54,4 +54,30 @@ class ColumnConfigurationTest extends TestCase
 
         $this->assertTrue($column->isHtml());
     }
+
+    /** @test */
+    public function can_hide_column(): void
+    {
+        $column = Column::make('Name');
+
+        $this->assertFalse($column->isHidden());
+        $this->assertTrue($column->isVisible());
+
+        $column->hideIf(true);
+
+        $this->assertTrue($column->isHidden());
+        $this->assertFalse($column->isVisible());
+    }
+
+    /** @test */
+    public function can_exclude_from_column_select(): void
+    {
+        $column = Column::make('Name');
+
+        $this->assertTrue($column->isSelectable());
+
+        $column->excludeFromColumnSelect();
+
+        $this->assertFalse($column->isSelectable());
+    }
 }

@@ -19,6 +19,16 @@ trait ColumnHelpers
     }
 
     /**
+     * @param  DataTableComponent  $component
+     *
+     * @return $this
+     */
+    public function getHash(): string
+    {
+        return $this->hash;
+    }
+
+    /**
      * @return bool
      */
     public function hasFrom(): bool
@@ -374,5 +384,31 @@ trait ColumnHelpers
         });
 
         return $this;
+    }
+
+    /**
+     * @param  callable  $callback
+     *
+     * @return $this
+     */
+    public function isVisible(): bool
+    {
+        return $this->hidden !== true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHidden(): bool
+    {
+        return $this->hidden === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSelectable(): bool
+    {
+        return $this->selectable === true;
     }
 }

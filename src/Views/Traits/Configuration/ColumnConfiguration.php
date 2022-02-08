@@ -128,4 +128,24 @@ trait ColumnConfiguration
 
         return $this;
     }
+
+    /**
+     * @return $this
+     */
+    public function hideIf($condition): self
+    {
+        $this->hidden = $condition;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function excludeFromColumnSelect(): self
+    {
+        $this->selectable = false;
+
+        return $this;
+    }
 }

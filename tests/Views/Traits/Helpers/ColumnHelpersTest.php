@@ -319,4 +319,12 @@ class ColumnHelpersTest extends TestCase
 
         $this->assertInstanceOf(Closure::class, $column->getFormatCallback());
     }
+
+    /** @test */
+    public function can_get_column_hash(): void
+    {
+        $column = Column::make('Name');
+
+        $this->assertSame($column->getHash(), md5('name'));
+    }
 }

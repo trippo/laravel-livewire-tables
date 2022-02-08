@@ -288,5 +288,15 @@ class ReorderingVisualsTest extends TestCase
             ->assertDontSee('Applied Filters');
     }
 
+    /** @test */
+    public function column_select_does_not_hide_on_reorder(): void
+    {
+        Livewire::test(PetsTable::class)
+            ->call('setReorderEnabled')
+            ->assertSee('Columns')
+            ->call('enableReordering')
+            ->assertSee('Columns');
+    }
+
     // TODO: Append as new features added
 }

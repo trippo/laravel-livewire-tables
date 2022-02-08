@@ -19,6 +19,9 @@ class Column
     // What displays in the columns header
     protected string $title;
 
+    // Act as a unique identifier for the column
+    protected string $hash;
+
     // The columns or relationship location: i.e. name, or address.group.name
     protected ?string $from = null;
 
@@ -44,6 +47,8 @@ class Column
     protected $formatCallback;
     protected bool $html = false;
     protected $labelCallback;
+    protected bool $hidden = false;
+    protected bool $selectable = true;
 
     /**
      * @param  string  $title
@@ -55,6 +60,7 @@ class Column
 
         if ($from) {
             $this->from = trim($from);
+            $this->hash = md5($this->from);
 
             if (Str::contains($this->from, '.')) {
                 $this->field = Str::afterLast($this->from, '.');
@@ -64,6 +70,7 @@ class Column
             }
         } else {
             $this->field = Str::snake($title);
+            $this->hash = md5($this->field);
         }
     }
 

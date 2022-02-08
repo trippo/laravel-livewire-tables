@@ -12,6 +12,8 @@
             <x-livewire-tables::table.th.row-contents />
 
             @foreach($columns as $index => $column)
+                @continue($column->isHidden())
+                @continue($this->columnSelectIsEnabled() && ! $this->columnSelectIsEnabledForColumn($column))
                 @continue($this->currentlyReorderingIsDisabled() && $column->isReorderColumn() && $this->hideReorderColumnUnlessReorderingIsEnabled())
 
                 <x-livewire-tables::table.th :column="$column" :index="$index" />
@@ -27,6 +29,8 @@
                 <x-livewire-tables::table.td.row-contents :rowIndex="$rowIndex" />
 
                 @foreach($columns as $colIndex => $column)
+                    @continue($column->isHidden())
+                    @continue($this->columnSelectIsEnabled() && ! $this->columnSelectIsEnabledForColumn($column))
                     @continue($this->currentlyReorderingIsDisabled() && $column->isReorderColumn() && $this->hideReorderColumnUnlessReorderingIsEnabled())
 
                     <x-livewire-tables::table.td :column="$column" :colIndex="$colIndex">

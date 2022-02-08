@@ -8,6 +8,7 @@ use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 use Rappasoft\LaravelLivewireTables\Traits\ComponentUtilities;
 use Rappasoft\LaravelLivewireTables\Traits\WithBulkActions;
 use Rappasoft\LaravelLivewireTables\Traits\WithColumns;
+use Rappasoft\LaravelLivewireTables\Traits\WithColumnSelect;
 use Rappasoft\LaravelLivewireTables\Traits\WithData;
 use Rappasoft\LaravelLivewireTables\Traits\WithDebugging;
 use Rappasoft\LaravelLivewireTables\Traits\WithFilters;
@@ -22,6 +23,7 @@ abstract class DataTableComponent extends Component
     use ComponentUtilities,
         WithBulkActions,
         WithColumns,
+        WithColumnSelect,
         WithData,
         WithDebugging,
         WithFilters,

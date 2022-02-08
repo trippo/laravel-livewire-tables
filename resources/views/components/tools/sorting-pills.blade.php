@@ -16,6 +16,8 @@
                     @endphp
 
                     @continue(is_null($column))
+                    @continue($column->isHidden())
+                    @continue($this->columnSelectIsEnabled() && ! $this->columnSelectIsEnabledForColumn($column))
 
                     <span
                         wire:key="sorting-pill-{{ $columnSelectName }}"
