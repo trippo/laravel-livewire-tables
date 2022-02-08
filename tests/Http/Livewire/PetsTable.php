@@ -26,7 +26,8 @@ class PetsTable extends DataTableComponent
                 ->setSortingPillTitle('Key')
                 ->setSortingPillDirections('0-9', '9-0'),
             Column::make('Sort')
-                ->sortable(),
+                ->sortable()
+                ->excludeFromColumnSelect(),
             Column::make('Name')
                 ->sortable()
                 ->searchable(),
