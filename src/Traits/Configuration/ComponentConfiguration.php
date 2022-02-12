@@ -229,4 +229,36 @@ trait ComponentConfiguration
 
         return $this;
     }
+
+    /**
+     * @param  bool  $status
+     *
+     * @return $this
+     */
+    public function setCollapsingColumnsStatus(bool $status): self
+    {
+        $this->collapsingColumnsStatus = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setCollapsingColumnsEnabled(): self
+    {
+        $this->setCollapsingColumnsStatus(true);
+
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function setCollapsingColumnsDisabled(): self
+    {
+        $this->setCollapsingColumnsStatus(false);
+
+        return $this;
+    }
 }

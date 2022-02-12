@@ -327,4 +327,38 @@ class ColumnHelpersTest extends TestCase
 
         $this->assertSame($column->getHash(), md5('name'));
     }
+
+     /** @test */
+    public function can_check_if_column_has_secondary_header(): void
+    {
+        $column = Column::make('ID', 'id');
+
+        $this->assertFalse($column->hasSecondaryHeader());
+        $this->assertFalse($column->hasSecondaryHeaderCallback());
+
+        $column = Column::make('ID', 'id')
+            ->secondaryHeader(fn ($rows) => 'Hi');
+
+        $this->assertTrue($column->hasSecondaryHeader());
+        $this->assertTrue($column->hasSecondaryHeaderCallback());
+        $this->assertIsCallable($column->getSecondaryHeaderCallback());
+        $this->assertSame('Hi', $column->getSecondaryHeaderContents([]));
+    }
+
+    /** @test */
+    public function can_check_if_column_has_footer(): void
+    {
+        $column = Column::make('ID', 'id');
+
+        $this->assertFalse($column->hasFooter());
+        $this->assertFalse($column->hasFooterCallback());
+
+        $column = Column::make('ID', 'id')
+            ->footer(fn ($rows) => 'Hi');
+
+        $this->assertTrue($column->hasFooter());
+        $this->assertTrue($column->hasFooterCallback());
+        $this->assertIsCallable($column->getFooterCallback());
+        $this->assertSame('Hi', $column->getFooterContents([]));
+    }
 }

@@ -29,6 +29,7 @@ trait ComponentUtilities
     protected $thAttributesCallback;
     protected $trAttributesCallback;
     protected $tdAttributesCallback;
+    protected $collapsingColumnsStatus = true;
     protected string $emptyMessage = 'No items found. Try to broaden your search.';
 
     /**

@@ -69,6 +69,9 @@ trait WithReordering
         $this->setBulkActionsDisabled();
         $this->clearSelected();
         $this->setFiltersDisabled();
+        $this->setSecondaryHeaderDisabled();
+        $this->setFooterDisabled();
+        $this->setCollapsingColumnsDisabled();
         $this->resetComputedPage();
     }
 
@@ -92,11 +95,16 @@ trait WithReordering
             'selected' => $this->getSelected(),
             'selectAllStatus' => $this->getSelectAllStatus(),
             'filtersStatus' => $this->getFiltersStatus(),
+            'secondaryHeaderStatus' => $this->getSecondaryHeaderStatus(),
+            'footerStatus' => $this->getFooterStatus(),
+            'collapsingColumnsStatus' => $this->hasCollapsingColumns(),
         ]]);
     }
 
     private function getReorderingBackup(): void
     {
+        // TODO: Why won't secondary header and footer come back?
+
         if (session()->has($this->getReorderingBackupSessionKey())) {
             $save = session()->get($this->getReorderingBackupSessionKey());
             $this->{$this->getTableName()} = $save[$this->getTableName()];
@@ -112,6 +120,9 @@ trait WithReordering
             $this->setSelected($save['selected']);
             $this->setSelectAllStatus($save['selectAllStatus']);
             $this->setFiltersStatus($save['filtersStatus']);
+            $this->setSecondaryHeaderStatus($save['secondaryHeaderStatus']);
+            $this->setFooterStatus($save['footerStatus']);
+            $this->setCollapsingColumnsStatus($save['collapsingColumnsStatus']);
             session()->forget($this->getReorderingBackupSessionKey());
         }
     }

@@ -148,4 +148,32 @@ trait ColumnConfiguration
 
         return $this;
     }
+
+    /**
+     * @param  string  $field
+     *
+     * @return $this
+     */
+    public function secondaryHeader($callback = null): self
+    {
+        $this->secondaryHeader = true;
+
+        $this->secondaryHeaderCallback = $callback;
+
+        return $this;
+    }
+
+    /**
+     * @param  string  $field
+     *
+     * @return $this
+     */
+    public function footer($callback = null): self
+    {
+        $this->footer = true;
+
+        $this->footerCallback = $callback;
+
+        return $this;
+    }
 }

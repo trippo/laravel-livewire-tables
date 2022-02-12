@@ -22,6 +22,10 @@
 
         <x-livewire-tables::table.tr.bulk-actions :rows="$rows" />
 
+        @if($this->secondaryHeaderIsEnabled() && $this->hasColumnsWithSecondaryHeader())
+            <x-livewire-tables::table.tr.secondary-header :rows="$rows" />
+        @endif
+
         @forelse ($rows as $rowIndex => $row)
             <x-livewire-tables::table.tr :row="$row" :rowIndex="$rowIndex">
                 <x-livewire-tables::table.td.reorder />
@@ -43,6 +47,16 @@
         @empty
             <x-livewire-tables::table.empty />
         @endforelse
+
+        @if ($this->footerIsEnabled() && $this->hasColumnsWithFooter())
+            <x-slot name="tfoot">
+                @if ($this->useHeaderAsFooterIsEnabled())
+                    <x-livewire-tables::table.tr.secondary-header :rows="$rows" />
+                @else
+                    <x-livewire-tables::table.tr.footer :rows="$rows" />
+                @endif
+            </x-slot>
+        @endif
     </x-livewire-tables::table>
 
     <x-livewire-tables::pagination :rows="$rows" />

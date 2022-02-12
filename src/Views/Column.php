@@ -49,6 +49,10 @@ class Column
     protected $labelCallback;
     protected bool $hidden = false;
     protected bool $selectable = true;
+    protected bool $secondaryHeader = false;
+    protected $secondaryHeaderCallback;
+    protected bool $footer = false;
+    protected $footerCallback;
 
     /**
      * @param  string  $title

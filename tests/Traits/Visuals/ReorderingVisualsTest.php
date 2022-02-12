@@ -298,5 +298,26 @@ class ReorderingVisualsTest extends TestCase
             ->assertSee('Columns');
     }
 
+    /** @test */
+    public function collapsing_columns_hide_on_reorder(): void
+    {
+        // TODO
+        $this->assertTrue(true);
+    }
+
+    /** @test */
+    public function secondary_header_hides_on_reorder(): void
+    {
+        // TODO
+        $this->assertTrue(true);
+    }
+
+    /** @test */
+    public function footer_hides_on_reorder(): void
+    {
+        // TODO
+        $this->assertTrue(true);
+    }
+
     // TODO: Append as new features added
 }

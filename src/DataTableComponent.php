@@ -12,6 +12,8 @@ use Rappasoft\LaravelLivewireTables\Traits\WithColumnSelect;
 use Rappasoft\LaravelLivewireTables\Traits\WithData;
 use Rappasoft\LaravelLivewireTables\Traits\WithDebugging;
 use Rappasoft\LaravelLivewireTables\Traits\WithFilters;
+use Rappasoft\LaravelLivewireTables\Traits\WithFooter;
+use Rappasoft\LaravelLivewireTables\Traits\WithSecondaryHeader;
 use Rappasoft\LaravelLivewireTables\Traits\WithPagination;
 use Rappasoft\LaravelLivewireTables\Traits\WithRefresh;
 use Rappasoft\LaravelLivewireTables\Traits\WithReordering;
@@ -27,6 +29,8 @@ abstract class DataTableComponent extends Component
         WithData,
         WithDebugging,
         WithFilters,
+        WithFooter,
+        WithSecondaryHeader,
         WithPagination,
         WithRefresh,
         WithReordering,

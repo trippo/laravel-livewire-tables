@@ -411,4 +411,88 @@ trait ColumnHelpers
     {
         return $this->selectable === true;
     }
+
+    /**
+     * @return bool
+     */
+    public function hasSecondaryHeader(): bool
+    {
+        return $this->secondaryHeader === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasSecondaryHeaderCallback(): bool
+    {
+        return $this->secondaryHeaderCallback !== null;
+    }
+
+    /**
+     * @return callable|null
+     */
+    public function getSecondaryHeaderCallback(): ?callable
+    {
+        return $this->secondaryHeaderCallback;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSecondaryHeaderContents($rows)
+    {
+        $value = null;
+
+        if ($this->hasSecondaryHeaderCallback()) {
+            $value = call_user_func($this->getSecondaryHeaderCallback(), $rows);
+
+            if ($this->isHtml()) {
+                return new HtmlString($value);
+            }
+        }
+
+        return $value;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFooter(): bool
+    {
+        return $this->footer === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFooterCallback(): bool
+    {
+        return $this->footerCallback !== null;
+    }
+
+    /**
+     * @return callable|null
+     */
+    public function getFooterCallback(): ?callable
+    {
+        return $this->footerCallback;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFooterContents($rows)
+    {
+        $value = null;
+
+        if ($this->hasFooterCallback()) {
+            $value = call_user_func($this->getFooterCallback(), $rows);
+
+            if ($this->isHtml()) {
+                return new HtmlString($value);
+            }
+        }
+
+        return $value;
+    }
 }

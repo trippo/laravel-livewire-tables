@@ -126,4 +126,18 @@ class ComponentHelpersTest extends TestCase
 
         $this->assertTrue($this->basicTable->eagerLoadAllRelationsIsDisabled());
     }
+
+     /** @test */
+    public function can_get_collapsing_columns_status(): void
+    {
+        $this->assertTrue($this->basicTable->getCollapsingColumnsStatus());
+
+        $this->assertTrue($this->basicTable->CollapsingColumnsAreEnabled());
+
+        $this->basicTable->setCollapsingColumnsDisabled();
+
+        $this->assertTrue($this->basicTable->CollapsingColumnsAreDisabled());
+
+        $this->assertFalse($this->basicTable->getCollapsingColumnsStatus());
+    }
 }

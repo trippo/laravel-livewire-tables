@@ -1,7 +1,7 @@
 @aware(['component'])
 @props(['row', 'rowIndex'])
 
-@if ($component->hasCollapsedColumns())
+@if ($component->collapsingColumnsAreEnabled() && $component->hasCollapsedColumns())
     @php
         $theme = $component->getTheme();
         $columns = collect([]);
@@ -23,6 +23,7 @@
 
     @if ($theme === 'tailwind')
         <tr
+            wire:key="row-{{ $rowIndex }}-collapsed-contents"
             wire:loading.class.delay="opacity-50 dark:bg-gray-900 dark:opacity-60"
             x-data
             @toggle-row-content.window="$event.detail.row === {{ $rowIndex }} ? $el.classList.toggle('hidden') : null"

@@ -229,4 +229,38 @@ trait ComponentHelpers
     {
         return $this->getEagerLoadAllRelationsStatus() === false;
     }
+
+    /**
+     * @param  string  $name
+     *
+     * @return string
+     */
+    public function getCollapsingColumnsStatus(): bool
+    {
+        return $this->collapsingColumnsStatus;
+    }
+    
+    /**
+     * @return bool
+     */
+    public function hasCollapsingColumns(): bool
+    {
+        return $this->getCollapsingColumnsStatus() === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function collapsingColumnsAreEnabled(): bool
+    {
+        return $this->getCollapsingColumnsStatus() === true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function collapsingColumnsAreDisabled(): bool
+    {
+        return $this->getCollapsingColumnsStatus() === false;
+    }
 }

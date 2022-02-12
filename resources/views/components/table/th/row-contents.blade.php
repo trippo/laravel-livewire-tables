@@ -1,6 +1,6 @@
 @aware(['component'])
 
-@if ($component->hasCollapsedColumns())
+@if ($component->collapsingColumnsAreEnabled() && $component->hasCollapsedColumns())
     @php
         $theme = $component->getTheme();
     @endphp

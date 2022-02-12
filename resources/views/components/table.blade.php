@@ -38,12 +38,18 @@
 
                 {{
                     $attributes->merge($customAttributes['tbody'])
-                    ->class(['bg-white divide-y divide-gray-200 dark:divide-none' => $customAttributes['tbody']['default'] ?? true])
-                    ->except('default')
+                        ->class(['bg-white divide-y divide-gray-200 dark:divide-none' => $customAttributes['tbody']['default'] ?? true])
+                        ->except('default')
                 }}
             >
                 {{ $slot }}
             </tbody>
+
+            @if (isset($tfoot))
+                <tfoot>
+                    {{ $tfoot }}
+                </tfoot>
+            @endif
         </table>
     </div>
 @elseif ($theme === 'bootstrap-4')
