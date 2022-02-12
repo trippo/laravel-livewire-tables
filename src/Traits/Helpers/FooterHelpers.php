@@ -6,7 +6,6 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 
 trait FooterHelpers
 {
-
     /**
      * @var bool
      */

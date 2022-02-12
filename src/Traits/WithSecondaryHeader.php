@@ -7,7 +7,7 @@ use Rappasoft\LaravelLivewireTables\Traits\Helpers\SecondaryHeaderHelpers;
 
 trait WithSecondaryHeader
 {
-    use SecondaryHeaderConfiguration, 
+    use SecondaryHeaderConfiguration,
         SecondaryHeaderHelpers;
 
     protected bool $secondaryHeaderStatus = true;

@@ -20,7 +20,7 @@ class FooterHelpersTest extends TestCase
         $this->assertTrue($this->basicTable->footerIsEnabled());
     }
 
-     /** @test */
+    /** @test */
     public function can_get_use_header_as_footer_status(): void
     {
         $this->assertTrue($this->basicTable->useHeaderAsFooterIsDisabled());
