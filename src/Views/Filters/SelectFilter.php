@@ -1,14 +1,15 @@
 <?php
 
-namespace Rappasoft\LaravelLivewireTables\Views;
+namespace Rappasoft\LaravelLivewireTables\Views\Filters;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Filter;
 
-class MultiSelectFilter extends Filter
+class SelectFilter extends Filter
 {
     protected array $options = [];
 
-    public function options(array $options = []): MultiSelectFilter
+    public function options(array $options = []): SelectFilter
     {
         $this->options = $options;
 
@@ -30,29 +31,23 @@ class MultiSelectFilter extends Filter
             ->toArray();
     }
 
-    public function getDefaultValue()
+    public function validate($value)
     {
-        return [];
+        if (! in_array($value, $this->getKeys())) {
+            return false;
+        }
+
+        return $value;
     }
 
     public function getFilterPillValue($value): ?string
     {
-        $values = [];
-
-        foreach ($value as $item) {
-            $found = $this->getCustomFilterPillValue($item) ?? $this->getOptions()[$item] ?? null;
-
-            if ($found) {
-                $values[] = $found;
-            }
-        }
-
-        return implode(', ', $values);
+        return $this->getCustomFilterPillValue($value) ?? $this->getOptions()[$value] ?? null;
     }
 
     public function render(DataTableComponent $component)
     {
-        return view('livewire-tables::components.tools.filters.multi-select', [
+        return view('livewire-tables::components.tools.filters.select', [
             'component' => $component,
             'filter' => $this,
         ]);

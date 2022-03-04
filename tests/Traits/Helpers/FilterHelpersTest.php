@@ -3,7 +3,7 @@
 namespace Rappasoft\LaravelLivewireTables\Tests\Traits\Helpers;
 
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
-use Rappasoft\LaravelLivewireTables\Views\MultiSelectFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
 
 class FilterHelpersTest extends TestCase
 {

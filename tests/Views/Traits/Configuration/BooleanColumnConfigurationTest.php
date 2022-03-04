@@ -4,7 +4,7 @@ namespace Rappasoft\LaravelLivewireTables\Tests\Views\Traits\Configuration;
 
 use Closure;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
-use Rappasoft\LaravelLivewireTables\Views\BooleanColumn;
+use Rappasoft\LaravelLivewireTables\Views\Columns\BooleanColumn;
 
 class BooleanColumnConfigurationTest extends TestCase
 {

@@ -2,13 +2,9 @@
 
 namespace Rappasoft\LaravelLivewireTables\Traits;
 
-use DateTime;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Traits\Configuration\FilterConfiguration;
 use Rappasoft\LaravelLivewireTables\Traits\Helpers\FilterHelpers;
-use Rappasoft\LaravelLivewireTables\Views\DateFilter;
-use Rappasoft\LaravelLivewireTables\Views\MultiSelectFilter;
-use Rappasoft\LaravelLivewireTables\Views\SelectFilter;
 
 trait WithFilters
 {
@@ -31,22 +27,10 @@ trait WithFilters
             foreach ($this->getFilters() as $filter) {
                 foreach ($this->getAppliedFiltersWithValues() as $key => $value) {
                     if ($filter->getKey() === $key && $filter->hasFilterCallback()) {
-                        if ($filter instanceof SelectFilter || $filter instanceof MultiSelectFilter) {
-                            // Make sure value is one of the filter's values
-                            if (is_array($value)) {
-                                foreach ($value as $index => $val) {
-                                    // Instead of nulling the whole thing, remove the bad value
-                                    if (! in_array($val, $filter->getKeys())) {
-                                        unset($value[$index]);
-                                    }
-                                }
-                            } elseif (! in_array($value, $filter->getKeys())) {
-                                continue;
-                            }
-                        }
+                        // Let the filter class validate the value
+                        $value = $filter->validate($value);
 
-                        // Make sure date filters have date values
-                        if ($filter instanceof DateFilter && DateTime::createFromFormat('Y-m-d', $value) === false) {
+                        if ($value === false) {
                             continue;
                         }
 

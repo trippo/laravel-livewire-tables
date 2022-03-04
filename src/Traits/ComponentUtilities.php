@@ -5,9 +5,9 @@ namespace Rappasoft\LaravelLivewireTables\Traits;
 use Illuminate\Support\Str;
 use Rappasoft\LaravelLivewireTables\Traits\Configuration\ComponentConfiguration;
 use Rappasoft\LaravelLivewireTables\Traits\Helpers\ComponentHelpers;
-use Rappasoft\LaravelLivewireTables\Views\DateFilter;
-use Rappasoft\LaravelLivewireTables\Views\MultiSelectFilter;
-use Rappasoft\LaravelLivewireTables\Views\SelectFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 trait ComponentUtilities
 {

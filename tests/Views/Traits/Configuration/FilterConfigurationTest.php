@@ -3,7 +3,7 @@
 namespace Rappasoft\LaravelLivewireTables\Tests\Views\Traits\Configuration;
 
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
-use Rappasoft\LaravelLivewireTables\Views\SelectFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
 class FilterConfigurationTest extends TestCase
 {

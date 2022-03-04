@@ -5,7 +5,7 @@ namespace Rappasoft\LaravelLivewireTables\Tests\Views;
 use Rappasoft\LaravelLivewireTables\Exceptions\DataTableConfigurationException;
 use Rappasoft\LaravelLivewireTables\Tests\Models\Pet;
 use Rappasoft\LaravelLivewireTables\Tests\TestCase;
-use Rappasoft\LaravelLivewireTables\Views\BooleanColumn;
+use Rappasoft\LaravelLivewireTables\Views\Columns\BooleanColumn;
 
 class BooleanColumnTest extends TestCase
 {
