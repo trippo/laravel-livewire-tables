@@ -17,8 +17,6 @@ class [class] extends DataTableComponent
 
     public function columns(): array
     {
-        return [
-            Column::make('Column Name'),
-        ];
+        return [columns];
     }
 }
