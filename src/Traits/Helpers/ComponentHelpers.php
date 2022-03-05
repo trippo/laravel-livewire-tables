@@ -44,7 +44,7 @@ trait ComponentHelpers
      */
     public function getTheme(): string
     {
-        return config('livewire-tables.theme', 'tailwind');
+        return $this->theme ?? config('livewire-tables.theme', 'tailwind');
     }
 
     /**

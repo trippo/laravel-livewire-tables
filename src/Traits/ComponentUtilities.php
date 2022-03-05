@@ -15,6 +15,7 @@ trait ComponentUtilities
         ComponentHelpers;
 
     public array $table = [];
+    public $theme = null;
     protected $model;
     protected $primaryKey;
     protected string $tableName = 'table';
