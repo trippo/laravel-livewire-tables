@@ -3,10 +3,10 @@
 namespace Rappasoft\LaravelLivewireTables\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Livewire\Commands\ComponentParser;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Commands\MakeCommand as LivewireMakeCommand;
 
 /**
@@ -146,13 +146,13 @@ class MakeCommand extends Command
             throw new \Exception('Invalid model given.');
         }
 
-        $getFillable    = array_merge(
+        $getFillable = array_merge(
             [$model->getKeyName()],
             $model->getFillable(),
             ['created_at', 'updated_at']
         );
 
-        $columns        = "[\n";
+        $columns = "[\n";
 
         foreach ($getFillable as $field) {
             if (in_array($field, $model->getHidden())) {
@@ -161,7 +161,7 @@ class MakeCommand extends Command
 
             $title = Str::of($field)->replace('_', ' ')->ucfirst();
 
-            $columns    .= '            Column::make("' . $title . '", "' . $field . '")' . "\n" . '                ->sortable(),' . "\n";
+            $columns .= '            Column::make("' . $title . '", "' . $field . '")' . "\n" . '                ->sortable(),' . "\n";
         }
 
         $columns .= "        ]";
