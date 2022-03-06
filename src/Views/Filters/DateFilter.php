@@ -17,6 +17,11 @@ class DateFilter extends Filter
         return $value;
     }
 
+    public function isEmpty($value): bool
+    {
+        return $value === '';
+    }
+
     public function render(DataTableComponent $component)
     {
         return view('livewire-tables::components.tools.filters.date', [

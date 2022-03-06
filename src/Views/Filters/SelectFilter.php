@@ -45,6 +45,11 @@ class SelectFilter extends Filter
         return $this->getCustomFilterPillValue($value) ?? $this->getOptions()[$value] ?? null;
     }
 
+    public function isEmpty($value): bool
+    {
+        return $value === '';
+    }
+
     public function render(DataTableComponent $component)
     {
         return view('livewire-tables::components.tools.filters.select', [

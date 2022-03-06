@@ -65,6 +65,11 @@ class MultiSelectFilter extends Filter
         return implode(', ', $values);
     }
 
+    public function isEmpty($value): bool
+    {
+        return ! is_array($value);
+    }
+
     public function render(DataTableComponent $component)
     {
         return view('livewire-tables::components.tools.filters.multi-select', [

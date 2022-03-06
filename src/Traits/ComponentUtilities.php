@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use Rappasoft\LaravelLivewireTables\Traits\Configuration\ComponentConfiguration;
 use Rappasoft\LaravelLivewireTables\Traits\Helpers\ComponentHelpers;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\DateTimeFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
@@ -80,10 +81,7 @@ trait ComponentUtilities
             $filterName = Str::after($name, $this->getTableName().'.filters.');
             $filter = $this->getFilterByKey($filterName);
 
-            if (
-                ($filter instanceof SelectFilter && $value === '' || $filter instanceof DateFilter && $value === '') ||
-                ($filter instanceof MultiSelectFilter && ! is_array($value))
-            ) {
+            if ($filter->isEmpty($value)) {
                 $this->resetFilter($filterName);
             }
         }

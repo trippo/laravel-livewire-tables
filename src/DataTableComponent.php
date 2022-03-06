@@ -61,7 +61,6 @@ abstract class DataTableComponent extends Component
         // Call the child configuration, if any
         $this->configure();
 
-        // TODO: Test
         // Make sure a primary key is set
         if (! $this->hasPrimaryKey()) {
             throw new DataTableConfigurationException('You must set a primary key using setPrimaryKey in the configure method.');
