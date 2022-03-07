@@ -10,7 +10,7 @@
             scope="col"
             {{
                 $attributes
-                    ->merge(['class' => 'table-cell'])
+                    ->merge(['class' => 'table-cell dark:bg-gray-800'])
                     ->class([
                         'md:hidden' =>
                             (($component->shouldCollapseOnMobile() && $component->shouldCollapseOnTablet()) ||
