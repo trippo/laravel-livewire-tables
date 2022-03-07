@@ -36,5 +36,6 @@ abstract class Filter
     }
 
     abstract public function isEmpty(string $value): bool;
+
     abstract public function render(DataTableComponent $component);
 }
