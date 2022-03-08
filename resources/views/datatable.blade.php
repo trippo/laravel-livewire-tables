@@ -20,11 +20,11 @@
             @endforeach
         </x-slot>
 
-        <x-livewire-tables::table.tr.bulk-actions :rows="$rows" />
-
         @if($this->secondaryHeaderIsEnabled() && $this->hasColumnsWithSecondaryHeader())
             <x-livewire-tables::table.tr.secondary-header :rows="$rows" />
         @endif
+
+        <x-livewire-tables::table.tr.bulk-actions :rows="$rows" />
 
         @forelse ($rows as $rowIndex => $row)
             <x-livewire-tables::table.tr :row="$row" :rowIndex="$rowIndex">
