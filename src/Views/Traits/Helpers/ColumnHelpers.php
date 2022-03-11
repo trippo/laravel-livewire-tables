@@ -495,4 +495,19 @@ trait ColumnHelpers
 
         return $value;
     }
+
+    /**
+     * @return bool
+     */
+    public function arrayToAttributes(array $attributes)
+    {
+        return join(' ', array_map(function($key) use ($attributes) {
+            if (is_bool($attributes[$key]))
+            {
+                return $attributes[$key] ? $key : '';
+            }
+            
+            return $key . '="' . $attributes[$key] . '"';
+        }, array_keys($attributes)));
+    }
 }
