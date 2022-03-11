@@ -10,8 +10,7 @@ use Rappasoft\LaravelLivewireTables\Views\Traits\Helpers\LinkColumnHelpers;
 
 class LinkColumn extends Column
 {
-
-    use LinkColumnHelpers, 
+    use LinkColumnHelpers,
         LinkColumnConfiguration;
 
     protected string $view = 'livewire-tables::includes.columns.link';
@@ -23,7 +22,7 @@ class LinkColumn extends Column
     {
         parent::__construct($title, $from);
 
-        $this->label(fn() => null);
+        $this->label(fn () => null);
     }
 
     public function getContents(Model $row)
