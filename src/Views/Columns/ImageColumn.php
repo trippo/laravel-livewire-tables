@@ -10,8 +10,7 @@ use Rappasoft\LaravelLivewireTables\Views\Traits\Helpers\ImageColumnHelpers;
 
 class ImageColumn extends Column
 {
-
-    use ImageColumnHelpers, 
+    use ImageColumnHelpers,
         ImageColumnConfiguration;
 
     protected string $view = 'livewire-tables::includes.columns.image';
@@ -22,7 +21,7 @@ class ImageColumn extends Column
     {
         parent::__construct($title, $from);
 
-        $this->label(fn() => null);
+        $this->label(fn () => null);
     }
 
     public function getContents(Model $row)

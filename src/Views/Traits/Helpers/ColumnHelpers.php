@@ -501,9 +501,8 @@ trait ColumnHelpers
      */
     public function arrayToAttributes(array $attributes)
     {
-        return join(' ', array_map(function($key) use ($attributes) {
-            if (is_bool($attributes[$key]))
-            {
+        return join(' ', array_map(function ($key) use ($attributes) {
+            if (is_bool($attributes[$key])) {
                 return $attributes[$key] ? $key : '';
             }
             
