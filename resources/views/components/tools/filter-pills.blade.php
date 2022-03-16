@@ -48,7 +48,47 @@
         @endif
     </div>
 @elseif ($theme === 'bootstrap-4')
+    <div>
+        @if ($component->filtersAreEnabled() && $component->filterPillsAreEnabled() && $component->hasAppliedFiltersWithValues())
+            <div class="mb-3">
+                <small>@lang('Applied Filters'):</small>
 
+                @foreach($component->getAppliedFiltersWithValues() as $filterSelectName => $value)
+                    @php
+                        $filter = $component->getFilterByKey($filterSelectName);
+                    @endphp
+
+                    @continue(is_null($filter))
+
+                    <span
+                        wire:key="{{ $component->getTableName() }}-filter-pill-{{ $filter->getKey() }}"
+                        class="badge badge-pill badge-info d-inline-flex align-items-center"
+                    >
+                        {{ $filter->getFilterPillTitle() }}: {{ $filter->getFilterPillValue($value) }}
+
+                        <a
+                            href="#"
+                            wire:click="resetFilter('{{ $filter->getKey() }}')"
+                            class="text-white ml-2"
+                        >
+                            <span class="sr-only">@lang('Remove filter option')</span>
+                            <svg style="width:.5em;height:.5em" stroke="currentColor" fill="none" viewBox="0 0 8 8">
+                                <path stroke-linecap="round" stroke-width="1.5" d="M1 1l6 6m0-6L1 7" />
+                            </svg>
+                        </a>
+                    </span>
+                @endforeach
+
+                <a
+                    href="#"
+                    wire:click.prevent="setFilterDefaults"
+                    class="badge badge-pill badge-light"
+                >
+                    @lang('Clear')
+                </a>
+            </div>
+        @endif
+    </div>
 @elseif ($theme === 'bootstrap-5')
 
 @endif

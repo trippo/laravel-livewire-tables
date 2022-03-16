@@ -25,7 +25,22 @@
         {{ $slot }}
     </tr>
 @elseif ($theme === 'bootstrap-4')
+    <tr
+        wire:loading.class.delay=""
 
+        @if ($component->reorderIsEnabled() && $component->currentlyReorderingIsEnabled())
+            wire:sortable.item="{{ $row->getKey() }}"
+        @endif
+
+        {{
+            $attributes->merge($customAttributes)
+                ->class(['' => ($customAttributes['default'] ?? true) && $rowIndex % 2 === 0])
+                ->class(['' => ($customAttributes['default'] ?? true) && $rowIndex % 2 !== 0])
+                ->except('default')
+        }}
+    >
+        {{ $slot }}
+    </tr>
 @elseif ($theme === 'bootstrap-5')
 
 @endif

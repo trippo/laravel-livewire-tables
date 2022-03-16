@@ -16,7 +16,12 @@
             </div>
         </x-livewire-tables::table.th.plain>
     @elseif ($theme === 'bootstrap-4')
-
+        <x-livewire-tables::table.th.plain>
+            <input
+                wire:model="selectAll"
+                type="checkbox"
+            />
+        </x-livewire-tables::table.th.plain>
     @elseif ($theme === 'bootstrap-5')
 
     @endif

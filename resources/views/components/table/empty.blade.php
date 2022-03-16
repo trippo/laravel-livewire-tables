@@ -14,7 +14,11 @@
         </td>
     </tr>
 @elseif ($theme === 'bootstrap-4')
-
+     <tr {{ $attributes }}>
+        <td colspan="{{ $component->getColspanCount() }}">
+            {{ $component->getEmptyMessage() }}
+        </td>
+    </tr>
 @elseif ($theme === 'bootstrap-5')
 
 @endif

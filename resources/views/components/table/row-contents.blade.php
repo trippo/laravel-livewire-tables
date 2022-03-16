@@ -43,7 +43,25 @@
             </td>
         </tr>
     @elseif ($theme === 'bootstrap-4')
-
+        <tr
+            wire:key="row-{{ $rowIndex }}-collapsed-contents"
+            x-data
+            @toggle-row-content.window="$event.detail.row === {{ $rowIndex }} ? $el.classList.toggle('d-none') : null"
+            class="d-none d-md-none"
+        >
+            <td class="pt-3 p-2" colspan="{{ $colspan }}">
+                <div>
+                    @foreach($columns as $colIndex => $column)
+                        @continue($column->isHidden())
+                        @continue($this->columnSelectIsEnabled() && ! $this->columnSelectIsEnabledForColumn($column))
+                        
+                        <p class="d-block mb-2 @if($column->shouldCollapseOnMobile()) d-sm-none @endif @if($column->shouldCollapseOnTablet()) d-md-none @endif">
+                            <strong>{{ $column->getTitle() }}</strong>: {{ $column->renderContents($row) }}
+                        </p>
+                    @endforeach
+                </div>
+            </td>
+        </tr>
     @elseif ($theme === 'bootstrap-5')
 
     @endif

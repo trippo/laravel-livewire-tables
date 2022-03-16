@@ -20,7 +20,19 @@
             }}
         ></th>
     @elseif ($theme === 'bootstrap-4')
-
+        <th
+            scope="col"
+            {{
+                $attributes
+                    ->merge(['class' => 'd-table-cell'])
+                    ->class([
+                        'd-md-none' =>
+                            (($component->shouldCollapseOnMobile() && $component->shouldCollapseOnTablet()) ||
+                            ($component->shouldCollapseOnTablet() && ! $component->shouldCollapseOnMobile()))
+                    ])
+                    ->class(['d-sm-none' => $component->shouldCollapseOnMobile() && ! $component->shouldCollapseOnTablet()])
+            }}
+        ></th>
     @elseif ($theme === 'bootstrap-5')
 
     @endif
