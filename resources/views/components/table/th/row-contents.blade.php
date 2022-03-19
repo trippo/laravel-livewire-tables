@@ -19,7 +19,7 @@
                     ->class(['sm:hidden' => $component->shouldCollapseOnMobile() && ! $component->shouldCollapseOnTablet()])
             }}
         ></th>
-    @elseif ($theme === 'bootstrap-4')
+    @elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')
         <th
             scope="col"
             {{
@@ -33,7 +33,5 @@
                     ->class(['d-sm-none' => $component->shouldCollapseOnMobile() && ! $component->shouldCollapseOnTablet()])
             }}
         ></th>
-    @elseif ($theme === 'bootstrap-5')
-
     @endif
 @endif

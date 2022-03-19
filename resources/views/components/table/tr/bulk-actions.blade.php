@@ -63,8 +63,8 @@
                 @endif
             </x-livewire-tables::table.td.plain>
         </x-livewire-tables::table.tr.plain>
-    @elseif ($theme === 'bootstrap-4')
-         <x-livewire-tables::table.tr.plain
+    @elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')
+        <x-livewire-tables::table.tr.plain
             wire:key="bulk-select-message-{{ $table }}"
         >
             <x-livewire-tables::table.td.plain :colspan="$colspan">
@@ -115,7 +115,5 @@
                 @endif
             </x-livewire-tables::table.td.plain>
         </x-livewire-tables::table.tr.plain>
-    @elseif ($theme === 'bootstrap-5')
-
     @endif
 @endif

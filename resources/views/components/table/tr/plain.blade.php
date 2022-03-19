@@ -13,7 +13,7 @@
     }}>
         {{ $slot }}
     </tr>
-@elseif ($theme === 'bootstrap-4')
+@elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')
     <tr {{ $attributes
         ->merge($customAttributes)
         ->class(['' => $customAttributes['default'] ?? true])
@@ -21,6 +21,4 @@
     }}>
         {{ $slot }}
     </tr>
-@elseif ($theme === 'bootstrap-5')
-
 @endif

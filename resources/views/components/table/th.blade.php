@@ -51,7 +51,7 @@
             </button>
         @endunless
     </th>
-@elseif ($theme === 'bootstrap-4')
+@elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')
     <th scope="col" {{
         $attributes->merge($customAttributes)
             ->class(['' => $customAttributes['default'] ?? true])
@@ -87,6 +87,4 @@
             </div>
         @endunless
     </th>
-@elseif ($theme === 'bootstrap-5')
-
 @endif

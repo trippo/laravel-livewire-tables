@@ -42,7 +42,7 @@
                 </div>
             </td>
         </tr>
-    @elseif ($theme === 'bootstrap-4')
+    @elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')
         <tr
             wire:key="row-{{ $rowIndex }}-collapsed-contents"
             x-data
@@ -62,7 +62,5 @@
                 </div>
             </td>
         </tr>
-    @elseif ($theme === 'bootstrap-5')
-
     @endif
 @endif

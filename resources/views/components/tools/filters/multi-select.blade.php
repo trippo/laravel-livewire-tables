@@ -32,7 +32,7 @@
             </div>
         @endforeach
     </div>
-@elseif ($theme === 'bootstrap-4')
+@elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')
     <div class="form-check">
         <input
             type="checkbox"
@@ -57,6 +57,4 @@
             <label class="form-check-label" for="{{ $component->getTableName() }}-filter-{{ $filter->getKey() }}-{{ $loop->index }}">{{ $value }}</label>
         </div>
     @endforeach
-@elseif ($theme === 'bootstrap-5')
-
 @endif

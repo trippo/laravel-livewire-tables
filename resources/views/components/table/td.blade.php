@@ -15,7 +15,7 @@
             ->class(['hidden md:table-cell' => $column && $column->shouldCollapseOnTablet()])
             ->except('default')
     }}>{{ $slot }}</td>
-@elseif ($theme === 'bootstrap-4')
+@elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')
     <td {{
         $attributes->merge($customAttributes)
             ->class(['' => $customAttributes['default'] ?? true])
@@ -23,6 +23,4 @@
             ->class(['d-none d-md-table-cell' => $column && $column->shouldCollapseOnTablet()])
             ->except('default')
     }}>{{ $slot }}</td>
-@elseif ($theme === 'bootstrap-5')
-
 @endif

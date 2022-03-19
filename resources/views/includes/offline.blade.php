@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-    @elseif ($theme === 'bootstrap-4')
+    @elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')
         <div wire:offline.class.remove="d-none" class="d-none">
             <div class="alert alert-danger d-flex align-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" style="width:1.3em;height:1.3em;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,7 +26,5 @@
                 <span class="d-inline-block ml-2">@lang('You are not connected to the internet.')</span>
             </div>
         </div>
-    @elseif ($theme === 'bootstrap-5')
-
     @endif
 @endif

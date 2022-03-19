@@ -24,7 +24,7 @@
     >
         {{ $slot }}
     </tr>
-@elseif ($theme === 'bootstrap-4')
+@elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')
     <tr
         wire:loading.class.delay=""
 
@@ -41,6 +41,4 @@
     >
         {{ $slot }}
     </tr>
-@elseif ($theme === 'bootstrap-5')
-
 @endif

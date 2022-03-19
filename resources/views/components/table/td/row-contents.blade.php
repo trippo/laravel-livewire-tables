@@ -34,7 +34,7 @@
                 </button>
             @endif
         </td>
-    @elseif ($theme === 'bootstrap-4')
+    @elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')
         <td
             @if (! $hidden) x-data="{open:false}" @endif
             {{
@@ -63,7 +63,5 @@
                 </button>
             @endif
         </td>
-    @elseif ($theme === 'bootstrap-5')
-
     @endif
 @endif

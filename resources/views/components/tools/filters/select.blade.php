@@ -15,7 +15,7 @@
             @endforeach
         </select>
     </div>
-@elseif ($theme === 'bootstrap-4')
+@elseif ($theme === 'bootstrap-4' || $theme === 'bootstrap-5')
     <select
         wire:model.stop="{{ $component->getTableName() }}.filters.{{ $filter->getKey() }}"
         wire:key="{{ $component->getTableName() }}-filter-{{ $filter->getKey() }}"
@@ -26,6 +26,4 @@
             <option value="{{ $key }}">{{ $value }}</option>
         @endforeach
     </select>
-@elseif ($theme === 'bootstrap-5')
-
 @endif
