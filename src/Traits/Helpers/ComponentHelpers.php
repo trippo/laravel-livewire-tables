@@ -42,6 +42,18 @@ trait ComponentHelpers
     /**
      * @return string
      */
+    public function setTheme(): void
+    {
+        $theme = $this->getTheme();
+
+        if ($theme === 'bootstrap-4' || $theme === 'bootstrap-5') {
+            $this->setPaginationTheme('bootstrap');
+        }
+    }
+
+    /**
+     * @return string
+     */
     public function getTheme(): string
     {
         return $this->theme ?? config('livewire-tables.theme', 'tailwind');

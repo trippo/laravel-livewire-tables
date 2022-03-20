@@ -49,12 +49,6 @@ abstract class DataTableComponent extends Component
             'filters' => $this->{$this->tableName}['filters'] ?? [],
         ];
 
-        $theme = $this->getTheme();
-
-        if ($theme === 'bootstrap-4' || $theme === 'bootstrap-5') {
-            $this->setPaginationTheme('bootstrap');
-        }
-
         // Set the user defined columns to work with
         $this->setColumns();
 
@@ -68,6 +62,14 @@ abstract class DataTableComponent extends Component
 
         // Set the filter defaults based on the filter type
         $this->setFilterDefaults();
+    }
+
+    /**
+     * Runs on every request, after the component is mounted or hydrated, but before any update methods are called
+     */
+    public function booted(): void
+    {
+        $this->setTheme();
     }
 
     /**
