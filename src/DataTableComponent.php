@@ -228,7 +228,7 @@ abstract class DataTableComponent extends Component
                 'rows' => $this->rows,
                 'modalsView' => $this->modalsView(),
                 'actions' => $this->actions,
-                'bulkActions' => $this->bulkActions
+                'bulkActions' => $this->bulkActions,
             ]);
     }
 }
