@@ -2,20 +2,19 @@
 
 namespace Rappasoft\LaravelLivewireTables\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Rappasoft\LaravelLivewireTables\Traits\Configuration\ActionsConfiguration;
+use Rappasoft\LaravelLivewireTables\Traits\Helpers\ActionsHelpers;
 
 /**
  * Trait WithButtons.
  */
 trait WithActions
 {
-    public bool $showActions = true;
+    use ActionsConfiguration,
+        ActionsHelpers;
 
-    public function getActionsProperty(): array
-    {
-        return $this->actions();
-    }
+    public bool $actionsStatus = true;
+    public array $actions = [];
 
     public function actions(): array
     {
