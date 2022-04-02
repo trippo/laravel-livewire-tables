@@ -2,8 +2,6 @@
 
 namespace Rappasoft\LaravelLivewireTables\Traits;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Rappasoft\LaravelLivewireTables\Traits\Configuration\ActionsConfiguration;
 use Rappasoft\LaravelLivewireTables\Traits\Helpers\ActionsHelpers;
 
