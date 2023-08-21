@@ -168,6 +168,6 @@ trait WithData
     {
         $builder = clone $this->getBuilder();
 
-        return (method_exists($builder,'toRawSql')) ? $builder->toRawSql() : $builder->toSql();
+        return (method_exists($builder, 'toRawSql')) ? $builder->toRawSql() : $builder->toSql();
     }
 }
