@@ -166,6 +166,8 @@ trait WithData
 
     protected function getQuerySql(): string
     {
-        return (clone $this->getBuilder())->toSql();
+        $builder = clone $this->getBuilder();
+
+        return (method_exists($builder,'toRawSql')) ? $builder->toRawSql() : $builder->toSql();
     }
 }
